@@ -2,7 +2,6 @@ local opt = vim.opt
 local g = vim.g
 
 opt.title = true
-opt.clipboard:append "unnamedplus"
 opt.cmdheight = 1
 opt.cul = true -- cursor line
 
@@ -27,9 +26,9 @@ opt.ruler = false
 opt.shortmess:append "sI"
 
 -- tab stuff
-opt.tabstop = 4
+opt.tabstop = 2
 opt.expandtab = true
-opt.shiftwidth = 4
+opt.shiftwidth = 2
 
 opt.signcolumn = "yes"
 opt.splitbelow = true
