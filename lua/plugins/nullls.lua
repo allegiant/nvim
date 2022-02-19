@@ -4,7 +4,7 @@ local b = null_ls.builtins
 local sources = {
    b.diagnostics.eslint,
    b.code_actions.eslint,
-   --b.formatting.stylua,
+   b.formatting.stylua,
    b.formatting.prettier,
 }
 
