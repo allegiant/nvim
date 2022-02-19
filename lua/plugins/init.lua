@@ -67,7 +67,7 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     config = function()
-      require("nvim-autopairs").setup {}
+      require("plugins.autopairs").setup()
     end,
   }
   use {
@@ -149,6 +149,12 @@ return require("packer").startup(function(use)
     config = function()
       require("plugins.whichkey").setup()
     end,
+  }
+  use {
+    "akinsho/toggleterm.nvim",
+    config = function ()
+      require('plugins.toggleterm').setup()
+    end
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
