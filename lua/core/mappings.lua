@@ -1,6 +1,9 @@
 ---@diagnostic disable-next-line: undefined-global
 local vim = vim
 local present, wk = pcall(require, "which-key")
+if not present then
+  return
+end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -9,8 +12,8 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 wk.register {
-  ["sv"] = { ":vsp<CR>", "vertical split" },
-  ["sh"] = { ":sp<CR>", "Horizontal split" },
+ ["sv"] = { ":vsp<CR>", "vertical split" },
+ ["sh"] = { ":sp<CR>", "Horizontal split" },
 }
 
 local pluginskeys = {}
