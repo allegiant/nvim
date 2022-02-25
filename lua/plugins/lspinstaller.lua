@@ -42,7 +42,11 @@ lsp_installer.on_server_ready(function(server)
   -- This setup() function will take the provided server configuration and decorate it with the necessary properties
   -- before passing it onwards to lspconfig.
   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  if server.name ~= "volar" then
-    server:setup(opts)
+  if server.name == "volar" then
+    opts.filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
   end
+  server:setup(opts)
+  -- if server.name ~= "volar" then
+  --   server:setup(opts)
+  -- end
 end)

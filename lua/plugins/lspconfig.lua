@@ -126,27 +126,27 @@ lspconfig_configs.volar_html = {
 local M = {}
 
 M.setup = function()
-  lspconfig.volar_api.setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
-  }
-  lspconfig.volar_doc.setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
-  }
-  lspconfig.volar_html.setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
-  }
+  -- lspconfig.volar_api.setup {
+  --   on_attach = on_attach,
+  --   flags = {
+  --     -- This will be the default in neovim 0.7+
+  --     debounce_text_changes = 150,
+  --   },
+  -- }
+  -- lspconfig.volar_doc.setup {
+  --   on_attach = on_attach,
+  --   flags = {
+  --     -- This will be the default in neovim 0.7+
+  --     debounce_text_changes = 150,
+  --   },
+  -- }
+  -- lspconfig.volar_html.setup {
+  --   on_attach = on_attach,
+  --   flags = {
+  --     -- This will be the default in neovim 0.7+
+  --     debounce_text_changes = 150,
+  --   },
+  -- }
 end
 
 return M
