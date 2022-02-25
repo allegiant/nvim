@@ -110,7 +110,11 @@ return require("packer").startup(function(use)
 
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      "arkav/lualine-lsp-progress",
+      opt = true,
+    },
     config = function()
       require("plugins.lualine").setup()
     end,
@@ -152,9 +156,18 @@ return require("packer").startup(function(use)
   }
   use {
     "akinsho/toggleterm.nvim",
-    config = function ()
-      require('plugins.toggleterm').setup()
-    end
+    config = function()
+      require("plugins.toggleterm").setup()
+    end,
+  }
+  use {
+    "tami5/lspsaga.nvim",
+    config = function()
+      require("plugins.lspsaga").setup()
+    end,
+    setup = function()
+      require("core.mappings").lspsaga()
+    end,
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
