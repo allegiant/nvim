@@ -4,17 +4,14 @@ local lspconfig_util = require "lspconfig.util"
 local vim_api = vim.api
 local vim_lsp = vim.lsp
 
-
 local function on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
 
-  -- set mappings only in current buffer with lsp enabled
   local function buf_set_keymap(...)
     vim_api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  -- set options only in current buffer with lsp enabled
   local function buf_set_option(...)
     vim_api.nvim_buf_set_option(bufnr, ...)
   end
@@ -127,6 +124,12 @@ lspconfig_configs.volar_html = {
 local M = {}
 
 M.setup = function()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = false,
+    update_in_insert = true,
+  })
+
   lspconfig.volar_api.setup {
     on_attach = on_attach,
     flags = {
