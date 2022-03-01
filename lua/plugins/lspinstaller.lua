@@ -5,6 +5,8 @@ local vim_lsp = vim.lsp
 local capabilities = vim_lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- do something on lsp on_attach
 local function on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
@@ -33,6 +35,7 @@ lsp_installer.on_server_ready(function(server)
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     },
+    capabilities = capabilities,
   }
   -- (optional) Customize the options passed to the server
   -- if server.name == "tsserver" then

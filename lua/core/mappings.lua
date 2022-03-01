@@ -18,7 +18,7 @@ wk.register {
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
-wk.register {
+  wk.register {
     ["g"] = {
       name = "+Lspsaga",
       r = { "<cmd>Lspsaga rename<cr>", "Rename" },
@@ -134,32 +134,38 @@ pluginskeys.nvimtree = function()
 end
 
 pluginskeys.gitsigns = function(bufnr)
-  local function gsmap(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-  end
-  -- Navigation
-  gsmap("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-  gsmap("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+  local gsOpts = vim.tbl_extend("force", { buffer = bufnr }, opts)
+  local ngsOpts = vim.tbl_extend("force", { mode = "n" }, gsOpts)
+  local exprgsOpts = vim.tbl_extend("force", { expr = true }, ngsOpts)
 
-  -- Actions
-  gsmap("n", "<leader>hs", ":Gitsigns stage_hunk<CR>")
-  gsmap("v", "<leader>hs", ":Gitsigns stage_hunk<CR>")
-  gsmap("n", "<leader>hr", ":Gitsigns reset_hunk<CR>")
-  gsmap("v", "<leader>hr", ":Gitsigns reset_hunk<CR>")
-  gsmap("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>")
-  gsmap("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
-  gsmap("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
-  gsmap("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
-  gsmap("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-  gsmap("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
-  gsmap("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
-  gsmap("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-  gsmap("n", "<leader>td", "<cmd>Gitsigns toggle_deleted<CR>")
-
-  -- Text object
-  gsmap("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
-  gsmap("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+  wk.register({
+    ["<leader>s"] = {
+      name = "Gitsigns",
+      j = {
+        "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+        "Next Hunk",
+      },
+      k = {
+        "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+        "Prev Hunk",
+      },
+    },
+  }, exprgsOpts)
+  wk.register {
+    ["<leader>s"] = {
+    s = { ":Gitsigns stage_hunk<CR>", "Stage Hunk", unpack(ngsOpts) },
+    r = { ":Gitsigns reset_hunk<CR>", "Reset Hunk", unpack(ngsOpts) },
+    S = { ":Gitsigns stage_buffer<CR>", "Stage Buffer", unpack(ngsOpts) },
+    u = { ":Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk", unpack(ngsOpts) },
+    R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer", unpack(ngsOpts) },
+    p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk", unpack(ngsOpts) },
+    b = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Blame Line", unpack(ngsOpts) },
+    o = { "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Current line Blame", unpack(ngsOpts) },
+    d = { "<cmd>Gitsigns diffthis<CR>", "Diff This", unpack(ngsOpts) },
+    D = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Diff This(~)", unpack(ngsOpts) },
+    x = { "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted", unpack(ngsOpts) },
+    },
+  }
 end
 
 pluginskeys.telescope = function()
@@ -173,11 +179,6 @@ pluginskeys.telescope = function()
       w = { "<cmd>Telescope grep_string<cr>", "Find grep_tring" },
     },
   }
-  --map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
-  --map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-  --map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
-  --map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
-  --map("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts)
 end
 
 return pluginskeys
