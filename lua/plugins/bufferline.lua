@@ -6,7 +6,7 @@ end
 local default = {
   options = {
     numbers = function(opts)
-      return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.ordinal))
+      return string.format("%s.", opts.ordinal)
     end,
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     buffer_close_icon = "",
@@ -21,7 +21,7 @@ local default = {
     show_tab_indicators = true,
     enforce_regular_tabs = false,
     view = "multiwindow",
-    show_buffer_close_icons = true,
+    show_buffer_close_icons = false,
     separator_style = "thin",
     always_show_bufferline = true,
     diagnostics = false,

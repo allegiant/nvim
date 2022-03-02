@@ -121,12 +121,30 @@ pluginskeys.cmp = function(cmp)
 end
 
 pluginskeys.bufferline = function()
-  wk.register {
-    ["<leader>c"] = { ":BufferLinePickClose<CR>", "Buffer Close" },
-    ["<leader>p"] = { ":BufferLinePick<CR>", "Buffer Pick" },
-  }
-  map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
-  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
+  map("n", "<TAB>", ":BufferLineCycleNext<CR>", opts)
+  map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
+
+  wk.register({
+    ["<leader>b"] = {
+      name = "Buffer",
+      c = { ":BufferLinePickClose<CR>", "Pick Close" },
+      s = { ":BufferLinePick<CR>", "Pick" },
+      l = { ":BufferLineMoveNext<CR>", "Move next" },
+      h = { ":BufferLineMovePrev<CR>", "Move Prev" },
+      q = { ":BufferLineCloseLeft<CR>", "Close left" },
+      p = { ":BufferLineCloseRight<CR>", "Move right " },
+    },
+  }, opts)
+end
+
+pluginskeys.bufdelete = function()
+  wk.register({
+    ["<leader>b"] = {
+      name = "Buffer",
+      d = { ":Bdelete<CR>", "Delete From List" },
+      w = { ":Bwipeout<CR>", "Delete" },
+    },
+  }, opts)
 end
 
 pluginskeys.nvimtree = function()
@@ -153,17 +171,17 @@ pluginskeys.gitsigns = function(bufnr)
   }, exprgsOpts)
   wk.register {
     ["<leader>s"] = {
-    s = { ":Gitsigns stage_hunk<CR>", "Stage Hunk", unpack(ngsOpts) },
-    r = { ":Gitsigns reset_hunk<CR>", "Reset Hunk", unpack(ngsOpts) },
-    S = { ":Gitsigns stage_buffer<CR>", "Stage Buffer", unpack(ngsOpts) },
-    u = { ":Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk", unpack(ngsOpts) },
-    R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer", unpack(ngsOpts) },
-    p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk", unpack(ngsOpts) },
-    b = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Blame Line", unpack(ngsOpts) },
-    o = { "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Current line Blame", unpack(ngsOpts) },
-    d = { "<cmd>Gitsigns diffthis<CR>", "Diff This", unpack(ngsOpts) },
-    D = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Diff This(~)", unpack(ngsOpts) },
-    x = { "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted", unpack(ngsOpts) },
+      s = { ":Gitsigns stage_hunk<CR>", "Stage Hunk", unpack(ngsOpts) },
+      r = { ":Gitsigns reset_hunk<CR>", "Reset Hunk", unpack(ngsOpts) },
+      S = { ":Gitsigns stage_buffer<CR>", "Stage Buffer", unpack(ngsOpts) },
+      u = { ":Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk", unpack(ngsOpts) },
+      R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer", unpack(ngsOpts) },
+      p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk", unpack(ngsOpts) },
+      b = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Blame Line", unpack(ngsOpts) },
+      o = { "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Current line Blame", unpack(ngsOpts) },
+      d = { "<cmd>Gitsigns diffthis<CR>", "Diff This", unpack(ngsOpts) },
+      D = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Diff This(~)", unpack(ngsOpts) },
+      x = { "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted", unpack(ngsOpts) },
     },
   }
 end
