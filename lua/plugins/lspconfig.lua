@@ -51,6 +51,7 @@ lspconfig_configs.volar_api = {
         serverPath = "",
       },
       languageFeatures = {
+        implementation = true, -- new in @volar/vue-language-server v0.33
         references = true,
         definition = true,
         typeDefinition = true,
@@ -84,6 +85,7 @@ lspconfig_configs.volar_doc = {
         serverPath = "",
       },
       languageFeatures = {
+        implementation = true, -- new in @volar/vue-language-server v0.33
         documentHighlight = true,
         documentLink = true,
         codeLens = { showReferencesNotification = true },
