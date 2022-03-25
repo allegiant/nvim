@@ -32,31 +32,11 @@ pluginskeys.lspsaga = function()
     ["<C-u"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", "Doc scroll up" },
     ["<C-d"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-d>')<cr>", "Doc scroll down" },
   }
-  --map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
-  --map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-  --map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
-  --map("n", "gd", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
-  --map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
-  --map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-  --map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
-  --map("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",opts)
-  --map("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", opts)
 end
 
 pluginskeys.lsp = function(mapbuf)
   wk.register {
-    --["<leader>rn"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Lsp Rename" },
-    --["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Lsp Code Action" },
-    --["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Lsp Go to definition" },
-    --["gh"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Lsp Show Hover" },
-    --["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Lsp Go To Declaration" },
-    --["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Lsp Go To Implementation" },
-    --["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Lsp Go To references" },
-    --["go"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "diagnostic open float" },
-    --["gp"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic goto prev" },
-    --["gn"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic goto next" },
-    --["gk"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Lsp signature help" },
-    ["<leader>f"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
+    ["<leader>l"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
   }
   --mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   -- code action
@@ -121,9 +101,8 @@ pluginskeys.cmp = function(cmp)
 end
 
 pluginskeys.bufferline = function()
-  map("n", "<TAB>", ":BufferLineCycleNext<CR>", opts)
-  map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
-
+  map("n", "<TAB>", ":BufferLineCycleNext <CR>", { noremap = true, silent = true })
+  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", { noremap = true, silent = true })
   wk.register({
     ["<leader>b"] = {
       name = "Buffer",
@@ -148,7 +127,7 @@ pluginskeys.bufdelete = function()
 end
 
 pluginskeys.nvimtree = function()
-  map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+  map("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 end
 
 pluginskeys.gitsigns = function(bufnr)
