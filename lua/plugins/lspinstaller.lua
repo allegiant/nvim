@@ -9,8 +9,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- do something on lsp on_attach
 local function on_attach(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  --client.resolved_capabilities.document_formatting = false
+  --client.resolved_capabilities.document_range_formatting = false
 
   -- set mappings only in current buffer with lsp enabled
   local function buf_set_keymap(...)
@@ -50,8 +50,19 @@ lsp_installer.on_server_ready(function(server)
   --   opts.filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
   -- end
   -- server:setup(opts)
-
-  if server.name ~= "volar" then
+  if server.name == "rust_analyzer" then
+    -- Initialize the LSP via rust-tools instead
+    require("rust-tools").setup {
+      -- The "server" property provided in rust-tools setup function are the
+      -- settings rust-tools will provide to lspconfig during init.            -- 
+      -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
+      -- with the user's own settings (opts).
+      server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
+    }
+    server:attach_buffers()
+    -- Only if standalone support is needed
+    require("rust-tools").start_standalone_if_required()
+  elseif server.name ~= "volar" then
     server:setup(opts)
   end
 end)
