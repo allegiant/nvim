@@ -36,26 +36,11 @@ end
 
 pluginskeys.lsp = function(mapbuf)
   wk.register {
-    ["<leader>l"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
+    ["<leader>f"] = {
+      name = "+file",
+      m = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
+    },
   }
-  --mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  -- code action
-  --mapbuf("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-
-  -- go xx
-  -- mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  --mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  --mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  --mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- diagnostic
-  -- mapbuf("n", "go", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  --mapbuf("n", "gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  --mapbuf("n", "gn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-  -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
-  --mapbuf("n", "<gk>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  -- leader + =
-  --mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 local has_words_before = function()
