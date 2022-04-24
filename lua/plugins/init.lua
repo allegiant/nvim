@@ -36,6 +36,10 @@ return require("packer").startup(function(use)
     end,
   }
   use {
+    "simrat39/rust-tools.nvim",
+    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"}
+  }
+  use {
     "williamboman/nvim-lsp-installer",
     config = function()
       require "plugins.lspinstaller"
