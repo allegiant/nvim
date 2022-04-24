@@ -53,7 +53,6 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-vsnip"
   use "hrsh7th/vim-vsnip"
-  use "uga-rosa/cmp-dictionary"
   use "hrsh7th/cmp-nvim-lsp-signature-help"
 
   use "onsails/lspkind-nvim"
