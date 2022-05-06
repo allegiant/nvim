@@ -39,7 +39,12 @@ return require("packer").startup(function(use)
       end,
     },
   }
-  
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = function ()
+      require("plugins.lsp_signature").setup()
+    end
+  }
   use {
     "hrsh7th/nvim-cmp",
     config = function()
