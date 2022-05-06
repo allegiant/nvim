@@ -30,20 +30,19 @@ return require("packer").startup(function(use)
   }
 
   use {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("plugins.lspconfig").setup()
-    end,
+    "williamboman/nvim-lsp-installer",
+    {
+      "neovim/nvim-lspconfig",
+      config = function()
+        require "plugins.lspinstaller"
+        require("plugins.lspconfig").setup()
+      end,
+    },
   }
+
   use {
     "simrat39/rust-tools.nvim",
-    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"}
-  }
-  use {
-    "williamboman/nvim-lsp-installer",
-    config = function()
-      require "plugins.lspinstaller"
-    end,
+    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
   }
   use {
     "hrsh7th/nvim-cmp",
@@ -112,10 +111,10 @@ return require("packer").startup(function(use)
     end,
   }
   use {
-    'famiu/bufdelete.nvim',
-    config = function ()
+    "famiu/bufdelete.nvim",
+    config = function()
       require("core.mappings").bufdelete()
-    end
+    end,
   }
 
   use {
