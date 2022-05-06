@@ -101,16 +101,6 @@ pluginskeys.bufferline = function()
   }, opts)
 end
 
-pluginskeys.bufdelete = function()
-  wk.register({
-    ["<leader>b"] = {
-      name = "Buffer",
-      d = { ":Bdelete<CR>", "Delete From List" },
-      w = { ":Bwipeout<CR>", "Delete" },
-    },
-  }, opts)
-end
-
 pluginskeys.nvimtree = function()
   map("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 end
