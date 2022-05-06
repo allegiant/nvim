@@ -110,12 +110,6 @@ return require("packer").startup(function(use)
       require("core.mappings").bufferline()
     end,
   }
-  use {
-    "famiu/bufdelete.nvim",
-    config = function()
-      require("core.mappings").bufdelete()
-    end,
-  }
 
   use {
     "nvim-lualine/lualine.nvim",
