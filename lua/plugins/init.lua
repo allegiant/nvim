@@ -39,11 +39,7 @@ return require("packer").startup(function(use)
       end,
     },
   }
-
-  use {
-    "simrat39/rust-tools.nvim",
-    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
-  }
+  
   use {
     "hrsh7th/nvim-cmp",
     config = function()
@@ -56,7 +52,6 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-vsnip"
   use "hrsh7th/vim-vsnip"
-  use "hrsh7th/cmp-nvim-lsp-signature-help"
 
   use "onsails/lspkind-nvim"
 

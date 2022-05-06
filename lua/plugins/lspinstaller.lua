@@ -35,13 +35,7 @@ for _, server in pairs(installed_servers) do
     on_attach = on_attach,
     capabilities = capabilities,
   }
-  if server.name == "rust_analyzer" then
-    require("rust-tools").setup {
-      server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
-    }
-    server:attach_buffers()
-    require("rust-tools").start_standalone_if_required()
-  elseif server.name == "volar" then
+  if server.name == "volar" then
     opts.filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" }
     server:setup(opts)
   else
