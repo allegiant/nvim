@@ -30,6 +30,10 @@ return require("packer").startup(function(use)
   }
 
   use {
+    "nvim-lua/plenary.nvim"
+  }
+
+  use {
     "williamboman/nvim-lsp-installer",
     {
       "neovim/nvim-lspconfig",
@@ -41,7 +45,7 @@ return require("packer").startup(function(use)
   }
   use {
     "ray-x/lsp_signature.nvim",
-    config = function ()
+    config = function()
       require("plugins.lsp_signature").setup()
     end
   }
@@ -93,6 +97,7 @@ return require("packer").startup(function(use)
     end,
   }
   use {
+    disable = true,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()

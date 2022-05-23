@@ -10,8 +10,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- do something on lsp on_attach
 local function on_attach(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  -- client.resolved_capabilities.document_formatting = false
+  -- client.resolved_capabilities.document_range_formatting = false
 
   -- set mappings only in current buffer with lsp enabled
   local function buf_set_keymap(...)
@@ -36,8 +36,9 @@ for _, server in pairs(installed_servers) do
     capabilities = capabilities,
   }
   if server.name == "volar" then
-    opts.filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" }
-    server:setup(opts)
+    -- opts.filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" }
+    -- server:setup(opts)
+    require('plugins.volar').setup(on_attach);
   else
     server:setup(opts)
   end
