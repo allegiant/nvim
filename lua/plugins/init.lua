@@ -3,6 +3,7 @@ local cmd = vim.cmd
 local opt = vim.opt
 local o = vim.o
 
+
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system {
@@ -30,35 +31,9 @@ return require("packer").startup(function(use)
   }
 
   use {
-    "williamboman/nvim-lsp-installer",
-    {
-      "neovim/nvim-lspconfig",
-      config = function()
-        require "plugins.lspinstaller"
-        require("plugins.lspconfig").setup()
-      end,
-    },
+    "neoclide/coc.nvim",
+    branch = "release",
   }
-  use {
-    "ray-x/lsp_signature.nvim",
-    config = function ()
-      require("plugins.lsp_signature").setup()
-    end
-  }
-  use {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      require "plugins.cmp"
-    end,
-  }
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/cmp-vsnip"
-  use "hrsh7th/vim-vsnip"
-
-  use "onsails/lspkind-nvim"
 
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -68,12 +43,14 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   }
   use {
+    disable = true,
     "windwp/nvim-autopairs",
     config = function()
       require("plugins.autopairs").setup()
     end,
   }
   use {
+    disable = true,
     "windwp/nvim-ts-autotag",
     requires = { "nvim-treesitter/nvim-treesitter" },
     config = function()
@@ -93,6 +70,7 @@ return require("packer").startup(function(use)
     end,
   }
   use {
+    disable = true,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()
@@ -115,7 +93,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = {
       "kyazdani42/nvim-web-devicons",
-      "arkav/lualine-lsp-progress",
+      -- "arkav/lualine-lsp-progress",
       opt = true,
     },
     config = function()
@@ -161,15 +139,6 @@ return require("packer").startup(function(use)
     "akinsho/toggleterm.nvim",
     config = function()
       require("plugins.toggleterm").setup()
-    end,
-  }
-  use {
-    "tami5/lspsaga.nvim",
-    config = function()
-      require("plugins.lspsaga").setup()
-    end,
-    setup = function()
-      require("core.mappings").lspsaga()
     end,
   }
   -- Automatically set up your configuration after cloning packer.nvim
