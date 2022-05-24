@@ -17,73 +17,8 @@ wk.register {
 }
 local pluginskeys = {}
 
-pluginskeys.lspsaga = function()
-  wk.register {
-    ["g"] = {
-      name = "+Lspsaga",
-      r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-      a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
-      h = { "<cmd>Lspsaga hover_doc<cr>", "Doc Hover" },
-      d = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration" },
-      o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic" },
-      j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next" },
-      k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "diagnostic prev" },
-    },
-    ["<C-u"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", "Doc scroll up" },
-    ["<C-d"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-d>')<cr>", "Doc scroll down" },
-  }
-end
 
-pluginskeys.lsp = function(mapbuf)
-  wk.register {
-    ["<leader>f"] = {
-      name = "+file",
-      m = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
-    },
-  }
-end
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-end
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-pluginskeys.cmp = function(cmp)
-  return {
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable,
-    ["<C-e>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-      end
-    end, { "i", "s" }),
-  }
-end
 
 pluginskeys.bufferline = function()
   map("n", "<TAB>", ":BufferLineCycleNext <CR>", { noremap = true, silent = true })
