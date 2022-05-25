@@ -3,6 +3,7 @@ local cmd = vim.cmd
 local opt = vim.opt
 local o = vim.o
 
+
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system {
@@ -59,8 +60,8 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/cmp-vsnip"
-  use "hrsh7th/vim-vsnip"
+  use { disable = false, "hrsh7th/cmp-vsnip" }
+  use { disable = false, "hrsh7th/vim-vsnip" }
 
   use "onsails/lspkind-nvim"
 
@@ -169,6 +170,7 @@ return require("packer").startup(function(use)
     end,
   }
   use {
+    disable = true,
     "tami5/lspsaga.nvim",
     config = function()
       require("plugins.lspsaga").setup()

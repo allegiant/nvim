@@ -35,6 +35,22 @@ pluginskeys.lspsaga = function()
 end
 
 pluginskeys.lsp = function(mapbuf)
+  wk.register({
+    ["g"] = {
+      name = "+Lsp",
+      rn = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+      h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
+      d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
+      D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+      i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+      r = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+      o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
+      j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
+      k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
+    },
+  },opts)
+
   wk.register {
     ["<leader>f"] = {
       name = "+file",
