@@ -7,11 +7,14 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- do something on lsp on_attach
-local function on_attach(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
 
+-- do something on lsp on_attach
+local function on_attach_client(client, enable)
+  client.resolved_capabilities.document_formatting = enable
+  client.resolved_capabilities.document_range_formatting = enable
+end
+
+local function on_attach_bufnr(bufnr)
   -- set mappings only in current buffer with lsp enabled
   local function buf_set_keymap(...)
     vim_api.nvim_buf_set_keymap(bufnr, ...)
@@ -29,13 +32,27 @@ end
 local installed_servers = lsp_installer.get_installed_servers()
 
 local opts = {
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    on_attach_client(client, true)
+    on_attach_bufnr(bufnr)
+  end,
   capabilities = capabilities,
 }
 
 for _, server in pairs(installed_servers) do
   if server.name == "volar" then
-    require("plugins.volar").setup(opts)
+
+    local volar = require("plugins.volar")
+
+    volar.setup_html(opts);
+
+    -- 禁用lspconfig代码格式化
+    opts.on_attach = function(client, bufnr)
+      on_attach_client(client, false)
+      on_attach_bufnr(bufnr)
+    end
+    volar.setup_api(opts)
+    volar.setup_doc(opts)
   else
     server:setup(opts)
   end

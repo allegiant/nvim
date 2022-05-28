@@ -2,7 +2,7 @@ local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-  b.formatting.stylua.with { filetpes = { "lua" } },
+  -- b.formatting.stylua.with { filetpes = { "lua" } },
 
   b.formatting.rustfmt.with {
     extra_args = function(params)

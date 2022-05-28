@@ -4,42 +4,6 @@ if not present then
   return
 end
 
-local g = vim.g
-
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_root_folder_modifier = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }
-g.nvim_tree_add_trailing = 1 -- append a trailing slash to folder names
-
-g.nvim_tree_show_icons = {
-  folders = 1,
-  files = 1,
-  git = 1,
-  folder_arrows = 1
-}
-
-g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    deleted = "",
-    ignored = "◌",
-    renamed = "➜",
-    staged = "✓",
-    unmerged = "",
-    unstaged = "✗",
-    untracked = "★",
-  },
-  folder = {
-    default = "",
-    empty = "",
-    empty_open = "",
-    open = "",
-    symlink = "",
-    symlink_open = "",
-  },
-}
-
 local default = {
   auto_reload_on_write = true,
   disable_netrw = true,
@@ -68,9 +32,54 @@ local default = {
     ignore = false,
   },
   renderer = {
+    add_trailing = true,
     indent_markers = {
       enable = true,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
     },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+      padding = " ",
+      symlink_arrow = " ➛ ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = "",
+        folder = {
+          arrow_closed = "",
+          arrow_open = "",
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+          symlink_open = "",
+        },
+        git = {
+          unstaged = "✗",
+          staged = "✓",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
+    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    highlight_git = true,
+    highlight_opened_files = "none",
+    root_folder_modifier = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
   },
   ignore_ft_on_setup = { "dashboard" },
   filters = {

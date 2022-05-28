@@ -230,11 +230,14 @@ lspconfig_configs.volar_html = {
 }
 
 local M = {}
-
-
-M.setup = function(opts)
+M.setup_api = function(opts)
   lspconfig.volar_api.setup(opts);
+end
+M.setup_doc = function(opts)
   lspconfig.volar_doc.setup(opts);
+end
+
+M.setup_html = function(opts)
   lspconfig.volar_html.setup(opts);
 end
 

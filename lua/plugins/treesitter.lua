@@ -17,7 +17,7 @@ local default = {
       "vue",
    },
    indent = {
-       enable = false
+       enable = true,
    },
    highlight = {
       enable = true,
