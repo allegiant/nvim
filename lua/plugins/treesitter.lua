@@ -17,11 +17,10 @@ local default = {
       "vue",
    },
    indent = {
-       enable = true
+       enable = false
    },
    highlight = {
       enable = true,
-      disable = { "vue" },
    },
 }
 

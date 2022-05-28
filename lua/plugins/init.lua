@@ -50,20 +50,27 @@ return require("packer").startup(function(use)
       require("plugins.lsp_signature").setup()
     end
   }
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
   use {
     "hrsh7th/nvim-cmp",
     config = function()
       require "plugins.cmp"
     end,
   }
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-cmdline"
-  use { disable = false, "hrsh7th/cmp-vsnip" }
-  use { disable = false, "hrsh7th/vim-vsnip" }
+  use { "hrsh7th/cmp-vsnip" }
+  use {
+    "hrsh7th/vim-vsnip",
+    config =  function ()
+      vim.g.vsnip_snippet_dir=vim.fn.stdpath('config').."/.vsnip"
+    end
+  }
+  use "rafamadriz/friendly-snippets"
 
-  use "onsails/lspkind-nvim"
+
+  use { "onsails/lspkind-nvim" }
 
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -98,7 +105,6 @@ return require("packer").startup(function(use)
     end,
   }
   use {
-    disable = true,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()

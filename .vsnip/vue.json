@@ -1,0 +1,51 @@
+{
+  "vueScript": {
+    "prefix": [
+      "vscript"
+    ],
+    "body": [
+      "<script lang=\"ts\">",
+        "name: $1",
+      "</script>"
+    ],
+    "description": "vue script default."
+  },
+  "vueTemplate": {
+    "prefix": [
+      "vt"
+    ],
+    "body": [
+      "<template>",
+      "<div class=\"$3\">",
+      "$4",
+      "</div>",
+      "</template>",
+      "<script lang=\"ts\">",
+      " ",
+      "</script>",
+      "<style lang=\"$1\" scoped>",
+      "$2",
+      "</style>"
+    ],
+    "description": "vue template setup."
+  },
+  "vueTemplateSetup": {
+    "prefix": [
+      "vts"
+    ],
+    "body": [
+      "<template>",
+      "<div class=\"$3\">",
+      "$4",
+      "</div>",
+      "</template>",
+      "<script setup lang=\"ts\">",
+      " ",
+      "</script>",
+      "<style lang=\"$1\" scoped>",
+      "$2",
+      "</style>"
+    ],
+    "description": "vue template setup."
+  }
+}
