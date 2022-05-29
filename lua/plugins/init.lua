@@ -67,8 +67,6 @@ return require("packer").startup(function(use)
       vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. "/.vsnip"
     end
   }
-  use "rafamadriz/friendly-snippets"
-
 
   use { "onsails/lspkind-nvim" }
 
