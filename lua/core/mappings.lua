@@ -169,4 +169,11 @@ pluginskeys.telescope = function()
   }
 end
 
+pluginskeys.autopairs = function()
+  local keymaps = {
+    map = '<C-G>' -- fast wrap
+  }
+  return keymaps;
+end
+
 return pluginskeys

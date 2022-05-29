@@ -47,12 +47,13 @@ for _, server in pairs(installed_servers) do
     volar.setup_html(opts);
 
     -- 禁用lspconfig代码格式化
-    opts.on_attach = function(client, bufnr)
+    local volarOpts = opts
+    volarOpts.on_attach = function(client, bufnr)
       on_attach_client(client, false)
       on_attach_bufnr(bufnr)
     end
-    volar.setup_api(opts)
-    volar.setup_doc(opts)
+    volar.setup_api(volarOpts)
+    volar.setup_doc(volarOpts)
   else
     server:setup(opts)
   end
