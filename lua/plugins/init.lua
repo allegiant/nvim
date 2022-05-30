@@ -174,7 +174,6 @@ return require("packer").startup(function(use)
     end,
   }
   use {
-    disable = true,
     "tami5/lspsaga.nvim",
     config = function()
       require("plugins.lspsaga").setup()

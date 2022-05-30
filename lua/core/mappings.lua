@@ -18,38 +18,47 @@ wk.register {
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
-  wk.register {
+  wk.register({
     ["g"] = {
       name = "+Lspsaga",
       r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-      a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+      a = { "<cmd>Lspsaga code_action<cr>", "Code Action", mode = 'n'},
       h = { "<cmd>Lspsaga hover_doc<cr>", "Doc Hover" },
-      d = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration" },
+      f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration" },
       o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic" },
       j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next" },
       k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "diagnostic prev" },
+      s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" },
+      d = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Preview definition" },
     },
     ["<C-u"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", "Doc scroll up" },
-    ["<C-d"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-d>')<cr>", "Doc scroll down" },
-  }
+    ["<C-d"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", "Doc scroll down" },
+  },{mode = 'n'})
+
+  wk.register({
+    ["g"] = {
+      name = "+Lspsaga",
+      a = { ":<c-u>Lspsaga range_code_action<cr>", "Range Code Action"},
+    }
+  },{mode = 'v'})
 end
 
 pluginskeys.lsp = function(mapbuf)
-  wk.register({
-    ["g"] = {
-      name = "+Lsp",
-      rn = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-      h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
-      d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-      D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-      i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
-      r = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
-      o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-      j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
-      k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
-    },
-  },opts)
+  -- wk.register({
+  --   ["g"] = {
+  --     name = "+Lsp",
+  --     rn = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+  --     a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+  --     h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
+  --     d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
+  --     D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+  --     i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+  --     r = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+  --     o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
+  --     j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
+  --     k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
+  --   },
+  -- },opts)
 
   wk.register {
     ["<leader>f"] = {
