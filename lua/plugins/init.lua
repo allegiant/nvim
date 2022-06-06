@@ -2,9 +2,11 @@ local fn = vim.fn
 local cmd = vim.cmd
 local opt = vim.opt
 local o = vim.o
+local g = vim.g
 
 
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system {
     "git",
@@ -21,12 +23,35 @@ cmd [[packadd packer.nvim]]
 
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
+
   use {
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+      "kyazdani42/nvim-web-devicons", -- optional, for file icon
+    },
+    event = 'VimEnter',
+    config = function()
+      require("plugins.nvimtree").setup()
+      require("core.mappings").nvimtree()
+    end,
+  }
+  use {
+    disable = true,
     "ellisonleao/gruvbox.nvim",
     config = function()
       vim.opt.termguicolors = true
       vim.o.background = "light" -- or "light" for light mode
       vim.cmd [[colorscheme gruvbox]]
+    end,
+  }
+
+use {
+    "sainnhe/gruvbox-material",
+    config = function()
+      vim.opt.termguicolors = true
+      vim.o.background = "light"
+      vim.g.gruvbox_material_better_performance = 1
+      vim.cmd[[colorscheme gruvbox-material]]
     end,
   }
 
@@ -91,18 +116,7 @@ return require("packer").startup(function(use)
       require("plugins.autotag").setup()
     end,
   }
-  use {
-    "kyazdani42/nvim-tree.lua",
-    requires = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icon
-    },
-    config = function()
-      require("plugins.nvimtree").setup()
-    end,
-    setup = function()
-      require("core.mappings").nvimtree()
-    end,
-  }
+  
   use {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
@@ -113,13 +127,23 @@ return require("packer").startup(function(use)
 
   use {
     "akinsho/bufferline.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = {"kyazdani42/nvim-web-devicons",'famiu/bufdelete.nvim'},
+    event = 'VimEnter',
     config = function()
       require("plugins.bufferline").setup()
-    end,
-    setup = function()
       require("core.mappings").bufferline()
     end,
+  }
+
+  use {
+    disable = true,
+    'romgrk/barbar.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    event = 'VimEnter',
+    config = function()
+      require('plugins.barbar').setup()
+      require('core.mappings').barbar()
+    end
   }
 
   use {

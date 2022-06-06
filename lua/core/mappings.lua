@@ -22,7 +22,7 @@ pluginskeys.lspsaga = function()
     ["g"] = {
       name = "+Lspsaga",
       r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-      a = { "<cmd>Lspsaga code_action<cr>", "Code Action", mode = 'n'},
+      a = { "<cmd>Lspsaga code_action<cr>", "Code Action", mode = 'n' },
       h = { "<cmd>Lspsaga hover_doc<cr>", "Doc Hover" },
       f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration" },
       o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic" },
@@ -33,14 +33,14 @@ pluginskeys.lspsaga = function()
     },
     ["<C-u"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", "Doc scroll up" },
     ["<C-d"] = { "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", "Doc scroll down" },
-  },{mode = 'n'})
+  }, { mode = 'n' })
 
   wk.register({
     ["g"] = {
       name = "+Lspsaga",
-      a = { ":<c-u>Lspsaga range_code_action<cr>", "Range Code Action"},
+      a = { ":<c-u>Lspsaga range_code_action<cr>", "Range Code Action" },
     }
-  },{mode = 'v'})
+  }, { mode = 'v' })
 end
 
 pluginskeys.lsp = function(mapbuf)
@@ -111,23 +111,72 @@ pluginskeys.cmp = function(cmp)
 end
 
 pluginskeys.bufferline = function()
-  map("n", "<TAB>", ":BufferLineCycleNext <CR>", { noremap = true, silent = true })
-  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", { noremap = true, silent = true })
+  map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
+  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
+  wk.register({
+    ["<leader>"] = {
+      name = "Leader",
+      ['1'] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "goto 1" },
+      ['2'] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "goto 2" },
+      ['3'] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "goto 3" },
+      ['4'] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "goto 4" },
+      ['5'] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "goto 5" },
+      ['6'] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "goto 6" },
+      ['7'] = { "<Cmd>BufferLineGoToBuffer 7<CR>", "goto 7" },
+      ['8'] = { "<Cmd>BufferLineGoToBuffer 8<CR>", "goto 8" },
+      ['9'] = { "<Cmd>BufferLineGoToBuffer 9<CR>", "goto 9" },
+    },
+  }, opts)
+
   wk.register({
     ["<leader>b"] = {
       name = "Buffer",
+      d = { ":bdelete<CR>", "Close" },
       c = { ":BufferLinePickClose<CR>", "Pick Close" },
       s = { ":BufferLinePick<CR>", "Pick" },
-      l = { ":BufferLineMoveNext<CR>", "Move next" },
-      h = { ":BufferLineMovePrev<CR>", "Move Prev" },
+      l = { ":BufferLineMoveNext<CR>", "Move right" },
+      h = { ":BufferLineMovePrev<CR>", "Move left" },
       q = { ":BufferLineCloseLeft<CR>", "Close left" },
-      p = { ":BufferLineCloseRight<CR>", "Move right " },
+      p = { ":BufferLineCloseRight<CR>", "Close right " },
+      ['1'] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "goto 1" },
+      ['2'] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "goto 2" },
+      ['3'] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "goto 3" },
+      ['4'] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "goto 4" },
+      ['5'] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "goto 5" },
+      ['6'] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "goto 6" },
     },
   }, opts)
 end
 
+pluginskeys.barbar = function()
+  map("n", "<TAB>", ":BufferNext<CR>", opts)
+  map("n", "<S-Tab>", ":BufferPrevious<CR>", opts)
+
+  map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
+  map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
+  map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
+  map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
+  map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
+  map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
+  map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
+  map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
+  map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
+  map('n', '<A-0>', ':BufferLast<CR>', opts)
+
+  wk.register({
+    ["<leader>b"] = {
+      name = "Buffer",
+      l = { ':BufferMoveNext<CR>', "Move right" },
+      h = { ':BufferMovePrevious<CR>', "Move left" },
+      p = { ':BufferPin<CR>', "Pin/unpin" },
+      c = { ':BufferClose<CR>', "Close" },
+      s = { ':BufferPick<CR>', "Picking mode" },
+    }
+  }, opts)
+end
+
 pluginskeys.nvimtree = function()
-  map("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+  map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 end
 
 pluginskeys.gitsigns = function(bufnr)
