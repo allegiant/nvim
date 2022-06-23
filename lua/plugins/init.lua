@@ -50,6 +50,7 @@ use {
     config = function()
       vim.opt.termguicolors = true
       vim.o.background = "light"
+      vim.g.gruvbox_material_background = 'soft'
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd[[colorscheme gruvbox-material]]
     end,
@@ -69,17 +70,12 @@ use {
       end,
     },
   }
-  use {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("plugins.lsp_signature").setup()
-    end
-  }
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lua"
+  use "hrsh7th/cmp-nvim-lsp-signature-help"
   use {
     "hrsh7th/nvim-cmp",
     config = function()

@@ -55,6 +55,7 @@ cmp.setup {
     { name = "nvim_lsp" },
     { name = "vsnip" }, -- For vsnip users.
     { name = 'nvim_lua' },
+    { name = 'nvim_lsp_signature_help' },
   }, {
     { name = "buffer" },
     { name = "path" }
