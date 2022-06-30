@@ -195,7 +195,7 @@ use {
     end,
   }
   use {
-    "tami5/lspsaga.nvim",
+    "glepnir/lspsaga.nvim",
     config = function()
       require("plugins.lspsaga").setup()
     end,
