@@ -26,7 +26,7 @@ local function on_attach_bufnr(bufnr)
   end
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-  require("core.mappings").lsp(buf_set_keymap)
+  require("core.mappings").lspconfig(buf_set_keymap)
 end
 
 local installed_servers = lsp_installer.get_installed_servers()

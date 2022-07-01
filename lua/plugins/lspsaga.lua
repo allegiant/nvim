@@ -11,7 +11,7 @@ local default = {
   -- "single" | "double" | "rounded" | "bold" | "plus"
   border_style = "single",
   -- when cursor in saga window you config these to move
-  move_in_saga = { prev = '<S-Tab>', next = '<Tab>' },
+  move_in_saga = { prev = 'k', next = 'j' },
   -- Error, Warn, Info, Hint
   -- use emoji like
   -- { "🙀", "😿", "😾", "😺" }
