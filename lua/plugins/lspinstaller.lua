@@ -15,18 +15,13 @@ local function on_attach_client(client, enable)
 end
 
 local function on_attach_bufnr(bufnr)
-  -- set mappings only in current buffer with lsp enabled
-  local function buf_set_keymap(...)
-    vim_api.nvim_buf_set_keymap(bufnr, ...)
-  end
-
   -- set options only in current buffer with lsp enabled
   local function buf_set_option(...)
     vim_api.nvim_buf_set_option(bufnr, ...)
   end
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-  require("core.mappings").lspconfig(buf_set_keymap)
+  require("core.mappings").lspconfig(bufnr)
 end
 
 local installed_servers = lsp_installer.get_installed_servers()
@@ -40,6 +35,7 @@ local opts = {
 }
 
 for _, server in pairs(installed_servers) do
+
   if server.name == "volar" then
 
     local volar = require("plugins.volar")
