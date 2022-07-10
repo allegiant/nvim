@@ -65,7 +65,6 @@ use {
     {
       "neovim/nvim-lspconfig",
       config = function()
-        require "plugins.lspinstaller"
         require("plugins.lspconfig").setup()
       end,
     },
