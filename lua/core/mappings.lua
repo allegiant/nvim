@@ -23,10 +23,10 @@ pluginskeys.lspsaga = function()
     ["g"] = {
       name = "+Lspsaga",
       f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration", noremap = true, silent = true},
-      a = { "<cmd>Lspsaga code_action<cr>", "Code Action", noremap = true, silent = true },
-      h = { "<cmd>Lspsaga hover_doc<cr>", "Doc Hover", silent = true },
+      a = { "<cmd>Lspsaga code_action<CR>", "Code Action", noremap = true, silent = true },
+      h = { "<cmd>Lspsaga hover_doc<CR>", "Doc Hover", silent = true },
       s = { "<cmd>Lspsaga signature_help<CR>", "Signature help", noremap = true, silent = true },
-      r = { "<cmd>Lspsaga rename<cr>", "Rename", noremap = true, silent = true },
+      r = { "<cmd>Lspsaga rename<CR>", "Rename", noremap = true, silent = true },
       d = { "<cmd>Lspsaga preview_definition<CR>", "Preview definition", silent = true },
       o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic", noremap = true, silent = true },
       j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next", noremap = true, silent = true },

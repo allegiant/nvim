@@ -45,7 +45,7 @@ end
 
 local capabilities = vim_lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true -- cancel comment completion
+capabilities.textDocument.completion.completionItem.snippetSupport = false -- cancel comment completion
 
 local M = {}
 

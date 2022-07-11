@@ -83,7 +83,7 @@ local function load_options()
         formatoptions = "1jcroql",
         expandtab = true,
         autoindent = true,
-        smartindent = true,
+        smartindent = false,
         tabstop = 2,
         shiftwidth = 2,
         softtabstop = 2,
