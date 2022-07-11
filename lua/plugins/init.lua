@@ -45,14 +45,14 @@ return require("packer").startup(function(use)
     end,
   }
 
-use {
+  use {
     "sainnhe/gruvbox-material",
     config = function()
       vim.opt.termguicolors = true
       vim.o.background = "light"
       vim.g.gruvbox_material_background = 'soft'
       vim.g.gruvbox_material_better_performance = 1
-      vim.cmd[[colorscheme gruvbox-material]]
+      vim.cmd [[colorscheme gruvbox-material]]
     end,
   }
 
@@ -96,6 +96,10 @@ use {
     config = function()
       require("plugins.treesitter").setup()
     end,
+    requires = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
+    },
     run = ":TSUpdate",
   }
   use {
@@ -104,14 +108,6 @@ use {
       require("plugins.autopairs").setup()
     end,
   }
-  use {
-    "windwp/nvim-ts-autotag",
-    requires = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("plugins.autotag").setup()
-    end,
-  }
-  
   use {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
@@ -122,23 +118,12 @@ use {
 
   use {
     "akinsho/bufferline.nvim",
-    requires = {"kyazdani42/nvim-web-devicons",'famiu/bufdelete.nvim'},
+    requires = { "kyazdani42/nvim-web-devicons", 'famiu/bufdelete.nvim' },
     event = 'VimEnter',
     config = function()
       require("plugins.bufferline").setup()
       require("core.mappings").bufferline()
     end,
-  }
-
-  use {
-    disable = true,
-    'romgrk/barbar.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    event = 'VimEnter',
-    config = function()
-      require('plugins.barbar').setup()
-      require('core.mappings').barbar()
-    end
   }
 
   use {
@@ -156,13 +141,6 @@ use {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
-    end,
-  }
-  use {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    requires = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("plugins.commentstring").setup()
     end,
   }
   use {

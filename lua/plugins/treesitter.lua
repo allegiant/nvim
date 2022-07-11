@@ -1,33 +1,39 @@
 local present, ts_config = pcall(require, "nvim-treesitter.configs")
 
 if not present then
-   return
+  return
 end
 
 local default = {
-   ensure_installed = {
-      "lua",
-      "vim",
-      "html",
-      "css",
-      "javascript",
-      "typescript",
-      "json",
-      "markdown",
-      "vue",
-   },
-   indent = {
-       enable = true,
-   },
-   highlight = {
-      enable = true,
-   },
+  ensure_installed = {
+    "lua",
+    "vim",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "json",
+    "markdown",
+    "vue",
+  },
+  indent = {
+    enable = true,
+  },
+  highlight = {
+    enable = true,
+  },
+  context_commentstring = {
+    enable = true
+  },
+  autotag = {
+    enable = true,
+  },
 }
 
 local M = {}
 
 M.setup = function()
-   ts_config.setup(default)
+  ts_config.setup(default)
 end
 
 return M

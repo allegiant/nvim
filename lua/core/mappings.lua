@@ -114,33 +114,6 @@ pluginskeys.bufferline = function()
   }, opts)
 end
 
-pluginskeys.barbar = function()
-  map("n", "<TAB>", ":BufferNext<CR>", opts)
-  map("n", "<S-Tab>", ":BufferPrevious<CR>", opts)
-
-  map("n", "<A-1>", ":BufferGoto 1<CR>", opts)
-  map("n", "<A-2>", ":BufferGoto 2<CR>", opts)
-  map("n", "<A-3>", ":BufferGoto 3<CR>", opts)
-  map("n", "<A-4>", ":BufferGoto 4<CR>", opts)
-  map("n", "<A-5>", ":BufferGoto 5<CR>", opts)
-  map("n", "<A-6>", ":BufferGoto 6<CR>", opts)
-  map("n", "<A-7>", ":BufferGoto 7<CR>", opts)
-  map("n", "<A-8>", ":BufferGoto 8<CR>", opts)
-  map("n", "<A-9>", ":BufferGoto 9<CR>", opts)
-  map("n", "<A-0>", ":BufferLast<CR>", opts)
-
-  wk.register({
-    ["<leader>b"] = {
-      name = "Buffer",
-      l = { ":BufferMoveNext<CR>", "Move right" },
-      h = { ":BufferMovePrevious<CR>", "Move left" },
-      p = { ":BufferPin<CR>", "Pin/unpin" },
-      c = { ":BufferClose<CR>", "Close" },
-      s = { ":BufferPick<CR>", "Picking mode" },
-    },
-  }, opts)
-end
-
 pluginskeys.nvimtree = function()
   map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 end
@@ -190,13 +163,6 @@ pluginskeys.telescope = function()
       w = { "<cmd>Telescope grep_string<cr>", "Find grep_tring" },
     },
   }
-end
-
-pluginskeys.autopairs = function()
-  local keymaps = {
-    map = "<C-G>", -- fast wrap
-  }
-  return keymaps
 end
 
 return pluginskeys
