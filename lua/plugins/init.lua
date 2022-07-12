@@ -180,6 +180,10 @@ return require("packer").startup(function(use)
       require("core.mappings").lspsaga()
     end,
   }
+  -- vue syntax and indent
+  use {
+    "leafOfTree/vim-vue-plugin"
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
