@@ -10,6 +10,9 @@ local M = {}
 local default = {
   -- "single" | "double" | "rounded" | "bold" | "plus"
   border_style = "single",
+  --the range of 0 for fully opaque window (disabled) to 100 for fully
+  --transparent background. Values between 0-30 are typically most useful.
+  saga_winblend = 0,
   -- when cursor in saga window you config these to move
   move_in_saga = { prev = 'k', next = 'j' },
   -- Error, Warn, Info, Hint
@@ -39,8 +42,13 @@ local default = {
     sign_priority = 20,
     virtual_text = true,
   },
-  -- separator in finder
-  finder_separator = "  ",
+
+  -- finder icons
+  finder_icons = {
+    def = '  ',
+    ref = '諭 ',
+    link = '  ',
+  },
   -- preview lines of lsp_finder and definition preview
   max_preview_lines = 10,
   finder_action_keys = {
@@ -58,6 +66,17 @@ local default = {
   },
   rename_action_quit = "<C-c>",
   definition_preview_icon = "  ",
+  -- show outline
+  show_outline = {
+    win_position = 'right',
+    -- set the special filetype in there which in left like nvimtree neotree defx
+    left_with = '',
+    win_width = 30,
+    auto_enter = true,
+    auto_preview = true,
+    virt_text = '┃',
+    jump_key = 'o',
+  },
   -- if you don't use nvim-lspconfig you must pass your server name and
   -- the related filetypes into this table
   -- like server_filetype_map = { metals = { "sbt", "scala" } }
