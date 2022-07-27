@@ -76,6 +76,8 @@ local default = {
     auto_preview = true,
     virt_text = '┃',
     jump_key = 'o',
+     -- auto refresh when change buffer
+    auto_refresh = true,
   },
   -- if you don't use nvim-lspconfig you must pass your server name and
   -- the related filetypes into this table
@@ -84,7 +86,7 @@ local default = {
 }
 
 M.setup = function()
-  lspsaga.init_lsp_saga(default)
+  lspsaga.init_lsp_saga()
 end
 
 return M

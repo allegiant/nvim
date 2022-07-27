@@ -172,17 +172,15 @@ return require("packer").startup(function(use)
     end,
   }
   use {
+    -- "kkharji/lspsaga.nvim",
     "glepnir/lspsaga.nvim",
+    branch = "main",
     config = function()
       require("plugins.lspsaga").setup()
     end,
     setup = function()
       require("core.mappings").lspsaga()
     end,
-  }
-  -- vue syntax and indent
-  use {
-    "leafOfTree/vim-vue-plugin"
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

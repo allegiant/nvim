@@ -22,7 +22,7 @@ local default = {
   },
   view = {
     side = "left",
-    width = 25,
+    width = 40,
     hide_root_folder = true,
     number = true,
     relativenumber = true,
