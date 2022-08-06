@@ -63,8 +63,12 @@ M.setup = function()
   -- 3. Loop through all of the installed servers and set it up via lspconfig
   for _, server in ipairs(lsp_installer.get_installed_servers()) do
     if server.name == "volar" then
-      local volar = require("plugins.volar")
-      volar.multi_setup(lspconfig, capabilities)
+      -- local volar = require("plugins.volar")
+      -- volar.multi_setup(lspconfig, capabilities)
+      lspconfig[server.name].setup {
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+        capabilities = capabilities,
+      }
     else
       lspconfig[server.name].setup {
         capabilities = capabilities,
