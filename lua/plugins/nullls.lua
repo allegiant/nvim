@@ -2,8 +2,6 @@ local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-  b.formatting.prettier,
-
   b.formatting.rustfmt.with {
     extra_args = function(params)
       local Path = require "plenary.path"
