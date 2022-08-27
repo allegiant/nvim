@@ -1,6 +1,26 @@
+local vim_g = vim.g
 local opt = vim.opt
 
-local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
+--disable_distribution_plugins
+vim_g.loaded_gzip = 1
+vim_g.loaded_tar = 1
+vim_g.loaded_tarPlugin = 1
+vim_g.loaded_zip = 1
+vim_g.loaded_zipPlugin = 1
+vim_g.loaded_getscript = 1
+vim_g.loaded_getscriptPlugin = 1
+vim_g.loaded_vimball = 1
+vim_g.loaded_vimballPlugin = 1
+vim_g.loaded_matchit = 1
+vim_g.loaded_matchparen = 1
+vim_g.loaded_2html_plugin = 1
+vim_g.loaded_logiPat = 1
+vim_g.loaded_rrhelper = 1
+vim_g.loaded_netrw = 1
+vim_g.loaded_netrwPlugin = 1
+vim_g.loaded_netrwSettings = 1
+vim_g.loaded_netrwFileHandlers = 1
+
 
 opt.termguicolors = true
 opt.mouse = 'nv'
@@ -20,11 +40,6 @@ opt.wildignore =
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
-opt.directory = cache_dir .. 'swag/'
-opt.undodir = cache_dir .. 'undo/'
-opt.backupdir = cache_dir .. 'backup/'
-opt.viewdir = cache_dir .. 'view/'
-opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
 opt.history = 2000
 opt.shada = "!,'300,<50,@100,s10,h"
 opt.backupskip = '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim'

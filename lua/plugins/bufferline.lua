@@ -13,15 +13,6 @@ local default = {
     right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
-    -- NOTE: this plugin is designed with this icon in mind,
-    -- and so changing this is NOT recommended, this is intended
-    -- as an escape hatch for people who cannot bear it for whatever reason
-    indicator_icon = '▎',
-    buffer_close_icon = '',
-    modified_icon = '●',
-    close_icon = '',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
     --- name_formatter can be used to change the buffer's label in the bufferline.
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
@@ -37,26 +28,6 @@ local default = {
     tab_size = 18,
     diagnostics = false,
     diagnostics_update_in_insert = false,
-    -- NOTE: this will be called a lot so don't do any heavy processing here
-    custom_filter = function(buf_number, buf_numbers)
-      -- filter out filetypes you don't want to see
-      if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
-        return true
-      end
-      -- filter out by buffer name
-      if vim.fn.bufname(buf_number) ~= "<buffer-name-I-dont-want>" then
-        return true
-      end
-      -- filter out based on arbitrary rules
-      -- e.g. filter out vim wiki buffer from tabline in your work repo
-      if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
-        return true
-      end
-      -- filter out by it's index number in list (don't show first buffer)
-      if buf_numbers[1] ~= buf_number then
-        return true
-      end
-    end,
     offsets = {{filetype = "NvimTree"}},
     color_icons = true, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers

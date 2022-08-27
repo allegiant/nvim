@@ -31,6 +31,8 @@ local default = {
   show_diagnostic_source = true,
   -- add bracket or something with diagnostic source, just have 2 elements
   diagnostic_source_bracket = {},
+  -- preview lines of lsp_finder and definition preview
+  max_preview_lines = 10,
   -- use emoji lightbulb in default
   code_action_icon = "💡",
   -- if true can press number to execute the codeaction in codeaction window
@@ -39,6 +41,7 @@ local default = {
   code_action_lightbulb = {
     enable = true,
     sign = true,
+    enable_in_insert = true,
     sign_priority = 20,
     virtual_text = true,
   },
@@ -49,8 +52,10 @@ local default = {
     ref = '諭 ',
     link = '  ',
   },
-  -- preview lines of lsp_finder and definition preview
-  max_preview_lines = 10,
+  -- finder do lsp request timeout
+  -- if your project big enough or your server very slow
+  -- you may need to increase this value
+  finder_request_timeout = 1500,
   finder_action_keys = {
     open = "o",
     vsplit = "s",
@@ -76,9 +81,10 @@ local default = {
     auto_preview = true,
     virt_text = '┃',
     jump_key = 'o',
-     -- auto refresh when change buffer
+    -- auto refresh when change buffer
     auto_refresh = true,
   },
+  custom_kind = {},
   -- if you don't use nvim-lspconfig you must pass your server name and
   -- the related filetypes into this table
   -- like server_filetype_map = { metals = { "sbt", "scala" } }
@@ -86,7 +92,7 @@ local default = {
 }
 
 M.setup = function()
-  lspsaga.init_lsp_saga()
+  lspsaga.init_lsp_saga({})
 end
 
 return M

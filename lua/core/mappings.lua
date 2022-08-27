@@ -22,15 +22,15 @@ pluginskeys.lspsaga = function()
   wk.register {
     ["g"] = {
       name = "+Lspsaga",
-      f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration", noremap = true, silent = true},
-      a = { "<cmd>Lspsaga code_action<CR>", "Code Action", noremap = true, silent = true },
-      h = { "<cmd>Lspsaga hover_doc<CR>", "Doc Hover", silent = true },
-      s = { "<cmd>Lspsaga signature_help<CR>", "Signature help", noremap = true, silent = true },
-      r = { "<cmd>Lspsaga rename<CR>", "Rename", noremap = true, silent = true },
+      f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration", silent = true },
+      a = { "<cmd>Lspsaga code_action<CR>", "Code Action", silent = true },
+      r = { "<cmd>Lspsaga rename<CR>", "Rename", silent = true },
       d = { "<cmd>Lspsaga preview_definition<CR>", "Preview definition", silent = true },
-      o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic", noremap = true, silent = true },
-      j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next", noremap = true, silent = true },
-      k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "diagnostic prev", noremap = true, silent = true },
+      o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic", silent = true },
+      s = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show cursor diagnostic", silent = true },
+      j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next", silent = true },
+      k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "diagnostic prev", silent = true },
+      h = { "<cmd>Lspsaga hover_doc<CR>", "Doc Hover", silent = true },
     },
   }
 
@@ -43,7 +43,7 @@ pluginskeys.lspsaga = function()
 end
 
 pluginskeys.lspconfig = function(bufnr)
-  local bufOpts = utils.merge_table(opts, {buffer = bufnr})
+  local bufOpts = utils.merge_table(opts, { buffer = bufnr })
   -- wk.register({
   --   ["g"] = {
   --     name = "+Lsp",
@@ -73,7 +73,7 @@ pluginskeys.lspconfig = function(bufnr)
       name = "+file",
       m = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
     },
-  }, bufOpts)
+  }, { buffer = bufnr, silent = true, noremap = true })
 end
 
 pluginskeys.bufferline = function()
