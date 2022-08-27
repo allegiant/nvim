@@ -64,12 +64,14 @@ M.setup = function()
   -- 3. Loop through all of the installed servers and set it up via lspconfig
   for _, server in ipairs(lsp_installer.get_installed_servers()) do
     if server.name == "volar" then
-      local volar = require("plugins.volar")
+      local volar = require("plugins.lspconfig.volar")
       volar.multi_setup(lspconfig, capabilities)
       -- lspconfig[server.name].setup {
       --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
       --   capabilities = capabilities,
       -- }
+    elseif server.name == "sumneko_lua" then
+      lspconfig[server.name].setup(require("plugins.lspconfig.sumneko_lua"))
     else
       lspconfig[server.name].setup {
         capabilities = capabilities,
