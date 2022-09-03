@@ -61,14 +61,26 @@ return require("packer").startup(function(use)
   }
 
   use {
-    "williamboman/nvim-lsp-installer",
-    {
-      "neovim/nvim-lspconfig",
-      config = function()
-        require("plugins.lspconfig").setup()
-      end,
-    },
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+		{
+			"neovim/nvim-lspconfig",
+    config = function ()
+      require("plugins.lspconfig").setup()
+    end
+		}
+    
   }
+
+  -- use {
+  --   "williamboman/nvim-lsp-installer",
+  --   {
+  --     "neovim/nvim-lspconfig",
+  --     config = function()
+  --       require("plugins.lspconfig").setup()
+  --     end,
+  --   },
+  -- }
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"

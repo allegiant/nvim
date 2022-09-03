@@ -1,5 +1,4 @@
-local mason = require("mason");
-local mason_lspconfig = require("mason-lspconfig");
+local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require("lspconfig")
 local vim_tbl_extend = vim.tbl_extend
 local api = vim.api
@@ -54,9 +53,7 @@ end
 local M = {}
 
 M.setup = function()
-  mason.setup();
-  mason_lspconfig.setup();
-
+  lsp_installer.setup {}
   lspconfig.util.default_config = vim_tbl_extend(
     "force",
     lspconfig.util.default_config,
@@ -65,18 +62,18 @@ M.setup = function()
     }
   )
   -- 3. Loop through all of the installed servers and set it up via lspconfig
-  for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-    if server_name == "volar" then
+  for _, server in ipairs(lsp_installer.get_installed_servers()) do
+    if server.name == "volar" then
       local volar = require("plugins.lspconfig.volar")
       volar.multi_setup(lspconfig, capabilities)
-      -- lspconfig[server_name].setup {
+      -- lspconfig[server.name].setup {
       --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
       --   capabilities = capabilities,
       -- }
-    elseif server_name == "sumneko_lua" then
-      lspconfig[server_name].setup(require("plugins.lspconfig.sumneko_lua"))
+    elseif server.name == "sumneko_lua" then
+      lspconfig[server.name].setup(require("plugins.lspconfig.sumneko_lua"))
     else
-      lspconfig[server_name].setup {
+      lspconfig[server.name].setup {
         capabilities = capabilities,
       }
     end
