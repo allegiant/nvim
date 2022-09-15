@@ -2,6 +2,8 @@ local vim_g = vim.g
 local opt = vim.opt
 
 --disable_distribution_plugins
+vim_g.loaded = 1
+vim_g.loaded_netrwPlugin = 1
 vim_g.loaded_gzip = 1
 vim_g.loaded_tar = 1
 vim_g.loaded_tarPlugin = 1
