@@ -25,7 +25,7 @@ pluginskeys.lspsaga = function()
       f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration", silent = true },
       a = { "<cmd>Lspsaga code_action<CR>", "Code Action", silent = true },
       r = { "<cmd>Lspsaga rename<CR>", "Rename", silent = true },
-      d = { "<cmd>Lspsaga preview_definition<CR>", "Preview definition", silent = true },
+      d = { "<cmd>Lspsaga peek_definition<CR>", "Preview definition", silent = true },
       o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic", silent = true },
       s = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show cursor diagnostic", silent = true },
       j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next", silent = true },
@@ -161,6 +161,7 @@ pluginskeys.telescope = function()
       b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
       h = { "<cmd>Telescope help_tags<cr>", "Find help_tags" },
       w = { "<cmd>Telescope grep_string<cr>", "Find grep_tring" },
+      r = { "<cmd>Telescope resume<cr>", "Find search history" },
     },
   }
 end
