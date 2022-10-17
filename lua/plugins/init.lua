@@ -57,20 +57,21 @@ return require("packer").startup(function(use)
   }
 
   use {
-    "nvim-lua/plenary.nvim"
+    'akinsho/flutter-tools.nvim',
+    requires = 'nvim-lua/plenary.nvim'
   }
-  use {'stevearc/dressing.nvim'}
+
+  use { 'stevearc/dressing.nvim' }
 
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-		{
-			"neovim/nvim-lspconfig",
-    config = function ()
-      require("plugins.lspconfig").setup()
-    end
-		}
-    
+    {
+      "neovim/nvim-lspconfig",
+      config = function()
+        require("plugins.lspconfig").setup()
+      end
+    }
   }
 
   -- use {
