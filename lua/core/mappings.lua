@@ -71,7 +71,7 @@ pluginskeys.lspconfig = function(bufnr)
   wk.register({
     ["<leader>f"] = {
       name = "+file",
-      m = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Lsp format" },
+      m = { function() vim.lsp.buf.format { async = true } end, "Lsp format" },
     },
   }, { buffer = bufnr, silent = true, noremap = true })
 end
