@@ -1,6 +1,7 @@
 local present, cmp = pcall(require, "cmp")
 local lspkind = require "lspkind"
 
+
 if not present then
   return
 end
@@ -13,8 +14,6 @@ end
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
-
-vim.opt.completeopt = "menu,menuone,noselect"
 
 cmp.setup({
   enabled = function()
@@ -61,20 +60,29 @@ cmp.setup({
     end, { "i", "s" }),
 
   }),
-
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "vsnip" }, -- For vsnip users.
-    { name = 'nvim_lua' },
-    { name = 'nvim_lsp_signature_help' },
-  }, {
-    { name = "buffer" },
-    { name = "path" }
-  }),
+  sorting = {
+    comparators = {
+      cmp.config.compare.length,
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.order,
+    },
+  },
+  sources = cmp.config.sources(
+    {
+      { name = "nvim_lsp", max_item_count = 30 },
+      { name = "vsnip" }, -- For vsnip users.
+      { name = 'nvim_lua' },
+      { name = "buffer", keyword_length = 3 },
+      { name = 'nvim_lsp_signature_help' },
+    }
+  ),
   formatting = {
     format = lspkind.cmp_format({
       with_text = true,
-      maxwidth = 50,
       before = function(entry, vim_item)
         -- vim_item.menu = "["..string.upper(entry.source.name).."]"
         vim_item.menu = ({
@@ -83,15 +91,20 @@ cmp.setup({
           nvim_lua = "[Lua]",
           buffer = "[BUF]",
           path = "PATH",
+          nvim_lsp_signature_help = "[param]",
         })[entry.source.name]
         return vim_item
       end,
     }),
   },
+  experimental = {
+    native_menu = false,
+    ghost_text = true,
+  },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
