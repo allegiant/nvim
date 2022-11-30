@@ -40,10 +40,16 @@ pluginskeys.lspsaga = function()
       a = { ":<c-u>Lspsaga range_code_action<cr>", "Range Code Action" },
     },
   }, { mode = "v" })
+
+  wk.register({
+    ["<leader>"] = {
+      name = "+outline",
+      o = { "<cmd>LSoutlineToggle<CR>", "outline Toggle", silent = true },
+    },
+  })
 end
 
 pluginskeys.lspconfig = function(bufnr)
-  local bufOpts = utils.merge_table(opts, { buffer = bufnr })
   -- wk.register({
   --   ["g"] = {
   --     name = "+Lsp",

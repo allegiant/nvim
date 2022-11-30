@@ -1,8 +1,5 @@
 local fn = vim.fn
 local cmd = vim.cmd
-local opt = vim.opt
-local o = vim.o
-local g = vim.g
 
 
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -74,15 +71,6 @@ return require("packer").startup(function(use)
     }
   }
 
-  -- use {
-  --   "williamboman/nvim-lsp-installer",
-  --   {
-  --     "neovim/nvim-lspconfig",
-  --     config = function()
-  --       require("plugins.lspconfig").setup()
-  --     end,
-  --   },
-  -- }
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
