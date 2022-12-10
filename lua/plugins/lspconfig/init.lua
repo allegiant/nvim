@@ -52,6 +52,8 @@ end
 
 local M = {}
 
+M.on_attach = on_attach
+
 M.setup = function()
   mason.setup();
   mason_lspconfig.setup();
@@ -67,12 +69,10 @@ M.setup = function()
   for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "volar" then
       require("plugins.lspconfig.volar").setup(lspconfig, capabilities)
-      --lspconfig[server_name].setup {
-      --  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-      --  capabilities = capabilities,
-      --}
     elseif server_name == "sumneko_lua" then
       lspconfig[server_name].setup(require("plugins.lspconfig.sumneko_lua"))
+    elseif server_name == "rust_analyzer" then
+      -- lspconfig[server_name].setup(require("plugins.lspconfig.rust"))
     else
       lspconfig[server_name].setup {
         capabilities = capabilities,

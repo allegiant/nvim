@@ -174,7 +174,6 @@ return require("packer").startup(function(use)
     end,
   }
   use {
-    -- "kkharji/lspsaga.nvim",
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
@@ -183,6 +182,12 @@ return require("packer").startup(function(use)
     setup = function()
       require("core.mappings").lspsaga()
     end,
+  }
+  use {
+    "simrat39/rust-tools.nvim",
+    config = function ()
+      require("plugins.rustools").setup()
+    end
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
