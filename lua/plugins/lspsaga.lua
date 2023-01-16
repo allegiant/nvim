@@ -9,7 +9,7 @@ local M = {}
 
 
 M.setup = function()
-  lspsaga.init_lsp_saga({})
+  lspsaga.setup({})
 end
 
 return M

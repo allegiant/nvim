@@ -18,7 +18,7 @@ local default = {
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
   -- auto_reload_on_write = true,
   -- disable_netrw = true,
