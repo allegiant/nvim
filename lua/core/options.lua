@@ -35,7 +35,6 @@ opt.virtualedit = 'block'
 opt.encoding = 'utf-8'
 opt.viewoptions = 'folds,cursor,curdir,slash,unix'
 opt.sessionoptions = 'curdir,help,tabpages,winsize'
-opt.clipboard = 'unnamedplus'
 opt.wildignorecase = true
 opt.wildignore =
   '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'

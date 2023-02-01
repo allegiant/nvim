@@ -36,13 +36,15 @@ local install_plugins = {
   { 'stevearc/dressing.nvim' },
   {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("plugins.lspconfig").setup()
-    end
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("plugins.lspconfig").setup()
+        end
+      },
+    }
   },
   {
     "hrsh7th/nvim-cmp",
@@ -105,7 +107,6 @@ local install_plugins = {
     dependencies = {
       "kyazdani42/nvim-web-devicons",
       "arkav/lualine-lsp-progress",
-      lazy = true,
     },
     config = function()
       require("plugins.lualine").setup()
@@ -157,12 +158,13 @@ local install_plugins = {
   },
   {
     enabled = false,
-    "simrat39/rust-tools.nvim",
+    "EtiamNullam/deferred-clipboard.nvim",
     config = function()
-      local on_attach = require("plugins.lspconfig").on_attach
-      require("plugins.rustools").setup(on_attach)
+      require('deferred-clipboard').setup {
+        fallback = 'unnamedplus', -- or your preferred setting for clipboard
+        lazy = true,
+      }
     end
   }
 }
-
 lazy.load(install_plugins)

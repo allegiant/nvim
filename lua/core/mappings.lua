@@ -12,6 +12,11 @@ vim.g.maplocalleader = " "
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+
+map("v", "<leader>y", '"+y', opts)
+map("n", "<leader>p", '"+p', opts)
+map("v", "<leader>d", '"+d', opts)
+
 wk.register {
   ["sv"] = { ":vsp<CR>", "vertical split" },
   ["sh"] = { ":sp<CR>", "Horizontal split" },
