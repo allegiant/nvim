@@ -1,4 +1,4 @@
-local plugins_lspconfig = require("plugins.lspconfig")
+local lspconfig_common = require("plugins.lspconfig.common")
 local M = {}
 
 local opts = {
@@ -19,8 +19,8 @@ local opts = {
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
     -- on_attach is a callback called when the language server attachs to the buffer
-    on_attach = plugins_lspconfig.on_attach,
-
+    on_attach = lspconfig_common.on_attach,
+    capabilities = lspconfig_common.capabilities(),
     settings = {
       -- to enable rust-analyzer settings visit:
 

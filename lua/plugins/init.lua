@@ -157,14 +157,10 @@ local install_plugins = {
     end,
   },
   {
-    enabled = false,
-    "EtiamNullam/deferred-clipboard.nvim",
+    "simrat39/rust-tools.nvim",
     config = function()
-      require('deferred-clipboard').setup {
-        fallback = 'unnamedplus', -- or your preferred setting for clipboard
-        lazy = true,
-      }
+      require("plugins.rustools").setup()
     end
-  }
+  },
 }
 lazy.load(install_plugins)

@@ -1,10 +1,11 @@
 local mason = require("mason");
 local mason_lspconfig = require("mason-lspconfig");
 local lspconfig = require("lspconfig")
+local lspconfig_common = require("plugins.lspconfig.common")
 local vim_tbl_extend = vim.tbl_extend
-local api = vim.api
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = lspconfig_common.capabilities()
 
 local signs = {
   Error = " ",
@@ -29,24 +30,24 @@ vim.diagnostic.config({
 })
 
 
-
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  require("core.mappings").lspconfig(bufnr)
-
-  if client.server_capabilities.documentFormattingProvider then
-    api.nvim_create_autocmd('BufWritePre', {
-      pattern = client.config.filetypes,
-      callback = function()
-        vim.lsp.buf.format({
-          bufnr = bufnr,
-          async = true,
-        })
-      end,
-    })
-  end
-end
+local on_attach = lspconfig_common.on_attach
+-- local on_attach = function(client, bufnr)
+--   -- Enable completion triggered by <c-x><c-o>
+--   api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+--   require("core.mappings").lspconfig(bufnr)
+-- 
+--   if client.server_capabilities.documentFormattingProvider then
+--     api.nvim_create_autocmd('BufWritePre', {
+--       pattern = client.config.filetypes,
+--       callback = function()
+--         vim.lsp.buf.format({
+--           bufnr = bufnr,
+--           async = true,
+--         })
+--       end,
+--     })
+--   end
+-- end
 
 
 
