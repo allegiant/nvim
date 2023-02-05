@@ -1,4 +1,4 @@
 require "core.options"
-require "core.autcmds"
+require "core.autocmds"
 require "plugins"
 require "core.mappings"

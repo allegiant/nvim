@@ -14,8 +14,14 @@ local opts = { noremap = true, silent = true }
 
 
 map("v", "<leader>y", '"+y', opts)
+map("n", "<leader>y", '"+y', opts)
+map("n", "<leader>Y", '"+yg_', opts)
 map("n", "<leader>p", '"+p', opts)
+map("n", "<leader>P", '"+P', opts)
+map("v", "<leader>p", '"+p', opts)
+map("v", "<leader>P", '"+P', opts)
 map("v", "<leader>d", '"+d', opts)
+
 
 wk.register {
   ["sv"] = { ":vsp<CR>", "vertical split" },
