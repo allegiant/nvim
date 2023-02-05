@@ -39,6 +39,7 @@ local opts = {
           prefix = "self",
         },
         cargo = {
+          loadOutDirsFromCheck = true,
           buildScripts = {
             enable = true,
           },
