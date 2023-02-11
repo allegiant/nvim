@@ -62,7 +62,11 @@ M.setup = function()
     elseif server_name == "sumneko_lua" then
       lspconfig[server_name].setup(require("plugins.lspconfig.sumneko_lua"))
     elseif server_name == "rust_analyzer" then
-      -- lspconfig[server_name].setup(require("plugins.lspconfig.rust"))
+      -- lspconfig[server_name].setup({
+      --   settings = {
+      --     ["rust-analyzer"] = require("plugins.lspconfig.rust")
+      --   }
+      -- })
     else
       lspconfig[server_name].setup {
           capabilities = capabilities,
