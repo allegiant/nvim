@@ -149,12 +149,26 @@ local install_plugins = {
     {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
+        enabled = false,
+        branch = "main",
         config = function()
           require("plugins.lspsaga").setup()
         end,
         init = function()
           require("core.mappings").lspsaga()
         end,
+    },
+    {
+        'kosayoda/nvim-lightbulb',
+        dependencies = {
+            "antoinemadec/FixCursorHold.nvim",
+            config = function()
+              require('nvim-lightbulb').setup({
+                  autocmd = { enabled = true }
+
+              })
+            end
+        }
     },
     {
         "simrat39/rust-tools.nvim",
