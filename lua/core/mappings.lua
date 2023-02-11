@@ -50,7 +50,7 @@ pluginskeys.lspsaga = function()
   keymap({ "n", "v" }, "ga", "<cmd>Lspsaga code_action<CR>")
   keymap("n", "gr", "<cmd>Lspsaga rename<CR>")
   keymap("n", "gr", "<cmd>Lspsaga rename ++project<CR>")
-  keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
+  -- keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
   keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
   keymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<CR>")
   keymap("n", "gc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
@@ -65,7 +65,7 @@ pluginskeys.lspsaga = function()
   end)
   keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
   keymap("n", "gh", "<cmd>Lspsaga hover_doc<CR>")
-  keymap("n", "gK", "<cmd>Lspsaga hover_doc ++keep<CR>")
+  -- keymap("n", "gK", "<cmd>Lspsaga hover_doc ++keep<CR>")
   keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
   keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
@@ -100,30 +100,30 @@ pluginskeys.lspsaga = function()
 end
 
 pluginskeys.lspconfig = function(bufnr)
-  local bufOpts = { noremap = true, silent = true, buffer = bufnr }
-  wk.register({
-      ["g"] = {
-          name = "+Lsp",
-          o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-          j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
-          k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
-          q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "diagnostic setloclist" },
-      },
-  }, opts)
-
-  wk.register({
-      ["g"] = {
-          name = "+Lsp",
-          d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-          D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-          h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
-          i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
-          s = { "<cmd>vim.lsp.buf.signature_help()<CR>", "Signature help" },
-          r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-          a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-          f = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
-      },
-  }, bufOpts)
+  -- local bufOpts = { noremap = true, silent = true, buffer = bufnr }
+  -- wk.register({
+  --     ["g"] = {
+  --         name = "+Lsp",
+  --         o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
+  --         j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
+  --         k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
+  --         q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "diagnostic setloclist" },
+  --     },
+  -- }, opts)
+  --
+  -- wk.register({
+  --     ["g"] = {
+  --         name = "+Lsp",
+  --         d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
+  --         D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+  --         h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
+  --         i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+  --         s = { "<cmd>vim.lsp.buf.signature_help()<CR>", "Signature help" },
+  --         r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+  --         a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+  --         f = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+  --     },
+  -- }, bufOpts)
 
   wk.register({
       ["<leader>f"] = {
