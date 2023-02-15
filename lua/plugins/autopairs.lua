@@ -5,7 +5,10 @@ end
 
 local function cmp_setting()
   autopairs.setup({
-    check_ts = true,
+      check_ts = true,
+      ts_config = {
+          rust = {},
+      },
   })
 
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -13,9 +16,11 @@ local function cmp_setting()
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
   local Rule = require("nvim-autopairs.rule")
+  local ts_conds = require("nvim-autopairs.ts-conds")
   autopairs.add_rules({
-    Rule("|","|","rust"),
+      Rule("|", "|", "rust"),
   })
+  autopairs.get_rule("'")[2]:with_pair(ts_conds.is_not_ts_node({ "type_arguments", "bounded_type" })) -- rust life
 end
 
 local M = {}

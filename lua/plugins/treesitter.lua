@@ -5,30 +5,32 @@ if not present then
 end
 
 local default = {
-  ensure_installed = {
-    "lua",
-    "vim",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "json",
-    "markdown",
-    "vue",
-  },
-  indent = {
-    enable = true,
-    disable = { "vue" }
-  },
-  highlight = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true
-  },
-  autotag = {
-    enable = true,
-  },
+    ensure_installed = {
+        "lua",
+        "vim",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "json",
+        "markdown",
+        "markdown_inline",
+        "vue",
+        "rust",
+    },
+    indent = {
+        enable = true,
+        disable = { "vue" }
+    },
+    highlight = {
+        enable = true,
+    },
+    context_commentstring = {
+        enable = true
+    },
+    autotag = {
+        enable = true,
+    },
 }
 
 local M = {}
