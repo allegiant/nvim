@@ -25,7 +25,7 @@ local opts = {
     -- on_attach is a callback called when the language server attachs to the buffer
     on_attach = function(_, bufnr)
       -- Hover actions
-      vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
+			vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
       -- Code action groups
       vim.keymap.set("n", "<Leader>ga", rt.code_action_group.code_action_group, { buffer = bufnr })
     end,

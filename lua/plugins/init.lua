@@ -3,7 +3,6 @@ local present, lazy = pcall(require, "plugins.lazy")
 if not present then
   return
 end
-
 -- install plugins
 local install_plugins = {
   {
@@ -18,6 +17,32 @@ local install_plugins = {
     end,
   },
   {
+    enabled = false,
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      require("gruvbox").setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = true,
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = true, -- invert background for search, diffs, statuslines and errors
+        contrast = "soft", -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = false,
+        transparent_mode = false,
+      })
+      vim.o.background = "light" -- or "light" for light mode
+      vim.cmd([[colorscheme gruvbox]])
+    end
+  },
+  {
+    enabled = true,
     "sainnhe/gruvbox-material",
     config = function()
       vim.opt.termguicolors = true
@@ -48,7 +73,6 @@ local install_plugins = {
   },
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",

@@ -7,9 +7,12 @@ end
 
 local M = {}
 
+local default = {
+}
+
 
 M.setup = function()
-  lspsaga.setup({})
+  lspsaga.setup(default)
 end
 
 return M
