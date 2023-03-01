@@ -24,6 +24,7 @@ local opts = {
   server = {
     -- on_attach is a callback called when the language server attachs to the buffer
     on_attach = function(_, bufnr)
+     require("core.mappings").lspconfig(bufnr)
       -- Hover actions
 			vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
       -- Code action groups
