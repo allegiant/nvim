@@ -37,10 +37,10 @@ local default = {
   --   number = true,
   --   relativenumber = true,
   -- },
-  -- git = {
-  --   enable = false,
-  --   ignore = false,
-  -- },
+  git = {
+    enable = false,
+    ignore = false,
+  },
   -- renderer = {
   --   add_trailing = true,
   --   indent_markers = {
