@@ -1,4 +1,4 @@
---local lspconfig_common = require("plugins.lspconfig.common")
+local lspconfig_common = require("plugins.lspconfig.common")
 local ok, rt = pcall(require, "rust-tools")
 if not ok then
   return
@@ -8,30 +8,37 @@ local M = {}
 
 local opts = {
   tools = {
-    runnables = {
-      use_telescope = true,
-    },
+    reload_workspace_from_cargo_toml = true,
     inlay_hints = {
       auto = true,
-      show_parameter_hints = false,
+      only_current_line = false,
+      show_parameter_hints = true,
       parameter_hints_prefix = "<- ",
       other_hints_prefix = "=> ",
+      -- whether to align to the length of the longest line in the file
+      max_len_align = false,
+      -- padding from the left if max_len_align is true
+      max_len_align_padding = 1,
+      -- whether to align to the extreme right or not
+      right_align = false,
+      -- padding from the right if right_align is true
+      right_align_padding = 7,
+      -- The color of the hints
+      highlight = "Comment",
     },
   },
-  -- all the opts to send to nvim-lspconfig
-  -- these override the defaults set by rust-tools.nvim
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
     -- on_attach is a callback called when the language server attachs to the buffer
-    on_attach = function(_, bufnr)
-     require("core.mappings").lspconfig(bufnr)
-      -- Hover actions
-			vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>ga", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-    -- on_attach = lspconfig_common.on_attach,
-    -- capabilities = lspconfig_common.capabilities(),
+   --  on_attach = function(_, bufnr)
+   --   require("core.mappings").lspconfig(bufnr)
+   --    -- Hover actions
+			-- vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
+   --    -- Code action groups
+   --    vim.keymap.set("n", "<Leader>ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+   --  end,
+    on_attach = lspconfig_common.on_attach,
+    capabilities = lspconfig_common.capabilities(),
 
     -- standalone file support
     -- setting it to false may improve startup time
