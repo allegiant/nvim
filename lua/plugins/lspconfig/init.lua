@@ -66,6 +66,17 @@ M.setup = function()
         --   ["rust-analyzer"] = require("plugins.lspconfig.rust")
         -- }
       })
+    elseif server_name == "yamlls" then
+      lspconfig[server_name].setup {
+        settings = {
+          yaml = {
+            schemas = {
+              ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.5-standalone-strict/all.json"] = "/*.k8s.yaml",
+              ["kubernetes"] = "/*.k8s.yaml"
+            },
+          },
+        }
+      }
     else
       lspconfig[server_name].setup {
         capabilities = capabilities,
