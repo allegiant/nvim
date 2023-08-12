@@ -29,14 +29,15 @@ local opts = {
   },
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
+    cmd = {"ra-multiplex","client" },
     -- on_attach is a callback called when the language server attachs to the buffer
-   --  on_attach = function(_, bufnr)
-   --   require("core.mappings").lspconfig(bufnr)
-   --    -- Hover actions
-			-- vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
-   --    -- Code action groups
-   --    vim.keymap.set("n", "<Leader>ga", rt.code_action_group.code_action_group, { buffer = bufnr })
-   --  end,
+    --  on_attach = function(_, bufnr)
+    --   require("core.mappings").lspconfig(bufnr)
+    --    -- Hover actions
+    -- vim.keymap.set("n", "ga", rt.hover_actions.hover_actions, { buffer = bufnr })
+    --    -- Code action groups
+    --    vim.keymap.set("n", "<Leader>ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+    --  end,
     on_attach = lspconfig_common.on_attach,
     capabilities = lspconfig_common.capabilities(),
 
@@ -65,6 +66,9 @@ local opts = {
         procMacro = {
           enable = true
         },
+        cachePriming = {
+          enable = false,
+        }
       }
     },
   },
