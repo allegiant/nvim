@@ -20,6 +20,7 @@ local default = {
     },
     indent = {
         enable = true,
+        disable = { "dart" },
     },
     highlight = {
         enable = true,

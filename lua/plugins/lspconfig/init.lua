@@ -55,6 +55,8 @@ M.setup = function()
     }
   )
   -- 3. Loop through all of the installed servers and set it up via lspconfig
+  
+  lspconfig.dartls.setup(require("plugins.lspconfig.dartls"))
   for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "volar" then
       require("plugins.lspconfig.volar").setup(lspconfig, capabilities)

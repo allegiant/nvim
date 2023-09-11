@@ -53,13 +53,6 @@ local install_plugins = {
     end,
   },
   {
-    'akinsho/flutter-tools.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim'
-    }
-  },
-  { 'stevearc/dressing.nvim' },
-  {
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
@@ -111,7 +104,6 @@ local install_plugins = {
     end,
   },
   {
-    enabled = false,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()
