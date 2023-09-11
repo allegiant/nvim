@@ -111,6 +111,7 @@ local install_plugins = {
     end,
   },
   {
+    enabled = false,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()
@@ -156,6 +157,7 @@ local install_plugins = {
   },
   {
     "nvim-telescope/telescope.nvim",
+     branch =  '0.1.x',
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("plugins.telescope").setup()
