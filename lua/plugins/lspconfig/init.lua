@@ -55,26 +55,14 @@ M.setup = function()
     }
   )
   -- 3. Loop through all of the installed servers and set it up via lspconfig
-  
-  lspconfig.dartls.setup(require("plugins.lspconfig.dartls"))
   for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "volar" then
       require("plugins.lspconfig.volar").setup(lspconfig, capabilities)
     elseif server_name == "lua_ls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.lua_ls"))
     elseif server_name == "rust_analyzer" then
-      -- lspconfig[server_name].setup({})
     elseif server_name == "yamlls" then
-      lspconfig[server_name].setup {
-        settings = {
-          yaml = {
-            schemas = {
-              ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.5-standalone-strict/all.json"] = "/*.k8s.yaml",
-              ["kubernetes"] = "/*.k8s.yaml"
-            },
-          },
-        }
-      }
+      lspconfig[server_name].setup(require("plugins.lspconfig.yamlls"))
     else
       lspconfig[server_name].setup {
         capabilities = capabilities,

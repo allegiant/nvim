@@ -30,7 +30,7 @@ local install_plugins = {
         invert_signs = false,
         invert_tabline = false,
         invert_intend_guides = false,
-        inverse = true, -- invert background for search, diffs, statuslines and errors
+        inverse = true,    -- invert background for search, diffs, statuslines and errors
         contrast = "soft", -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
@@ -88,6 +88,7 @@ local install_plugins = {
   { "onsails/lspkind-nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
+    commit = "f2778bd",
     config = function()
       require("plugins.treesitter").setup()
     end,
@@ -104,6 +105,7 @@ local install_plugins = {
     end,
   },
   {
+    enabled = false,
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("plugins.nullls").setup()
@@ -149,7 +151,7 @@ local install_plugins = {
   },
   {
     "nvim-telescope/telescope.nvim",
-     branch =  '0.1.x',
+    branch = '0.1.x',
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("plugins.telescope").setup()
@@ -188,5 +190,16 @@ local install_plugins = {
       require("plugins.rustools").setup()
     end
   },
+  {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim',   -- optional for vim.ui.select
+    },
+    config = function ()
+      require("plugins.fluttertools").setup()
+    end
+  }
 }
 lazy.load(install_plugins)
