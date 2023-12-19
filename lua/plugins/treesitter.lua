@@ -2,7 +2,9 @@ local present, ts_config = pcall(require, "nvim-treesitter.configs")
 local utils = require "core.utils"
 
 if utils.is_win() then
+   require 'nvim-treesitter.install'.prefer_git = false
   require 'nvim-treesitter.install'.compilers = { 'zig' }
+
 end
 
 if not present then
