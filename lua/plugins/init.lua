@@ -93,10 +93,15 @@ local install_plugins = {
       require("plugins.treesitter").setup()
     end,
     dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
+  },
+  {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      config = function ()
+        require('ts_context_commentstring').setup()
+      end
   },
   {
     "windwp/nvim-autopairs",
@@ -195,9 +200,9 @@ local install_plugins = {
     lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim',   -- optional for vim.ui.select
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
-    config = function ()
+    config = function()
       require("plugins.fluttertools").setup()
     end
   }

@@ -59,4 +59,42 @@ utils.table_to_string = function(tbl)
     return result.."}"
 end
 
+local fast_event_aware_notify = function(msg, level, opts)
+  if vim.in_fast_event() then
+    vim.schedule(function()
+      vim.notify(msg, level, opts)
+    end)
+  else
+    vim.notify(msg, level, opts)
+  end
+end
+
+function utils.info(msg)
+  fast_event_aware_notify(msg, vim.log.levels.INFO, {})
+end
+
+function utils.warn(msg)
+  fast_event_aware_notify(msg, vim.log.levels.WARN, {})
+end
+
+function utils.err(msg)
+  fast_event_aware_notify(msg, vim.log.levels.ERROR, {})
+end
+
+function utils.is_root()
+  return (vim.loop.getuid() == 0)
+end
+
+function utils.is_darwin()
+  return vim.loop.os_uname().sysname == "Darwin"
+end
+
+function utils.is_NetBSD()
+  return vim.loop.os_uname().sysname == "NetBSD"
+end
+
+function utils.is_win()
+  return vim.loop.os_uname().sysname == "Windows_NT"
+end
+
 return utils
