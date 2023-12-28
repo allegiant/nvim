@@ -88,7 +88,6 @@ local install_plugins = {
   { "onsails/lspkind-nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
-    commit = "f2778bd",
     config = function()
       require("plugins.treesitter").setup()
     end,
