@@ -1,5 +1,5 @@
 local lspconfig_common = require("plugins.lspconfig.common")
-local ok, rt = pcall(require, "rust-tools")
+local ok, _rt = pcall(require, "rust-tools")
 if not ok then
   return
 end

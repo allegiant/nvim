@@ -61,6 +61,7 @@ M.setup = function()
     elseif server_name == "lua_ls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.lua_ls"))
     elseif server_name == "rust_analyzer" then
+      lspconfig[server_name].setup(require("plugins.lspconfig.rust_analyzer"))
     elseif server_name == "yamlls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.yamlls"))
     else
