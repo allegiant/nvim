@@ -34,113 +34,79 @@ map("n", "L", "<C-w>3>", opts)
 map("n", "K", "<C-w>2+<", opts)
 map("n", "J", "<C-w>2-", opts)
 
-
-wk.register {
-  ["sv"] = { ":vsp<CR>", "vertical split" },
-  ["sh"] = { ":sp<CR>", "Horizontal split" },
-}
+wk.add({
+  { "<leader>sv", ":vsp<CR>", desc = "vertical split" },
+  { "<leader>sh", ":sp<CR>",  desc = "Horizontal split" },
+})
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
-
-  wk.register {
-      ["g"] = {
-          name = "+Lspsaga",
-          f = { "<cmd>Lspsaga lsp_finder<CR>", "Definition Declaration" },
-          a = { "<cmd>Lspsaga code_action<CR>", "Code Action", mode = {"n","v"} },
-          r = { "<cmd>Lspsaga rename<CR>", "Rename", silent = true },
-          d = { "<cmd>Lspsaga goto_definition<CR>", "goto definition" },
-          t = { "<cmd>Lspsaga goto_type_definition<CR>", "goto type definition" },
-          o = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostic" },
-          j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "diagnostic next" },
-          k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "diagnostic prev" },
-          h = { "<cmd>Lspsaga hover_doc<CR>", "Doc Hover" },
-      },
-  }
-  wk.register({
-      ["<leader>"] = {
-          name = "+Lspsaga",
-          lt = { "<cmd>Lspsaga outline<CR>", "outline Toggle" },
-          la = { ":<c-u>Lspsaga range_code_action<cr>", "Range Code Action", mode = "v" },
-          lc = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show cursor diagnostic" },
-          lb = { "<cmd>Lspsaga show_buf_diagnostics<CR>", "Show buffer diagnostic" },
-          lj = { function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end, "error prev"},
-          lk = { function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, "error next"},
-          li = { "<cmd>Lspsaga incoming_calls<CR>", "incoming calls" },
-          lo = { "<cmd>Lspsaga outgoing_calls<CR>", "outgoing calls" },
-      },
+  wk.add({
+    { "<leader>g",  group = "Lspsaga" },
+    { "<leader>gf", "<cmd>Lspsaga lsp_finder<CR>",            desc = "Definition Declaration" },
+    { "<leader>ga", "<cmd>Lspsaga code_action<CR>",           desc = "Code Action",           mode = { "n", "v" } },
+    { "<leader>gr", "<cmd>Lspsaga rename<CR>",                desc = "Rename",                silent = true },
+    { "<leader>gd", "<cmd>Lspsaga goto_definition<CR>",       desc = "goto definition" },
+    { "<leader>gt", "<cmd>Lspsaga goto_type_definition<CR>",  desc = "goto type definition" },
+    { "<leader>go", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Show line diagnostic" },
+    { "<leader>gj", "<cmd>Lspsaga diagnostic_jump_next<cr>",  desc = "diagnostic next" },
+    { "<leader>gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>",  desc = "diagnostic prev" },
+    { "<leader>gh", "<cmd>Lspsaga hover_doc<CR>",             desc = "Doc Hover" },
+  })
+  wk.add({
+    { "<leader>l",  group = "Lspsaga" },
+    { "<leader>lt", "<cmd>Lspsaga outline<CR>",                                                                           desc = "outline Toggle" },
+    { "<leader>la", ":<c-u>Lspsaga range_code_action<cr>",                                                                desc = "Range Code Action",     mode = "v" },
+    { "<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<CR>",                                                           desc = "Show cursor diagnostic" },
+    { "<leader>lb", "<cmd>Lspsaga show_buf_diagnostics<CR>",                                                              desc = "Show buffer diagnostic" },
+    { "<leader>lj", function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "error prev" },
+    { "<leader>lk", function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "error next" },
+    { "<leader>li", "<cmd>Lspsaga incoming_calls<CR>",                                                                    desc = "incoming calls" },
+    { "<leader>lo", "<cmd>Lspsaga outgoing_calls<CR>",                                                                    desc = "outgoing calls" },
   })
 end
 
 pluginskeys.lspconfig = function(bufnr)
-  -- local bufOpts = { noremap = true, silent = true, buffer = bufnr }
-  -- wk.register({
-  --     ["g"] = {
-  --         name = "+Lsp",
-  --         o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-  --         j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "diagnostic next" },
-  --         k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diagnostic prev" },
-  --         q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "diagnostic setloclist" },
-  --     },
-  -- }, opts)
-  --
-  -- wk.register({
-  --     ["g"] = {
-  --         name = "+Lsp",
-  --         d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-  --         D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-  --         h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Doc Hover" },
-  --         i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
-  --         s = { "<cmd>vim.lsp.buf.signature_help()<CR>", "Signature help" },
-  --         r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-  --         a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-  --         f = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
-  --     },
-  -- }, bufOpts)
-
-  wk.register({
-    ["<leader>f"] = {
-      name = "+file",
-      m = { function() vim.lsp.buf.format { async = true } end, "Lsp format" },
-    },
-  }, { buffer = bufnr, silent = true, noremap = true })
+  wk.add({
+    { "<leader>f", group = "File" },
+    {
+      { buffer = bufnr, silent = true,                                      noremap = true },
+      { "<leader>fm",   function() vim.lsp.buf.format { async = true } end, desc = "Lsp format" },
+    }
+  })
 end
 
 pluginskeys.bufferline = function()
   map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
   map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
-  wk.register({
-    ["<leader>"] = {
-      name = "Leader",
-      ["1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "goto 1" },
-      ["2"] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "goto 2" },
-      ["3"] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "goto 3" },
-      ["4"] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "goto 4" },
-      ["5"] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "goto 5" },
-      ["6"] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "goto 6" },
-      ["7"] = { "<Cmd>BufferLineGoToBuffer 7<CR>", "goto 7" },
-      ["8"] = { "<Cmd>BufferLineGoToBuffer 8<CR>", "goto 8" },
-      ["9"] = { "<Cmd>BufferLineGoToBuffer 9<CR>", "goto 9" },
-    },
+  wk.add({
+    { "<leader>",  group = "Buffer" },
+    { "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
+    { "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
+    { "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
+    { "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
+    { "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
+    { "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
+    { "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "goto 7" },
+    { "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "goto 8" },
+    { "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "goto 9" },
   }, opts)
 
-  wk.register({
-    ["<leader>b"] = {
-      name = "Buffer",
-      d = { ":bdelete<CR>", "Close" },
-      c = { ":BufferLinePickClose<CR>", "Pick Close" },
-      s = { ":BufferLinePick<CR>", "Pick" },
-      l = { ":BufferLineMoveNext<CR>", "Move right" },
-      h = { ":BufferLineMovePrev<CR>", "Move left" },
-      q = { ":BufferLineCloseLeft<CR>", "Close left" },
-      p = { ":BufferLineCloseRight<CR>", "Close right " },
-      ["1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "goto 1" },
-      ["2"] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "goto 2" },
-      ["3"] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "goto 3" },
-      ["4"] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "goto 4" },
-      ["5"] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "goto 5" },
-      ["6"] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "goto 6" },
-    },
+  wk.add({
+    { "<leader>b",  group = "Buffer" },
+    { "<leader>bd", ":bdelete<CR>",                    desc = "Close" },
+    { "<leader>bc", ":BufferLinePickClose<CR>",        desc = "Pick Close" },
+    { "<leader>bs", ":BufferLinePick<CR>",             desc = "Pick" },
+    { "<leader>bl", ":BufferLineMoveNext<CR>",         desc = "Move right" },
+    { "<leader>bh", ":BufferLineMovePrev<CR>",         desc = "Move left" },
+    { "<leader>bq", ":BufferLineCloseLeft<CR>",        desc = "Close left" },
+    { "<leader>bp", ":BufferLineCloseRight<CR>",       desc = "Close right " },
+    { "<leader>b1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
+    { "<leader>b2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
+    { "<leader>b3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
+    { "<leader>b4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
+    { "<leader>b5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
+    { "<leader>b6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
   }, opts)
 end
 
@@ -151,49 +117,38 @@ end
 pluginskeys.gitsigns = function(bufnr)
   local gsOpts = utils.merge_table(opts, { buffer = bufnr })
 
-  wk.register({
-    ["<leader>s"] = {
-      name = "Gitsigns",
-      j = {
-        "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
-        "Next Hunk",
-      },
-      k = {
-        "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
-        "Prev Hunk",
-      },
-    },
+  wk.add({
+    { "<leader>s",  group = "Gitsigns" },
+    { "<leader>sj", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", desc = "Next Hunk", },
+    { "<leader>sk", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", desc = "Prev Hunk", },
   }, utils.merge_table(gsOpts, { expr = true }))
 
-  wk.register({
-    ["<leader>s"] = {
-      s = { ":Gitsigns stage_hunk<CR>", "Stage Hunk" },
-      r = { ":Gitsigns reset_hunk<CR>", "Reset Hunk" },
-      S = { ":Gitsigns stage_buffer<CR>", "Stage Buffer" },
-      u = { ":Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
-      R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer" },
-      p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk" },
-      b = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Blame Line" },
-      o = { "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Current line Blame" },
-      d = { "<cmd>Gitsigns diffthis<CR>", "Diff This" },
-      D = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Diff This(~)" },
-      x = { "<cmd>Gitsigns toggle_deleted<CR>", "Toggle Deleted" },
-    },
+  wk.add({
+    { "<leader>s",  group = "Gitsigns" },
+    { "<leader>ss", ":Gitsigns stage_hunk<CR>",                             desc = "Stage Hunk" },
+    { "<leader>sr", ":Gitsigns reset_hunk<CR>",                             desc = "Reset Hunk" },
+    { "<leader>sS", ":Gitsigns stage_buffer<CR>",                           desc = "Stage Buffer" },
+    { "<leader>su", ":Gitsigns undo_stage_hunk<CR>",                        desc = "Undo Stage Hunk" },
+    { "<leader>sR", "<cmd>Gitsigns reset_buffer<CR>",                       desc = "Reset Buffer" },
+    { "<leader>sp", "<cmd>Gitsigns preview_hunk<CR>",                       desc = "Preview Hunk" },
+    { "<leader>sb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', desc = "Blame Line" },
+    { "<leader>so", "<cmd>Gitsigns toggle_current_line_blame<CR>",          desc = "Toggle Current line Blame" },
+    { "<leader>sd", "<cmd>Gitsigns diffthis<CR>",                           desc = "Diff This" },
+    { "<leader>sD", '<cmd>lua require"gitsigns".diffthis("~")<CR>',         desc = "Diff This(~)" },
+    { "<leader>sx", "<cmd>Gitsigns toggle_deleted<CR>",                     desc = "Toggle Deleted" },
   }, gsOpts)
 end
 
 pluginskeys.telescope = function()
-  wk.register {
-    ["<leader>f"] = {
-      name = "+file",
-      f = { "<cmd>Telescope find_files<cr>", "Find Files" },
-      g = { "<cmd>Telescope live_grep<cr>", "Find live_grep" },
-      b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
-      h = { "<cmd>Telescope help_tags<cr>", "Find help_tags" },
-      w = { "<cmd>Telescope grep_string<cr>", "Find grep_tring" },
-      r = { "<cmd>Telescope resume<cr>", "Find search history" },
-    },
-  }
+  wk.add({
+    { "<leader>f",  group = "File" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find live_grep" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Find help_tags" },
+    { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find grep_tring" },
+    { "<leader>fr", "<cmd>Telescope resume<cr>",      desc = "Find search history" },
+  })
 end
 
 return pluginskeys
