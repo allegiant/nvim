@@ -97,10 +97,10 @@ local install_plugins = {
     build = ":TSUpdate",
   },
   {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      config = function ()
-        require('ts_context_commentstring').setup()
-      end
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require('ts_context_commentstring').setup()
+    end
   },
   {
     "windwp/nvim-autopairs",
@@ -189,13 +189,6 @@ local install_plugins = {
     end,
   },
   {
-    enabled=false,
-    "simrat39/rust-tools.nvim",
-    config = function()
-      require("plugins.rustools").setup()
-    end
-  },
-  {
     'akinsho/flutter-tools.nvim',
     lazy = false,
     dependencies = {
@@ -204,6 +197,14 @@ local install_plugins = {
     },
     config = function()
       require("plugins.fluttertools").setup()
+    end
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+    config = function ()
+      vim.g.rustaceanvim = require('plugins.rustaceanvim').config
     end
   }
 }

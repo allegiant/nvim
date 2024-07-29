@@ -54,6 +54,7 @@ M.setup = function()
       on_attach = on_attach
     }
   )
+
   -- 3. Loop through all of the installed servers and set it up via lspconfig
   for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
     if server_name == "volar" then
@@ -61,7 +62,6 @@ M.setup = function()
     elseif server_name == "lua_ls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.lua_ls"))
     elseif server_name == "rust_analyzer" then
-      lspconfig[server_name].setup(require("plugins.lspconfig.rust_analyzer"))
     elseif server_name == "yamlls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.yamlls"))
     else
