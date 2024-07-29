@@ -17,31 +17,6 @@ local install_plugins = {
     end,
   },
   {
-    enabled = false,
-    "ellisonleao/gruvbox.nvim",
-    config = function()
-      require("gruvbox").setup({
-        undercurl = true,
-        underline = true,
-        bold = true,
-        italic = true,
-        strikethrough = true,
-        invert_selection = false,
-        invert_signs = false,
-        invert_tabline = false,
-        invert_intend_guides = false,
-        inverse = true,    -- invert background for search, diffs, statuslines and errors
-        contrast = "soft", -- can be "hard", "soft" or empty string
-        palette_overrides = {},
-        overrides = {},
-        dim_inactive = false,
-        transparent_mode = false,
-      })
-      vim.o.background = "light" -- or "light" for light mode
-      vim.cmd([[colorscheme gruvbox]])
-    end
-  },
-  {
     enabled = true,
     "sainnhe/gruvbox-material",
     config = function()
@@ -107,14 +82,6 @@ local install_plugins = {
     config = function()
       require("plugins.autopairs").setup()
     end,
-  },
-  {
-    enabled = false,
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("plugins.nullls").setup()
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
     "akinsho/bufferline.nvim",
