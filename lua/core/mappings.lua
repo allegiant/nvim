@@ -42,16 +42,16 @@ local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
   wk.add({
-    { "<leader>g",  group = "Lspsaga" },
-    { "<leader>gf", "<cmd>Lspsaga lsp_finder<CR>",            desc = "Definition Declaration" },
-    { "<leader>ga", "<cmd>Lspsaga code_action<CR>",           desc = "Code Action",           mode = { "n", "v" } },
-    { "<leader>gr", "<cmd>Lspsaga rename<CR>",                desc = "Rename",                silent = true },
-    { "<leader>gd", "<cmd>Lspsaga goto_definition<CR>",       desc = "goto definition" },
-    { "<leader>gt", "<cmd>Lspsaga goto_type_definition<CR>",  desc = "goto type definition" },
-    { "<leader>go", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Show line diagnostic" },
-    { "<leader>gj", "<cmd>Lspsaga diagnostic_jump_next<cr>",  desc = "diagnostic next" },
-    { "<leader>gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>",  desc = "diagnostic prev" },
-    { "<leader>gh", "<cmd>Lspsaga hover_doc<CR>",             desc = "Doc Hover" },
+    { "g",  group = "Lspsaga" },
+    { "gf", "<cmd>Lspsaga lsp_finder<CR>",            desc = "Definition Declaration" },
+    { "ga", "<cmd>Lspsaga code_action<CR>",           desc = "Code Action",           mode = { "n", "v" } },
+    { "gr", "<cmd>Lspsaga rename<CR>",                desc = "Rename",                silent = true },
+    { "gd", "<cmd>Lspsaga goto_definition<CR>",       desc = "goto definition" },
+    { "gt", "<cmd>Lspsaga goto_type_definition<CR>",  desc = "goto type definition" },
+    { "go", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Show line diagnostic" },
+    { "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>",  desc = "diagnostic next" },
+    { "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>",  desc = "diagnostic prev" },
+    { "gh", "<cmd>Lspsaga hover_doc<CR>",             desc = "Doc Hover" },
   })
   wk.add({
     { "<leader>l",  group = "Lspsaga" },
