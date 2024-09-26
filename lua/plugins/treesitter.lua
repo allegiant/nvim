@@ -10,7 +10,7 @@ if not present then
 end
 local default = {
   ensure_installed = {
-    "dart"
+    "dart",
     "lua",
     "vim",
     "html",
