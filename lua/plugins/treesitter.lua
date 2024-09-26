@@ -9,8 +9,8 @@ if not present then
   return
 end
 local default = {
-  ignore_install = { "dart" },
   ensure_installed = {
+    "dart"
     "lua",
     "vim",
     "html",
