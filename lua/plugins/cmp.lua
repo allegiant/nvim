@@ -14,6 +14,21 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local cmp_confirm = cmp.mapping.confirm({
+  behavior = cmp.ConfirmBehavior.Replace,
+  select = false,
+})
+
+-- don't confirm for signature help to allow new line without selecting argument name
+local confirm = cmp.sync(function(fallback)
+  local e = cmp.core.view:get_selected_entry()
+  if e and e.source.name == "nvim_lsp_signature_help" then
+    fallback()
+  else
+    cmp_confirm(fallback)
+  end
+end)
+
 
 
 cmp.setup({
@@ -39,20 +54,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = function(fallback)
-      -- Don't block <CR> if signature help is active
-      -- https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/issues/13
-      if not cmp.visible() or not cmp.get_selected_entry() or cmp.get_selected_entry().source.name == 'nvim_lsp_signature_help' then
-        fallback()
-      else
-        cmp.confirm({
-          -- Replace word if completing in the middle of a word
-          -- https://github.com/hrsh7th/nvim-cmp/issues/664
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        })
-      end
-    end,
+    ['<CR>'] = confirm,
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -97,6 +99,7 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
     { name = "vsnip" }, -- For vsnip users.
+    { name = "codeium" },
   }, {
     { name = "buffer", keyword_length = 2 },
   }),
