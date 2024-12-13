@@ -175,17 +175,6 @@ local install_plugins = {
     end
   },
   {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({
-      })
-    end
-  },
-  {
     "coffebar/neovim-project",
     opts = require("plugins.project"),
     init = function()
@@ -194,7 +183,7 @@ local install_plugins = {
     end,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim", tag = "0.1.x" },
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x" },
       { "Shatur/neovim-session-manager" },
     },
     lazy = false,
