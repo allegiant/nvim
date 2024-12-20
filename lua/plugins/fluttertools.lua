@@ -7,6 +7,9 @@ end
 local M = {}
 
 local opts = {
+  closing_tags = {
+    enabled = false -- set to false to disable
+  },
   lsp = {
     on_attach = lspconfig_common.on_attach,
     capabilities = lspconfig_common.capabilities(),

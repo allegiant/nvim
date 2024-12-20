@@ -47,14 +47,9 @@ local install_plugins = {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-vsnip",
-      {
-        "hrsh7th/vim-vsnip",
-        config = function()
-          vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. "/.vsnip"
-        end
-      },
+      -- "hrsh7th/cmp-nvim-lsp-signature-help",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       require "plugins.cmp"
@@ -198,6 +193,12 @@ local install_plugins = {
       }
     end,
     dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
   }
 }
 lazy.load(install_plugins)
