@@ -24,6 +24,7 @@ local default = {
     "rust",
   },
   indent = {
+    disable = { "dart" },
     enable = true,
   },
   highlight = {

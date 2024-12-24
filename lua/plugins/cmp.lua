@@ -1,10 +1,34 @@
 local present, cmp = pcall(require, "cmp")
 local lspkind = require "lspkind"
-local luasnip = require("luasnip")
 
 if not present then
   return
 end
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
+local cmp_confirm = cmp.mapping.confirm({
+  behavior = cmp.ConfirmBehavior.Replace,
+  select = false,
+})
+
+-- don't confirm for signature help to allow new line without selecting argument name
+local confirm = cmp.sync(function(fallback)
+  local e = cmp.core.view:get_selected_entry()
+  if e and e.source.name == "nvim_lsp_signature_help" then
+    fallback()
+  else
+    cmp_confirm(fallback)
+  end
+end)
+
 
 
 cmp.setup({
@@ -21,7 +45,7 @@ cmp.setup({
   end,
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
     end,
   },
   preselect = cmp.PreselectMode.None,
@@ -30,39 +54,35 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        if luasnip.expandable() then
-          luasnip.expand()
-        else
-          cmp.confirm({
-            select = true,
-          })
-        end
-      else
-        fallback()
-      end
-    end),
+    ['<CR>'] = confirm,
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
+      elseif vim.fn["vsnip#available"](1) == 1 then
+        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      elseif has_words_before() then
+        cmp.complete()
       else
-        fallback()
+        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
     end, { "i", "s" }),
 
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        feedkey("<Plug>(vsnip-jump-prev)", "")
       end
     end, { "i", "s" }),
+
   }),
+  matching = {
+    disallow_fuzzy_matching = true,
+    disallow_fullfuzzy_matching = true,
+    disallow_partial_fuzzy_matching = false,
+    disallow_partial_matching = false,
+    disallow_prefix_unmatching = true,
+  },
   sorting = {
     comparators = {
       cmp.config.compare.offset,
@@ -75,29 +95,34 @@ cmp.setup({
     },
   },
   sources = cmp.config.sources({
+    { name = "nvim_lsp",               max_item_count = 30 },
     { name = 'nvim_lua' },
-    { name = "nvim_lsp" },
-    { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = "vsnip" }, -- For vsnip users.
+    { name = "codeium" },
   }, {
-    { name = "path" },
     { name = "buffer", keyword_length = 2 },
   }),
   formatting = {
     format = lspkind.cmp_format({
       with_text = true,
       before = function(entry, vim_item)
+        -- vim_item.menu = "["..string.upper(entry.source.name).."]"
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
-          nvim_lua = "[api]",
-          buffer = "[buf]",
-          path = "path",
-          luasnip = "[snip]",
-          -- nvim_lsp_signature_help = "[param]",
+          vsnip = "[VSNIP]",
+          nvim_lua = "[Lua]",
+          buffer = "[BUF]",
+          path = "PATH",
+          nvim_lsp_signature_help = "[param]",
         })[entry.source.name]
         return vim_item
       end,
     }),
+  },
+  experimental = {
+    native_menu = false,
+    ghost_text = true,
   },
 })
 
