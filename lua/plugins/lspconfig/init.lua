@@ -3,7 +3,6 @@ local mason_lspconfig = require("mason-lspconfig");
 local lspconfig = require("lspconfig")
 local lspconfig_common = require("plugins.lspconfig.common")
 local vim_tbl_extend = vim.tbl_extend
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local capabilities = lspconfig_common.capabilities()
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -62,6 +61,7 @@ M.setup = function()
     elseif server_name == "lua_ls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.lua_ls"))
     elseif server_name == "rust_analyzer" then
+    elseif server_name == "dartls" then
     elseif server_name == "yamlls" then
       lspconfig[server_name].setup(require("plugins.lspconfig.yamlls"))
     else

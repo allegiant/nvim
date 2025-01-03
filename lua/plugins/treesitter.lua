@@ -25,7 +25,7 @@ local default = {
   },
   indent = {
     disable = { "dart" },
-    enable = true,
+    enable = false,
   },
   highlight = {
     enable = true,

@@ -1,10 +1,13 @@
 local present, lazy = pcall(require, "plugins.lazy")
-
 if not present then
   return
 end
 -- install plugins
 local install_plugins = {
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
@@ -39,27 +42,7 @@ local install_plugins = {
       },
     }
   },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-vsnip",
-      {
-        "hrsh7th/vim-vsnip",
-        config = function()
-          vim.g.vsnip_snippet_dir = vim.fn.stdpath('config') .. "/.vsnip"
-        end
-      },
-    },
-    config = function()
-      require "plugins.cmp"
-    end,
-  },
+
   { "onsails/lspkind-nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -199,6 +182,31 @@ local install_plugins = {
       }
     end,
     dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-  }
+  },
+  {
+    'saghen/blink.compat',
+    -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
+    version = '*',
+    -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+    lazy = true,
+    -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+    opts = {},
+  },
+  {
+    'saghen/blink.cmp',
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      version = 'v2.*',
+      dependencies = {
+        'rafamadriz/friendly-snippets'
+      },
+    },
+    version = '*',
+    opts = require('plugins.blink'),
+    opts_extend = { "sources.default" }
+  },
+  {
+    'saghen/blink.nvim',
+  },
 }
 lazy.load(install_plugins)

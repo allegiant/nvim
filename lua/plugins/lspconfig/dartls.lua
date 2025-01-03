@@ -6,7 +6,7 @@ return {
     flutterOutline = true,
     onlyAnalyzeProjectsWithOpenFiles = true,
     outline = true,
-    suggestFromUnimportedLibraries = true,
+    suggestFromUnimportedLibraries = true
   },
   -- root_dir = root_pattern("pubspec.yaml"),
   settings = {

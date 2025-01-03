@@ -1,5 +1,5 @@
 local lspconfig_common = require("plugins.lspconfig.common")
-local ok, _ra = pcall(require, "rustaceanvim")
+local ok, _ = pcall(require, "rustaceanvim")
 if not ok then
   return
 end
