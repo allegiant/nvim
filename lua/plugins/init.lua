@@ -240,6 +240,6 @@ local install_plugins = {
     config = function()
       require('plugins.dap').config()
     end
-  }
+  },
 }
 lazy.load(install_plugins)
