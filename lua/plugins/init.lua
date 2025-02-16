@@ -195,11 +195,22 @@ local install_plugins = {
   {
     'saghen/blink.cmp',
     dependencies = {
-      'L3MON4D3/LuaSnip',
-      version = 'v2.*',
-      dependencies = {
-        'rafamadriz/friendly-snippets'
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        dependencies = {
+          'rafamadriz/friendly-snippets'
+        },
       },
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+          require('plugins.copilot').setup()
+        end
+      },
+      "giuxtaposition/blink-cmp-copilot"
     },
     version = '*',
     opts = require('plugins.blink'),
@@ -208,5 +219,27 @@ local install_plugins = {
   {
     'saghen/blink.nvim',
   },
+  {
+    'wa11breaker/flutter-bloc.nvim',
+    dependencies = {
+      "nvimtools/none-ls.nvim", -- Required for code actions
+    },
+    opts = {
+      bloc_type = 'equatable', -- Choose from: 'default', 'equatable', 'freezed'
+      use_sealed_classes = false,
+      enable_code_actions = true,
+    }
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "theHamsta/nvim-dap-virtual-text"
+    },
+    config = function()
+      require('plugins.dap').config()
+    end
+  }
 }
 lazy.load(install_plugins)

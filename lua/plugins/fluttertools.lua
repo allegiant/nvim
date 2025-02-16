@@ -10,7 +10,14 @@ local opts = {
   lsp = {
     on_attach = lspconfig_common.on_attach,
     capabilities = lspconfig_common.capabilities(),
-  }
+  },
+  dev_log = {
+    enabled = true,
+    open_cmd = "10split", -- command to use to open the log buffer
+  },
+  debugger = { -- integrate with nvim dap + install dart code debugger
+    enabled = true,
+  },
 
 }
 

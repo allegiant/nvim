@@ -1,60 +1,29 @@
-local M = {}
-
-M.setup = function(lspconfig, capabilities)
-  lspconfig.volar.setup {
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-    capabilities = capabilities,
-    settings = {
-      volar = {
-        disableFormatting = false,
-        vueserver = {
-          textDocumentSync = "incremental",
-          diagnosticModel = "pull",
-        },
-        completion = {
-          preferredTagNameCase = 'kebab',
-          preferredAttrNameCase = 'kebab',
-        },
-      }
+return {
+  init_options = {
+    vue = {
+      hybridMode = false,
     },
-    init_options = {
-      documentFeatures = {
-        documentColor = false,
-        documentFormatting = {
-          defaultPrintWidth = 100,
+  },
+  settings = {
+    typescript = {
+      inlayHints = {
+        enumMemberValues = {
+          enabled = true,
         },
-        documentSymbol = true,
-        foldingRange = true,
-        linkedEditingRange = true,
-        selectionRange = true
-      },
-      languageFeatures = {
-        callHierarchy = true,
-        codeAction = true,
-        codeLens = true,
-        completion = {
-          defaultAttrNameCase = "kebabCase",
-          defaultTagNameCase = "both"
+        functionLikeReturnTypes = {
+          enabled = true,
         },
-        definition = true,
-        diagnostics = true,
-        documentHighlight = true,
-        documentLink = true,
-        hover = true,
-        implementation = true,
-        references = true,
-        rename = true,
-        renameFileRefactoring = true,
-        schemaRequestService = true,
-        semanticTokens = false,
-        signatureHelp = true,
-        typeDefinition = true
+        propertyDeclarationTypes = {
+          enabled = true,
+        },
+        parameterTypes = {
+          enabled = true,
+          suppressWhenArgumentMatchesName = true,
+        },
+        variableTypes = {
+          enabled = true,
+        },
       },
-      typescript = {
-        tsdk = ""
-      }
-    }
+    },
   }
-end
-
-return M
+}

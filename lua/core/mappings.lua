@@ -143,4 +143,17 @@ pluginskeys.telescope = function()
   })
 end
 
+pluginskeys.dap = function()
+  wk.add({
+    { "<leader>d",  group = "Dap" },
+    { "<F5>",       function() require("dap").continue() end,          desc = "Continue" },
+    { "<F8>",       function() require("dap").step_over() end,         desc = "Step over" },
+    { "<F7>",       function() require("dap").step_into() end,         desc = "Step into" },
+    { "<S-F8>",     function() require("dap").step_out() end,          desc = "Step out" },
+    { "<leader>du", function() require("dapui").toggle() end,          desc = "Toggle debug ui" },
+    { "<leader>dv", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+    { "<leader>dt", function() require("dap").terminate() end,         desc = "Continue" },
+  })
+end
+
 return pluginskeys
