@@ -1,16 +1,11 @@
-local present, copilot = pcall(require, "copilot")
-if not present then
-  return
-end
-
-local M = {}
-
-local opts = {
-  suggestion = { enabled = false },
-  panel = { enabled = false },
+return {
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    })
+  end
 }
-
-M.setup = function()
-  copilot.setup(opts)
-end
-return M

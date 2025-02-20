@@ -1,17 +1,14 @@
-local lspconfig_common = require("plugins.lspconfig.common")
-local ok, _ = pcall(require, "rustaceanvim")
-if not ok then
-  return
-end
+return {
+  'mrcjkb/rustaceanvim',
+  version = '^5', -- Recommended
+  config = function()
+    vim.g.rustaceanvim = {
+      server = {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+      },
+      dap = {
 
-local M = {}
-
-M.config = function()
-  return {
-    server = {
-      on_attach = lspconfig_common.on_attach,
-      capabilities = lspconfig_common.capabilities(),
+      }
     }
-  }
-end
-return M
+  end
+}

@@ -1,9 +1,3 @@
-local present, nvimtree = pcall(require, "nvim-tree")
-
-if not present then
-  return
-end
-
 local default = {
   sort_by = "case_sensitive",
   view = {
@@ -21,10 +15,14 @@ local default = {
   },
 }
 
-local M = {}
-
-M.setup = function()
-  nvimtree.setup(default)
-end
-
-return M
+return {
+  "nvim-tree/nvim-tree.lua",
+  event = "vimEnter",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("nvim-tree").setup(default)
+    require("core.mappings").nvimtree()
+  end,
+}

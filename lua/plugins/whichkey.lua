@@ -1,12 +1,4 @@
-local present, key = pcall(require, "which-key")
-
-if not present then
-  return
-end
-
-local M = {}
-
-local default = {
+local opts = {
   plugins = {
     spelling = {
       enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
@@ -24,8 +16,8 @@ local default = {
   },
 }
 
-M.setup = function()
-  key.setup(default)
-end
-
-return M
+return {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts =opts,
+  }

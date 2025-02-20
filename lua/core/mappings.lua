@@ -1,10 +1,6 @@
 local utils = require "core.utils"
 ---@diagnostic disable-next-line: undefined-global
 local vim = vim
-local present, wk = pcall(require, "which-key")
-if not present then
-  return
-end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -33,14 +29,14 @@ map("n", "H", "<C-w>3<", opts)
 map("n", "L", "<C-w>3>", opts)
 map("n", "K", "<C-w>2+<", opts)
 map("n", "J", "<C-w>2-", opts)
+-- split windows
+map("n", "<leader>sv", ":vsp<CR>", opts)
+map("n", "<leader>sh", ":sp<CR>", opts)
 
-wk.add({
-  { "<leader>sv", ":vsp<CR>", desc = "vertical split" },
-  { "<leader>sh", ":sp<CR>",  desc = "Horizontal split" },
-})
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
+  local wk = require("which-key")
   wk.add({
     { "g",  group = "Lspsaga" },
     { "gf", "<cmd>Lspsaga finder<CR>",                desc = "Ref + Impl" },
@@ -58,19 +54,10 @@ pluginskeys.lspsaga = function()
   })
 end
 
-pluginskeys.lspconfig = function(bufnr)
-  wk.add({
-    { "<leader>f", group = "File" },
-    {
-      { buffer = bufnr, silent = true,                                      noremap = true },
-      { "<leader>fm",   function() vim.lsp.buf.format { async = true } end, desc = "Lsp format" },
-    }
-  })
-end
-
 pluginskeys.bufferline = function()
   map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
   map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
+  local wk = require("which-key")
   wk.add({
     { "<leader>",  group = "Buffer" },
     { "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
@@ -106,13 +93,31 @@ pluginskeys.nvimtree = function()
   map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 end
 
-pluginskeys.gitsigns = function(bufnr)
+pluginskeys.gitsigns = function(bufnr, gitsigns)
   local gsOpts = utils.merge_table(opts, { buffer = bufnr })
+
+  local wk = require("which-key")
+
+  function nav_next_hunk()
+    if vim.wo.diff then
+      vim.cmd.normal({ ']c', bang = true })
+    else
+      gitsigns.nav_hunk('next')
+    end
+  end
+
+  function nav_prev_hunk()
+    if vim.wo.diff then
+      vim.cmd.normal({ '[c', bang = true })
+    else
+      gitsigns.nav_hunk('prev')
+    end
+  end
 
   wk.add({
     { "<leader>s",  group = "Gitsigns" },
-    { "<leader>sj", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", desc = "Next Hunk", },
-    { "<leader>sk", "&diff ? '[c' : '<cmd>Gitsigns pqev_hunk<CR>'", desc = "Prev Hunk", },
+    { "<leader>sj", '<cmd>lua nav_next_hunk()<CR>', desc = "Next Hunk", },
+    { "<leader>sk", '<cmd>lua nav_prev_hunk()<CR>', desc = "Prev Hunk", },
   }, utils.merge_table(gsOpts, { expr = true }))
 
   wk.add({
@@ -132,6 +137,7 @@ pluginskeys.gitsigns = function(bufnr)
 end
 
 pluginskeys.telescope = function()
+  local wk = require("which-key")
   wk.add({
     { "<leader>f",  group = "File" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
@@ -144,15 +150,35 @@ pluginskeys.telescope = function()
 end
 
 pluginskeys.dap = function()
+  local wk = require("which-key")
   wk.add({
     { "<leader>d",  group = "Dap" },
-    { "<F5>",       function() require("dap").continue() end,          desc = "Continue" },
+    { "<leader>dc", function() require("dap").continue() end,          desc = "Continue" },
+    { "<leader>dr", function() require("dap").run_to_cursor() end,     desc = "Run to cursor" },
     { "<F8>",       function() require("dap").step_over() end,         desc = "Step over" },
     { "<F7>",       function() require("dap").step_into() end,         desc = "Step into" },
     { "<S-F8>",     function() require("dap").step_out() end,          desc = "Step out" },
-    { "<leader>du", function() require("dapui").toggle() end,          desc = "Toggle debug ui" },
     { "<leader>dv", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-    { "<leader>dt", function() require("dap").terminate() end,         desc = "Continue" },
+    { "<leader>dt", function() require("dap").terminate() end,         desc = "Terminate" },
+  })
+end
+pluginskeys.dapui = function()
+  local wk = require("which-key")
+  wk.add({
+    { "<leader>d",  group = "Dap" },
+    { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle debug ui" },
+  })
+end
+
+pluginskeys.code_runner = function()
+  local wk = require("which-key")
+  wk.add({
+    { "<leader>r",   group = "Code Runner" },
+    { "<leader>rr",  ":RunCode<CR>",       desc = "run code" },
+    { "<leader>rf",  ':RunFile<CR>',       desc = "run file" },
+    { "<leader>rft", ':RunFile tab<CR>',   desc = "run file tab" },
+    { "<leader>rp",  ':RunProject<CR>',    desc = "run project" },
+    { "<leader>rc",  ':RunClose<CR>',      desc = "run close" },
   })
 end
 

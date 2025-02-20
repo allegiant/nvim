@@ -1,21 +1,9 @@
-local present, telescope = pcall(require, "telescope")
-
-if not present then
-  return
-end
-
-local M = {}
-
-local default = {
-  defaults = {
-    mappings = {
-      require("core.mappings").telescope(),
-    },
-  },
+return {
+  "nvim-telescope/telescope.nvim",
+  branch = '0.1.x',
+  dependencies = { "nvim-lua/plenary.nvim" },
+  config = function()
+    require("telescope").setup()
+    require("core.mappings").telescope()
+  end,
 }
-
-M.setup = function()
-  telescope.setup(default)
-end
-
-return M

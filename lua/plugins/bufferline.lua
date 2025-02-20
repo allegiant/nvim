@@ -1,8 +1,3 @@
-local present, bufferline = pcall(require, "bufferline")
-if not present then
-  return
-end
-
 local default = {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -17,7 +12,7 @@ local default = {
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
     --- some limitations that will *NOT* be fixed.
-    name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
+    name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
       -- remove extension from markdown files for example
       if buf.name:match('%.md') then
         return vim.fn.fnamemodify(buf.name, ':t:r')
@@ -28,8 +23,8 @@ local default = {
     tab_size = 18,
     diagnostics = false,
     diagnostics_update_in_insert = false,
-    offsets = {{filetype = "NvimTree"}},
-    color_icons = true, -- whether or not to add the filetype icon highlights
+    offsets = { { filetype = "NvimTree" } },
+    color_icons = true,       -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = false,
     show_close_icon = false,
@@ -43,9 +38,15 @@ local default = {
   },
 }
 
-local M = {}
-M.setup = function()
-  bufferline.setup(default)
-end
-
-return M
+return {
+  "akinsho/bufferline.nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    'famiu/bufdelete.nvim'
+  },
+  event = 'VimEnter',
+  config = function()
+    require("bufferline").setup(default)
+    require("core.mappings").bufferline()
+  end,
+}
