@@ -52,6 +52,7 @@ local opts = {
 }
 
 return {
+  enabled = false,
   "coffebar/neovim-project",
   opts = opts,
   init = function()
