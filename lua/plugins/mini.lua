@@ -16,6 +16,9 @@ return {
   {
     'echasnovski/mini.sessions',
     version = '*',
+    opts = {
+      file = ""
+    },
     config = function()
       require('mini.sessions').setup()
     end
