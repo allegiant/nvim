@@ -1,5 +1,5 @@
 if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14"
+  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
   vim.g.neovide_position_animation_length = 0
   vim.g.neovide_cursor_animation_length = 0.00
   vim.g.neovide_cursor_trail_size = 0
