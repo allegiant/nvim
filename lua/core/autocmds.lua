@@ -6,3 +6,11 @@ autocmd({ "VimEnter" }, { pattern = { "*" }, command = "setlocal formatoptions-=
 vim.cmd [[ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |	 exe "normal! g`\"" | endif ]]
 -- 自动保存
 -- autocmd({ "InsertLeave" }, { pattern = { "*" }, command = "silent! wall", nested = true, })
+-- set indent to 2 for lua
+autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+})
