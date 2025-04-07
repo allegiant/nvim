@@ -3,7 +3,13 @@ return {
     'echasnovski/mini.pairs',
     version = '*',
     config = function()
-      require('mini.pairs').setup()
+      require('mini.pairs').setup({
+        mappings = {
+          ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+          ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\<].", register = { cr = false } },
+          ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\&].", register = { cr = false } },
+        }
+      })
     end
   },
   {

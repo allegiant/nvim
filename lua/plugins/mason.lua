@@ -19,7 +19,8 @@ return {
         lspconfig["lua_ls"].setup(
           require("plugins.lspconfig.lua_ls")
         )
-      end
+      end,
+      ['rust_analyzer'] = function() end,
     }
   end
 }
