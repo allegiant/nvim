@@ -1,8 +1,6 @@
 local opts = {
   keymap = {
     preset = "enter",
-    --["<Tab>"] = { "select_next", 'snippet_forward', "fallback" },
-    --["<S-Tab>"] = { "select_prev", 'snippet_backward', "fallback" },
     ["<Tab>"] = {
       function(cmp)
         if cmp.is_visible() then
@@ -43,12 +41,8 @@ local opts = {
     accept = { auto_brackets = { enabled = true }, },
     list = {
       selection = {
-        preselect = function(ctx)
-          return ctx.mode ~= "cmdline"
-        end,
-        auto_insert = function(ctx)
-          return ctx.mode == "cmdline"
-        end,
+        preselect = false,
+        auto_insert = true
       }
     },
     menu = {
@@ -60,6 +54,9 @@ local opts = {
           { "kind_icon", "kind" }
         },
       },
+      auto_show = function(ctx)
+        return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+      end,
     },
     documentation = {
       window = {
@@ -90,6 +87,9 @@ local opts = {
         module = "blink-copilot",
         score_offset = 100,
         async = true,
+        opts = {
+          max_completions = 3, -- Override global max_completions
+        }
       },
     },
   },

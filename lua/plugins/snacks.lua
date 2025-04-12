@@ -1,13 +1,11 @@
 return {
   "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
   opts = {
-    picker = {
-    },
-    notifier = {
-      top_down = false, -- place notifications from top to bottom
-
-    },
+    bigfile = { enabled = false },
     dashboard = {
+      enabled = true,
       sections = {
         { section = "header" },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
@@ -15,15 +13,27 @@ return {
         { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         { section = "startup" },
       },
-    }
+    },
+    explorer = { enabled = false },
+    indent = { enabled = false },
+    input = { enabled = false },
+    picker = { enabled = true },
+    notifier = {
+      enabled = true,
+      top_down = false, -- place notifications from top to bottom
+    },
+    quickfile = { enabled = false },
+    scope = { enabled = false },
+    scroll = { enabled = false },
+    statuscolumn = { enabled = false },
+    words = { enabled = false },
   },
   init = function()
     local progress = vim.defaulttable()
     vim.api.nvim_create_autocmd("LspProgress", {
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params
-            .value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+        local value = ev.data.params.value
         if not client or type(value) ~= "table" then
           return
         end

@@ -13,7 +13,7 @@ return { -- dap debugging {{{
     { '<leader>dc', '<Cmd>lua require"dap".continue()<CR>',                                                      desc = 'continue' },
     { '<leader>dl', '<Cmd>lua require"dap".run_last()<CR>',                                                      desc = 'run last' },
     { '<leader>dq', '<Cmd>lua require"dap".terminate()<CR>',                                                     desc = 'terminate' },
-    { '<leader>dh', '<Cmd>lua require"dap".stop()<CR>',                                                          desc = 'stop' },
+    { '<leader>dh', '<Cmd>lua require"dap".close()<CR>',                                                         desc = 'stop' },
     { '<leader>dn', '<Cmd>lua require"dap".step_over()<CR>',                                                     desc = 'step over' },
     { '<leader>ds', '<Cmd>lua require"dap".step_into()<CR>',                                                     desc = 'step into' },
     { '<leader>dS', '<Cmd>lua require"dap".step_out()<CR>',                                                      desc = 'step out' },
@@ -54,56 +54,3 @@ return { -- dap debugging {{{
     end
   end,
 }
-
-
-
-
-
--- return {
---   {
---     "mfussenegger/nvim-dap",
---     config = function()
---       vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
---       vim.fn.sign_define('DapStopped', { text = '▶️', texthl = '', linehl = '', numhl = '' })
---       require("core.mappings").dap()
---     end
---   },
---   {
---     "rcarriga/nvim-dap-ui",
---     dependencies = {
---       "mfussenegger/nvim-dap",
---       "nvim-neotest/nvim-nio"
---     },
---     config = function()
---       require("dapui").setup()
---       require("core.mappings").dapui()
---
---       local dap, dapui = require("dap"), require("dapui")
---       dap.listeners.before.attach.dapui_config = function()
---         dapui.open()
---       end
---       dap.listeners.before.launch.dapui_config = function()
---         dapui.open()
---       end
---       dap.listeners.before.event_terminated.dapui_config = function()
---         dapui.close()
---       end
---       dap.listeners.before.event_exited.dapui_config = function()
---         dapui.close()
---       end
---     end
---   },
---   {
---     "jay-babu/mason-nvim-dap.nvim",
---     config = function()
---       require("mason-nvim-dap").setup({
---         automatic_setup = true,
---         handlers = {
---           function(config)
---             require('mason-nvim-dap').default_setup(config)
---           end
---         }
---       })
---     end
---   },
--- }

@@ -6,7 +6,6 @@ end
 
 local default = {
   ensure_installed = {
-    "dart",
     "lua",
     "vim",
     "html",
@@ -20,8 +19,9 @@ local default = {
     "rust",
   },
   indent = {
-    disable = { "dart" },
-    enable = false,
+    enable = true,
+    -- disable = { "dart" },
+    -- enable = false,
   },
   highlight = {
     enable = true,

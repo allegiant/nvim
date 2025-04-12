@@ -14,3 +14,11 @@ autocmd("FileType", {
     vim.opt_local.tabstop = 2
   end,
 })
+
+autocmd("FileType", {
+  pattern = "slint",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+  end,
+})

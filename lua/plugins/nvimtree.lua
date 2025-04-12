@@ -1,5 +1,7 @@
-local default = {
-  sort_by = "case_sensitive",
+opts = {
+  sort = {
+    sorter = "case_sensitive",
+  },
   view = {
     adaptive_size = true,
   },
@@ -11,18 +13,20 @@ local default = {
   },
   git = {
     enable = false,
-    ignore = false,
+  },
+  filesystem_watchers = {
+    enable = false,
   },
 }
-
 return {
+  -- enabled = false,
   "nvim-tree/nvim-tree.lua",
-  event = "vimEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+
   config = function()
-    require("nvim-tree").setup(default)
+    require("nvim-tree").setup(opts)
     require("core.mappings").nvimtree()
   end,
 }
