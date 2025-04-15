@@ -43,9 +43,9 @@ return { -- dap debugging {{{
     dap_python.test_runner = 'pytest'
     dap_python.default_port = 38000
 
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      require('dapui').open()
-    end
+    -- dap.listeners.after.event_initialized["dapui_config"] = function()
+    --   require('dapui').open()
+    -- end
     dap.listeners.before.event_terminated["dapui_config"] = function()
       require('dapui').close()
     end

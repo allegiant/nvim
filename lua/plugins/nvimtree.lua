@@ -3,6 +3,7 @@ opts = {
     sorter = "case_sensitive",
   },
   view = {
+    relativenumber = true,
     adaptive_size = true,
   },
   renderer = {

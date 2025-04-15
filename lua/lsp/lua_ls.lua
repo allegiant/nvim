@@ -1,4 +1,5 @@
-return {
+local M = {}
+M.opts = {
   settings = {
     Lua = {
       runtime = {
@@ -27,5 +28,24 @@ return {
         }
       },
     },
-  },
+  }
 }
+
+
+-- M.setup = function()
+--   local present, mason_registry = pcall(require, "mason-registry")
+--   if not present then
+--     return
+--   end
+--
+--   local installed = mason_registry.is_installed("lua-language-server")
+--   if not installed then
+--     return
+--   end
+--
+--
+--   vim.lsp.config('lua_ls', M.opts)
+--   vim.lsp.enable('lua_ls')
+-- end
+
+return M

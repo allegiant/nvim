@@ -17,5 +17,12 @@ return {
         },
       },
     })
+
+    vim.lsp.config.lua_ls = {
+      settings = require("lsp.lua_ls").opts.settings
+    }
+    vim.lsp.enable('lua_ls')
+    vim.lsp.enable('jsonls')
+    vim.lsp.enable('pylsp')
   end
 }

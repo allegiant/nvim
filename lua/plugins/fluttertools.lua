@@ -11,8 +11,8 @@ return {
       capabilities = require("blink.cmp").get_lsp_capabilities(),
     },
     dev_log = {
-      enabled = false,
-      open_cmd = "10split", -- command to use to open the log buffer
+      enabled = true,
+      open_cmd = "5split", -- command to use to open the log buffer
       focus_on_open = false,
     },
     debugger = { -- integrate with nvim dap + install dart code debugger

@@ -8,4 +8,5 @@ else
   require "core.autocmds"
   require "core.mappings"
   require "config.lazy"
+  require "lspconfig"
 end
