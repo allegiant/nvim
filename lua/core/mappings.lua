@@ -33,6 +33,8 @@ map("n", "J", "<C-w>2-", opts)
 map("n", "<leader>sv", ":vsp<CR>", opts)
 map("n", "<leader>sh", ":sp<CR>", opts)
 
+map("n", "<leader>nl", ":nohlsearch<CR>", opts)
+
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
@@ -52,45 +54,6 @@ pluginskeys.lspsaga = function()
     { "gu", "<cmd>Lspsaga outgoing_calls<CR>",        desc = "outgoing calls" },
     { "gs", "<cmd>Lspsaga outline<CR>",               desc = "outline code structure" },
   })
-end
-
-pluginskeys.bufferline = function()
-  map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
-  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
-  local wk = require("which-key")
-  wk.add({
-    { "<leader>",  group = "Buffer" },
-    { "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
-    { "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
-    { "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
-    { "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
-    { "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
-    { "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
-    { "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "goto 7" },
-    { "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "goto 8" },
-    { "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "goto 9" },
-  }, opts)
-
-  wk.add({
-    { "<leader>b",  group = "Buffer" },
-    { "<leader>bd", ":bdelete<CR>",                    desc = "Close" },
-    { "<leader>bc", ":BufferLinePickClose<CR>",        desc = "Pick Close" },
-    { "<leader>bs", ":BufferLinePick<CR>",             desc = "Pick" },
-    { "<leader>bl", ":BufferLineMoveNext<CR>",         desc = "Move right" },
-    { "<leader>bh", ":BufferLineMovePrev<CR>",         desc = "Move left" },
-    { "<leader>bq", ":BufferLineCloseLeft<CR>",        desc = "Close left" },
-    { "<leader>bp", ":BufferLineCloseRight<CR>",       desc = "Close right " },
-    { "<leader>b1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
-    { "<leader>b2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
-    { "<leader>b3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
-    { "<leader>b4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
-    { "<leader>b5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
-    { "<leader>b6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
-  }, opts)
-end
-
-pluginskeys.nvimtree = function()
-  map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 end
 
 pluginskeys.gitsigns = function(bufnr, gitsigns)
@@ -134,52 +97,6 @@ pluginskeys.gitsigns = function(bufnr, gitsigns)
     { "<leader>sD", '<cmd>lua require"gitsigns".diffthis("~")<CR>',         desc = "Diff This(~)" },
     { "<leader>sx", "<cmd>Gitsigns toggle_deleted<CR>",                     desc = "Toggle Deleted" },
   }, gsOpts)
-end
-
-pluginskeys.telescope = function()
-  local wk = require("which-key")
-  wk.add({
-    { "<leader>f",  group = "File" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find live_grep" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Find help_tags" },
-    { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find grep_tring" },
-    { "<leader>fr", "<cmd>Telescope resume<cr>",      desc = "Find search history" },
-  })
-end
-
-pluginskeys.dap = function()
-  local wk = require("which-key")
-  wk.add({
-    { "<leader>d",  group = "Dap" },
-    { "<leader>dc", function() require("dap").continue() end,          desc = "Continue" },
-    { "<leader>dr", function() require("dap").run_to_cursor() end,     desc = "Run to cursor" },
-    { "<F8>",       function() require("dap").step_over() end,         desc = "Step over" },
-    { "<F7>",       function() require("dap").step_into() end,         desc = "Step into" },
-    { "<S-F8>",     function() require("dap").step_out() end,          desc = "Step out" },
-    { "<leader>dv", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-    { "<leader>dt", function() require("dap").terminate() end,         desc = "Terminate" },
-  })
-end
-pluginskeys.dapui = function()
-  local wk = require("which-key")
-  wk.add({
-    { "<leader>d",  group = "Dap" },
-    { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle debug ui" },
-  })
-end
-
-pluginskeys.code_runner = function()
-  local wk = require("which-key")
-  wk.add({
-    { "<leader>r",   group = "Code Runner" },
-    { "<leader>rr",  ":RunCode<CR>",       desc = "run code" },
-    { "<leader>rf",  ':RunFile<CR>',       desc = "run file" },
-    { "<leader>rft", ':RunFile tab<CR>',   desc = "run file tab" },
-    { "<leader>rp",  ':RunProject<CR>',    desc = "run project" },
-    { "<leader>rc",  ':RunClose<CR>',      desc = "run close" },
-  })
 end
 
 return pluginskeys

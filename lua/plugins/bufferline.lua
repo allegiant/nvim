@@ -45,8 +45,28 @@ return {
     'famiu/bufdelete.nvim'
   },
   event = 'VimEnter',
+  keys = {
+    { "<leader>b",  group = "Buffer" },
+    { "<TAB>",      "<cmd>BufferLineCycleNext<CR>",    desc = "buf next" },
+    { "<S-Tab>",    "<cmd>BufferLineCyclePrev<CR>",    desc = "buf prev" },
+    { "<leader>bd", "<cmd>bdelete<CR>",                desc = "Close" },
+    { "<leader>bc", "<cmd>BufferLinePickClose<CR>",    desc = "Pick Close" },
+    { "<leader>bs", "<cmd>BufferLinePick<CR>",         desc = "Pick" },
+    { "<leader>bl", "<cmd>BufferLineMoveNext<CR>",     desc = "Move right" },
+    { "<leader>bh", "<cmd>BufferLineMovePrev<CR>",     desc = "Move left" },
+    { "<leader>bq", "<cmd>BufferLineCloseLeft<CR>",    desc = "Close left" },
+    { "<leader>bp", "<cmd>BufferLineCloseRight<CR>",   desc = "Close right " },
+    { "<leader>b1", "<cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
+    { "<leader>b2", "<cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
+    { "<leader>b3", "<cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
+    { "<leader>b4", "<cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
+    { "<leader>b5", "<cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
+    { "<leader>b6", "<cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
+    { "<leader>7",  "<cmd>BufferLineGoToBuffer 7<CR>", desc = "goto 7" },
+    { "<leader>8",  "<cmd>BufferLineGoToBuffer 8<CR>", desc = "goto 8" },
+    { "<leader>9",  "<cmd>BufferLineGoToBuffer 9<CR>", desc = "goto 9" },
+  },
   config = function()
     require("bufferline").setup(default)
-    require("core.mappings").bufferline()
   end,
 }
