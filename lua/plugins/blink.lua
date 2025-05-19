@@ -41,7 +41,7 @@ local opts = {
     accept = { auto_brackets = { enabled = true }, },
     list = {
       selection = {
-        preselect = true,
+        preselect = false,
         auto_insert = true
       }
     },
@@ -54,7 +54,9 @@ local opts = {
           { "kind_icon", "kind" }
         },
       },
-      auto_show = true,
+      auto_show = function(ctx)
+        return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+      end,
     },
     documentation = {
       window = {
