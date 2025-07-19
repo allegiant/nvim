@@ -9,6 +9,16 @@ local opts = {
     'Pipfile',
     '.git',
   },
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = { 'W391' },
+          maxLineLength = 100
+        }
+      }
+    }
+  }
 }
 
 local M = {}

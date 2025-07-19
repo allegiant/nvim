@@ -1,43 +1,43 @@
 local vscode = require("vscode")
 
 local whichkey = {
-	show = function()
-		vim.fn.VSCodeNotify("whichkey.show")
-	end,
+  show = function()
+    vim.fn.VSCodeNotify("whichkey.show")
+  end,
 }
 
 local fold = {
-	toggle = function()
-		vim.fn.VSCodeNotify("editor.toggleFold")
-	end,
+  toggle = function()
+    vim.fn.VSCodeNotify("editor.toggleFold")
+  end,
 
-	all = function()
-		vim.fn.VSCodeNotify("editor.foldAll")
-	end,
-	openAll = function()
-		vim.fn.VSCodeNotify("editor.unfoldAll")
-	end,
+  all = function()
+    vim.fn.VSCodeNotify("editor.foldAll")
+  end,
+  openAll = function()
+    vim.fn.VSCodeNotify("editor.unfoldAll")
+  end,
 
-	close = function()
-		vim.fn.VSCodeNotify("editor.fold")
-	end,
-	open = function()
-		vim.fn.VSCodeNotify("editor.unfold")
-	end,
-	openRecursive = function()
-		vim.fn.VSCodeNotify("editor.unfoldRecursively")
-	end,
+  close = function()
+    vim.fn.VSCodeNotify("editor.fold")
+  end,
+  open = function()
+    vim.fn.VSCodeNotify("editor.unfold")
+  end,
+  openRecursive = function()
+    vim.fn.VSCodeNotify("editor.unfoldRecursively")
+  end,
 
-	blockComment = function()
-		vim.fn.VSCodeNotify("editor.foldAllBlockComments")
-	end,
+  blockComment = function()
+    vim.fn.VSCodeNotify("editor.foldAllBlockComments")
+  end,
 
-	allMarkerRegion = function()
-		vim.fn.VSCodeNotify("editor.foldAllMarkerRegions")
-	end,
-	openAllMarkerRegion = function()
-		vim.fn.VSCodeNotify("editor.unfoldAllMarkerRegions")
-	end,
+  allMarkerRegion = function()
+    vim.fn.VSCodeNotify("editor.foldAllMarkerRegions")
+  end,
+  openAllMarkerRegion = function()
+    vim.fn.VSCodeNotify("editor.unfoldAllMarkerRegions")
+  end,
 }
 
 -- remap leader key
@@ -54,12 +54,13 @@ vim.keymap.set({ "v" }, "<leader>p", '"+p')
 vim.keymap.set({ "v" }, "<leader>P", '"+P')
 vim.keymap.set({ "v" }, "<leader>d", '"+d')
 
--- vim.keymap.set({ "n", "v" }, "<leader>", whichkey.show)
+
+-- -- vim.keymap.set({ "n", "v" }, "<leader>", whichkey.show)
 vim.keymap.set(
-	{ "n", "v" },
-	"<leader>",
-	"<cmd>lua require('vscode').action('whichkey.show')<CR>",
-	{ desc = "WhichKey Show" }
+  { "n", "v" },
+  "<Space>",
+  "<cmd>lua require('vscode').action('whichkey.show')<CR>",
+  { noremap = true, silent = true, desc = "WhichKey Show" }
 )
 
 -- code action

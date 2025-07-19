@@ -1,4 +1,9 @@
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local opts = {
+  capabilities = capabilities,
   cmd = { 'vscode-json-language-server', '--stdio' },
   filetypes = { 'json', 'jsonc' },
   init_options = {
@@ -19,6 +24,7 @@ M.setup = function()
   if not installed then
     return
   end
+
 
 
   vim.lsp.config('jsonls', opts)
