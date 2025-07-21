@@ -19,8 +19,6 @@ return {
     },
     -- Define your formatters
     formatters_by_ft = {
-      --lua = { "`lua-format" },
-      python = { "isort", "black" },
       vue = { "prettierd", "prettier" },
       html = { "prettierd", "prettier" },
       javascript = { "prettierd", "prettier" },
