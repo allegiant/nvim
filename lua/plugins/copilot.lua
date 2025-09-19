@@ -10,7 +10,7 @@ return {
         markdown = true,
         help = true,
       }
-    },
+    }
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -19,7 +19,7 @@ return {
       { "nvim-lua/plenary.nvim" },  -- for curl, log and async functions
     },
     keys = {
-      { "<leader>co", "<cmd>CopilotChatToggle<cr>",  desc = "Copilot Open" },
+      { "<leader>co", "<cmd>CopilotChatToggle<cr>",  desc = "Copilot Toggle" },
       { "<leader>cm", "<cmd>CopilotChatModels<cr>",  desc = "Copilot (Models)" },
       { "<leader>ca", "<cmd>CopilotChatAgents<cr>",  desc = "Copilot (Panel)" },
       { "<leader>cc", "<cmd>CopilotChatClose<cr>",   desc = "Copilot Close" },
@@ -33,7 +33,6 @@ return {
           insert = '<C-s>'
         }
       }
-    },
-    -- See Commands section for default commands if you want to lazy load on them
+    }
   },
 }

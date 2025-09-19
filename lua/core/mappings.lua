@@ -8,7 +8,6 @@ vim.g.maplocalleader = " "
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
-
 map("v", "<leader>y", '"+y', opts)
 map("n", "<leader>y", '"+y', opts)
 map("n", "<leader>Y", '"+yg_', opts)

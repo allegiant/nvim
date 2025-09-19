@@ -28,6 +28,11 @@ end
 
 return {
   "akinsho/toggleterm.nvim",
+  keys = {
+    { '<leader>t',  group = 'Terminal' },
+    { '<leader>tn', '<Cmd>TermNew<CR>',    desc = 'Create new Terminal' },
+    { '<leader>ts', '<Cmd>TermSelect<CR>', desc = 'select Terminal' },
+  },
   config = function()
     require("toggleterm").setup({
       size = function(term)

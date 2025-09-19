@@ -21,10 +21,10 @@ return {
       enable = false,
     },
     filesystem_watchers = {
-      enable = true,
+      enable = false,
     },
     diagnostics = {
-      enable = true,
+      enable = false,
       icons = {
         hint = "",
         info = "",

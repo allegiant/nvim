@@ -1,17 +1,16 @@
 return { -- dap debugging {{{
   'mfussenegger/nvim-dap',
-  lazy = true,
+  event = "VeryLazy",
   dependencies = {
-    'nvim-telescope/telescope-dap.nvim',
-    'mfussenegger/nvim-dap-python',
-    'theHamsta/nvim-dap-virtual-text',
     'rcarriga/nvim-dap-ui',
-    "nvim-neotest/nvim-nio",
+    'nvim-neotest/nvim-nio',
+    'theHamsta/nvim-dap-virtual-text',
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     { '<leader>d',  group = 'debug' },
     { '<leader>dc', '<Cmd>lua require"dap".continue()<CR>',                                                      desc = 'continue' },
-    { '<leader>dl', '<Cmd>lua require"dap".run_last()<CR>',                                                      desc = 'run last' },
+    { '<leader>dd', '<Cmd>lua require"dap".run_last()<CR>',                                                      desc = 'run last' },
     { '<leader>dq', '<Cmd>lua require"dap".terminate()<CR>',                                                     desc = 'terminate' },
     { '<leader>dh', '<Cmd>lua require"dap".close()<CR>',                                                         desc = 'stop' },
     { '<leader>dn', '<Cmd>lua require"dap".step_over()<CR>',                                                     desc = 'step over' },
@@ -25,32 +24,47 @@ return { -- dap debugging {{{
     { '<leader>dj', '<Cmd>lua require"dap".down()<CR>',                                                          desc = 'down callstack' },
     { '<leader>di', '<Cmd>lua require"dap.ui.widgets".hover()<CR>',                                              desc = 'info' },
     { '<leader>d?', '<Cmd>lua local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes)<CR>', desc = 'scopes' },
-    { '<leader>df', '<Cmd>Telescope dap frames<CR>',                                                             desc = 'search frames' },
-    { '<leader>dC', '<Cmd>Telescope dap commands<CR>',                                                           desc = 'search commands' },
-    { '<leader>dL', '<Cmd>Telescope dap list_breakpoints<CR>',                                                   desc = 'search breakpoints' },
     { "<leader>du", function() require("dapui").toggle() end,                                                    desc = "Toggle debug ui" },
   },
   config = function()
-    require("dapui").setup()
-    local dap = require('dap')
+    local dap = require("dap")
+    local dapui = require("dapui")
+    local dap_virtual_text = require("nvim-dap-virtual-text")
+    local dap_python = require("dap-python")
+
     vim.fn.sign_define('DapBreakpoint', { text = '', texthl = '', linehl = '', numhl = '' })
     vim.fn.sign_define('DapStopped', { text = '', texthl = '', linehl = '', numhl = '' })
     dap.defaults.fallback.terminal_win_cmd = 'tabnew'
     dap.defaults.fallback.focus_terminal = true
 
-    local dap_python = require('dap-python')
-    dap_python.setup(vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/bin/python')
-    dap_python.test_runner = 'pytest'
-    dap_python.default_port = 38000
+    dapui.setup()
+    dap_virtual_text.setup()
 
-    -- dap.listeners.after.event_initialized["dapui_config"] = function()
-    --   require('dapui').open()
-    -- end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-      require('dapui').close()
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
     end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      require('dapui').close()
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
     end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
+
+    dap_python.setup('python')
+
+    dap.adapters.codelldb = {
+      type = 'server',
+      host = '127.0.0.1',
+      port = 13000,
+      executable = {
+        command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
+        args = { "--port", "13000" },
+        -- on windows you may have to uncomment this:
+        -- detached = false,
+      },
+    }
   end,
 }
