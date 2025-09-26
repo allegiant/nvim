@@ -26,6 +26,7 @@ return {
       markdown = { "prettierd", "prettier" },
       typescript = { "prettierd", "prettier" },
       typescriptreact = { "prettierd", "prettier" },
+      sql = { "sqruff" }
     },
     format_on_save = {
       timeout_ms = 500,

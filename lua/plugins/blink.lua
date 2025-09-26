@@ -120,6 +120,7 @@ return {
         dependencies = {
           "rafamadriz/friendly-snippets",
         },
+        build = "make install_jsregexp"
       },
       {
         "fang2hou/blink-copilot",

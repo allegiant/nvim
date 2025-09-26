@@ -21,5 +21,6 @@ return {
     require("lsp.jsonls").setup()
     require("lsp.pylsp").setup()
     require("lsp.vue_ls").setup()
+    require("lsp.sqls").setup()
   end,
 }
