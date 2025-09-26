@@ -1,31 +1,25 @@
-local present, lualine = pcall(require, "lualine")
-
-if not present then
-  return
-end
-
-local M = {}
-
-local default = {
-  options = {
-    theme = "gruvbox",
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    -- "arkav/lualine-lsp-progress",
   },
-  sections = {
-    lualine_x = {
-      {
-        require("lazy.status").updates,
-        cond = require("lazy.status").has_updates,
-        color = { fg = "#ff9e64" },
+  opts = {
+    options = {
+      theme = "gruvbox-material",
+    },
+    sections = {
+      lualine_x = {
+        {
+          require("lazy.status").updates,
+          cond = require("lazy.status").has_updates,
+          color = { fg = "#ff9e64" },
+        },
       },
-    },
-    lualine_y = {
-      "lsp_progress",
-    },
-  },
+      lualine_y = {
+        "progress",
+        -- "lsp_progress",
+      },
+    }
+  }
 }
-
-M.setup = function()
-  lualine.setup(default)
-end
-
-return M

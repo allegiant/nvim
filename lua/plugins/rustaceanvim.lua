@@ -1,17 +1,25 @@
-local lspconfig_common = require("plugins.lspconfig.common")
-local ok, _ra = pcall(require, "rustaceanvim")
-if not ok then
-  return
-end
+return {
+  "mrcjkb/rustaceanvim",
+  version = "^5", -- Recommended
+  config = function()
+    vim.g.rustaceanvim = {
+      server = {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        default_settings = {
+          -- rust-analyzer language server configuration
+          ["rust-analyzer"] = {
+            diagnostics = {
+              enable = true,
+            },
+            checkOnSave = false,
+            files = {
+              watcher = "client",
+            },
+          },
+        },
+      },
 
-local M = {}
-
-M.config = function()
-  return {
-    server = {
-      on_attach = lspconfig_common.on_attach,
-      capabilities = lspconfig_common.capabilities(),
+      -- dap = {},
     }
-  }
-end
-return M
+  end,
+}

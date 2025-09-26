@@ -1,17 +1,12 @@
 local utils = require "core.utils"
 ---@diagnostic disable-next-line: undefined-global
 local vim = vim
-local present, wk = pcall(require, "which-key")
-if not present then
-  return
-end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-
 
 map("v", "<leader>y", '"+y', opts)
 map("n", "<leader>y", '"+y', opts)
@@ -33,14 +28,16 @@ map("n", "H", "<C-w>3<", opts)
 map("n", "L", "<C-w>3>", opts)
 map("n", "K", "<C-w>2+<", opts)
 map("n", "J", "<C-w>2-", opts)
+-- split windows
+map("n", "<leader>sv", ":vsp<CR>", opts)
+map("n", "<leader>sh", ":sp<CR>", opts)
 
-wk.add({
-  { "<leader>sv", ":vsp<CR>", desc = "vertical split" },
-  { "<leader>sh", ":sp<CR>",  desc = "Horizontal split" },
-})
+map("n", "<leader>nl", ":nohlsearch<CR>", opts)
+
 local pluginskeys = {}
 
 pluginskeys.lspsaga = function()
+  local wk = require("which-key")
   wk.add({
     { "g",  group = "Lspsaga" },
     { "gf", "<cmd>Lspsaga finder<CR>",                desc = "Ref + Impl" },
@@ -58,61 +55,31 @@ pluginskeys.lspsaga = function()
   })
 end
 
-pluginskeys.lspconfig = function(bufnr)
-  wk.add({
-    { "<leader>f", group = "File" },
-    {
-      { buffer = bufnr, silent = true,                                      noremap = true },
-      { "<leader>fm",   function() vim.lsp.buf.format { async = true } end, desc = "Lsp format" },
-    }
-  })
-end
-
-pluginskeys.bufferline = function()
-  map("n", "<TAB>", ":BufferLineCycleNext <CR>", opts)
-  map("n", "<S-Tab>", ":BufferLineCyclePrev <CR>", opts)
-  wk.add({
-    { "<leader>",  group = "Buffer" },
-    { "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
-    { "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
-    { "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
-    { "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
-    { "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
-    { "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
-    { "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "goto 7" },
-    { "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "goto 8" },
-    { "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "goto 9" },
-  }, opts)
-
-  wk.add({
-    { "<leader>b",  group = "Buffer" },
-    { "<leader>bd", ":bdelete<CR>",                    desc = "Close" },
-    { "<leader>bc", ":BufferLinePickClose<CR>",        desc = "Pick Close" },
-    { "<leader>bs", ":BufferLinePick<CR>",             desc = "Pick" },
-    { "<leader>bl", ":BufferLineMoveNext<CR>",         desc = "Move right" },
-    { "<leader>bh", ":BufferLineMovePrev<CR>",         desc = "Move left" },
-    { "<leader>bq", ":BufferLineCloseLeft<CR>",        desc = "Close left" },
-    { "<leader>bp", ":BufferLineCloseRight<CR>",       desc = "Close right " },
-    { "<leader>b1", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "goto 1" },
-    { "<leader>b2", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "goto 2" },
-    { "<leader>b3", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "goto 3" },
-    { "<leader>b4", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "goto 4" },
-    { "<leader>b5", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "goto 5" },
-    { "<leader>b6", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "goto 6" },
-  }, opts)
-end
-
-pluginskeys.nvimtree = function()
-  map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-end
-
-pluginskeys.gitsigns = function(bufnr)
+pluginskeys.gitsigns = function(bufnr, gitsigns)
   local gsOpts = utils.merge_table(opts, { buffer = bufnr })
+
+  local wk = require("which-key")
+
+  function nav_next_hunk()
+    if vim.wo.diff then
+      vim.cmd.normal({ ']c', bang = true })
+    else
+      gitsigns.nav_hunk('next')
+    end
+  end
+
+  function nav_prev_hunk()
+    if vim.wo.diff then
+      vim.cmd.normal({ '[c', bang = true })
+    else
+      gitsigns.nav_hunk('prev')
+    end
+  end
 
   wk.add({
     { "<leader>s",  group = "Gitsigns" },
-    { "<leader>sj", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", desc = "Next Hunk", },
-    { "<leader>sk", "&diff ? '[c' : '<cmd>Gitsigns pqev_hunk<CR>'", desc = "Prev Hunk", },
+    { "<leader>sj", '<cmd>lua nav_next_hunk()<CR>', desc = "Next Hunk", },
+    { "<leader>sk", '<cmd>lua nav_prev_hunk()<CR>', desc = "Prev Hunk", },
   }, utils.merge_table(gsOpts, { expr = true }))
 
   wk.add({
@@ -129,18 +96,6 @@ pluginskeys.gitsigns = function(bufnr)
     { "<leader>sD", '<cmd>lua require"gitsigns".diffthis("~")<CR>',         desc = "Diff This(~)" },
     { "<leader>sx", "<cmd>Gitsigns toggle_deleted<CR>",                     desc = "Toggle Deleted" },
   }, gsOpts)
-end
-
-pluginskeys.telescope = function()
-  wk.add({
-    { "<leader>f",  group = "File" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find live_grep" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Find help_tags" },
-    { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find grep_tring" },
-    { "<leader>fr", "<cmd>Telescope resume<cr>",      desc = "Find search history" },
-  })
 end
 
 return pluginskeys

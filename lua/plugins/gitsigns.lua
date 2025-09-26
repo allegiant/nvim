@@ -1,17 +1,14 @@
-local present, gitsigns = pcall(require, "gitsigns")
-
-if not present then
-   return
-end
-
-local M = {}
-
-M.setup = function()
-   gitsigns.setup {
+return {
+  "lewis6991/gitsigns.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  config = function()
+    local gitsigns = require("gitsigns")
+    gitsigns.setup({
       on_attach = function(bufnr)
-         require("core.mappings").gitsigns(bufnr)
+        require("core.mappings").gitsigns(bufnr, gitsigns)
       end,
-   }
-end
-
-return M
+    })
+  end,
+}

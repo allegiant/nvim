@@ -1,18 +1,13 @@
-local present, lspsaga = pcall(require, "lspsaga")
-
-if not present then
-  return
-end
-
-
-local M = {}
-
-local default = {
+return {
+  "glepnir/lspsaga.nvim",
+  event = "BufRead",
+  config = function()
+    require("lspsaga").setup()
+    require("core.mappings").lspsaga()
+  end,
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons" },
+    --Please make sure you install markdown and markdown_inline parser
+    { "nvim-treesitter/nvim-treesitter" }
+  },
 }
-
-
-M.setup = function()
-  lspsaga.setup(default)
-end
-
-return M
