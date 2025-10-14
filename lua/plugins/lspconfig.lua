@@ -1,6 +1,13 @@
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
+  keys = {
+    { "gj", "<cmd>lua vim.diagnostic.goto_next()<cr>",              desc = "diagnostic next" },
+    { "gk", "<cmd>lua vim.diagnostic.goto_prev()<cr>",              desc = "diagnostic prev" },
+    { "gr", "<cmd>lua vim.lsp.buf.rename()<cr>",                    desc = "rename" },
+    { "gh", "<cmd>lua vim.lsp.buf.hover({border = 'rounded'})<CR>", desc = "Doc Hover" },
+
+  },
   config = function()
     vim.diagnostic.config({
       virtual_text = {
