@@ -14,14 +14,10 @@ return {
     { "<leader>fw", "<cmd>FzfLua grep<cr>",                     desc = "Find grep_tring" },
     { "<leader>fr", "<cmd>FzfLua resume<cr>",                   desc = "Find search history" },
     { "gf",         "<cmd>FzfLua lsp_finder<CR>",               desc = "Ref + Impl" },
-    { "ga",         "<cmd>FzfLua lsp_code_actions<CR>",         desc = "Code Action",        mode = { "n", "v" } },
     { "gd",         "<cmd>FzfLua  lsp_definitions<CR>",         desc = "definition" },
     { "gt",         "<cmd>FzfLua lsp_typedefs<CR>",             desc = "Type Definitions" },
     { "go",         "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "Show diagnostic" },
     { "gi",         "<cmd>FzfLua lsp_incoming_calls<CR>",       desc = "incoming calls" },
     { "gu",         "<cmd>FzfLua lsp_outgoing_calls<CR>",       desc = "outgoing calls" },
   },
-  config = function(opts, _)
-    require("fzf-lua").register_ui_select(opts.ui_select or nil)
-  end
 }

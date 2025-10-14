@@ -6,6 +6,7 @@ return {
     { "gk", "<cmd>lua vim.diagnostic.goto_prev()<cr>",              desc = "diagnostic prev" },
     { "gr", "<cmd>lua vim.lsp.buf.rename()<cr>",                    desc = "rename" },
     { "gh", "<cmd>lua vim.lsp.buf.hover({border = 'rounded'})<CR>", desc = "Doc Hover" },
+    { "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>",               desc = "Code Action" },
 
   },
   config = function()
