@@ -22,4 +22,7 @@ return {
     { "gs",         "<cmd>FzfLua lsp_document_symbols<CR>",     desc = "Document Symbols" },
     { "gS",         "<cmd>FzfLua lsp_workspace_symbols<CR>",    desc = "Workspace Symbols" },
   },
+  config = function()
+    require('fzf-lua').register_ui_select()
+  end
 }
