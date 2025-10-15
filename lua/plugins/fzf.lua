@@ -19,5 +19,7 @@ return {
     { "go",         "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "Show diagnostic" },
     { "gi",         "<cmd>FzfLua lsp_incoming_calls<CR>",       desc = "incoming calls" },
     { "gu",         "<cmd>FzfLua lsp_outgoing_calls<CR>",       desc = "outgoing calls" },
+    { "gs",         "<cmd>FzfLua lsp_document_symbols<CR>",     desc = "Document Symbols" },
+    { "gS",         "<cmd>FzfLua lsp_workspace_symbols<CR>",    desc = "Workspace Symbols" },
   },
 }
