@@ -1,30 +1,30 @@
 local utils = {}
-utils.merge_table = function (origin_tbl, ...)
-  local tabs = {...}
-    if not tabs then
-        return utils.clone(origin_tbl)
-    end
+utils.merge_table = function(origin_tbl, ...)
+  local tabs = { ... }
+  if not tabs then
+    return utils.clone(origin_tbl)
+  end
   local new_table = utils.clone(origin_tbl)
   for _, table in pairs(tabs) do
     for key, value in pairs(table) do
       new_table[key] = value
     end
   end
-    return new_table
+  return new_table
 end
 
 -- Lua table deep copy
 utils.clone = function(obj)
-    if type(obj) ~= "table" then
-        return obj
-    end
-    local newtable = {}
+  if type(obj) ~= "table" then
+    return obj
+  end
+  local newtable = {}
 
-    for key,value in pairs(obj) do
-        newtable[key] = utils.clone(value)
-    end
-    setmetatable(newtable,getmetatable(obj))
-    return newtable
+  for key, value in pairs(obj) do
+    newtable[key] = utils.clone(value)
+  end
+  setmetatable(newtable, getmetatable(obj))
+  return newtable
 end
 
 utils.print_table = function(table)
@@ -35,28 +35,28 @@ end
 
 
 utils.table_to_string = function(tbl)
-    local result = "{"
-    for k, v in pairs(tbl) do
-        -- Check the key type (ignore any numerical keys - assume its an array)
-        if type(k) == "string" then
-            result = result.."[\""..k.."\"]".."="
-        end
+  local result = "{"
+  for k, v in pairs(tbl) do
+    -- Check the key type (ignore any numerical keys - assume its an array)
+    if type(k) == "string" then
+      result = result .. "[\"" .. k .. "\"]" .. "="
+    end
 
-        -- Check the value type
-        if type(v) == "table" then
-            result = result..utils.table_to_string(v)
-        elseif type(v) == "boolean" then
-            result = result..tostring(v)
-        else
-            result = result.."\""..v.."\""
-        end
-        result = result..","
+    -- Check the value type
+    if type(v) == "table" then
+      result = result .. utils.table_to_string(v)
+    elseif type(v) == "boolean" then
+      result = result .. tostring(v)
+    else
+      result = result .. "\"" .. v .. "\""
     end
-    -- Remove leading commas from the result
-    if result ~= "" then
-        result = result:sub(1, result:len()-1)
-    end
-    return result.."}"
+    result = result .. ","
+  end
+  -- Remove leading commas from the result
+  if result ~= "" then
+    result = result:sub(1, result:len() - 1)
+  end
+  return result .. "}"
 end
 
 local fast_event_aware_notify = function(msg, level, opts)
@@ -95,6 +95,10 @@ end
 
 function utils.is_win()
   return vim.loop.os_uname().sysname == "Windows_NT"
+end
+
+function utils.is_wsl()
+  return vim.fn.has('wsl') == 1
 end
 
 return utils
