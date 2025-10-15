@@ -2,6 +2,23 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  keys = {
+    { "<leader>f",  group = "File" },
+    { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
+    { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>",               desc = "Find Buffers" },
+    { "<leader>fh", "<cmd>lua Snacks.picker.help()<cr>",                  desc = "Find help_tags" },
+    { "<leader>fw", "<cmd>lua Snacks.picker.grep()<cr>",                  desc = "Find grep_tring" },
+    { "<leader>fr", "<cmd>lua Snacks.picker.resume()<cr>",                desc = "Find search history" },
+    { "gf",         "<cmd>lua Snacks.picker.lsp_references()<CR>",        nowait = true,               desc = "References" },
+    { "gi",         "<cmd>lua Snacks.picker.lsp_implementations()<CR>",   desc = "goto Implementation" },
+    { "gd",         "<cmd>lua Snacks.picker.lsp_definitions()<CR>",       desc = "definition" },
+    { "gD",         "<cmd>lua Snacks.picker.lsp_declarations()<CR>",      desc = "Declaration" },
+    { "gt",         "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>",  desc = "Type Definitions" },
+    { "go",         "<cmd>lua Snacks.picker.diagnostics()<cr>",           desc = "diagnostic" },
+    { "gO",         "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>",    desc = "Buffer diagnostic" },
+    { "gs",         "<cmd>lua Snacks.picker.lsp_symbols()<CR>",           desc = "Symbols" },
+    { "gS",         "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>", desc = "Workspace Symbols" },
+  },
   opts = {
     bigfile = { enabled = false },
     dashboard = {
@@ -17,7 +34,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = false },
     input = { enabled = true },
-    picker = { enabled = false },
+    picker = { enabled = true },
     notifier = {
       enabled = true,
       top_down = false, -- place notifications from top to bottom

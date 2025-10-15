@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   event = "VeryLazy",
   "ibhagwan/fzf-lua",
   -- optional for icon support
