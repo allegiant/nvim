@@ -26,7 +26,12 @@ local opts = {
       "fallback",
     },
   },
-
+  cmdline = {
+    keymap = {
+      ['<CR>'] = { 'accept', 'fallback' },
+    },
+    completion = { menu = { auto_show = true } }
+  },
   appearance = {
     use_nvim_cmp_as_default = false,
     nerd_font_variant = "mono",
@@ -54,9 +59,6 @@ local opts = {
           { "kind_icon", "kind" },
         },
       },
-      auto_show = function(ctx)
-        return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-      end,
     },
     documentation = {
       window = {
@@ -91,6 +93,13 @@ local opts = {
         score_offset = 100,
         async = true,
       },
+      cmdline = {
+        min_keyword_length = function(ctx)
+          -- when typing a command, only show when the keyword is 3 characters or longer
+          if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+          return 0
+        end
+      }
     },
   },
   snippets = {
