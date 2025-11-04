@@ -21,7 +21,13 @@ return {
       enable = false,
     },
     filesystem_watchers = {
-      enable = false,
+      enable = true,
+      ignore_dirs = {
+        "/.ccls-cache",
+        "/build",
+        "/node_modules",
+        "/target",
+      },
     },
     diagnostics = {
       enable = false,
