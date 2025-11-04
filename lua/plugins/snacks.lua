@@ -18,6 +18,15 @@ return {
     { "gO",         "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>",    desc = "Buffer diagnostic" },
     { "gs",         "<cmd>lua Snacks.picker.lsp_symbols()<CR>",           desc = "Symbols" },
     { "gS",         "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>", desc = "Workspace Symbols" },
+    -- git
+    { "<leader>so", function() Snacks.lazygit.open() end,                 desc = "Lazygit open" },
+    { "<leader>sb", function() Snacks.picker.git_branches() end,          desc = "Git Branches" },
+    { "<leader>sl", function() Snacks.picker.git_log() end,               desc = "Git Log" },
+    { "<leader>sL", function() Snacks.picker.git_log_line() end,          desc = "Git Log Line" },
+    { "<leader>ss", function() Snacks.picker.git_status() end,            desc = "Git Status" },
+    { "<leader>sS", function() Snacks.picker.git_stash() end,             desc = "Git Stash" },
+    { "<leader>sd", function() Snacks.picker.git_diff() end,              desc = "Git Diff (Hunks)" },
+    { "<leader>sf", function() Snacks.picker.git_log_file() end,          desc = "Git Log File" },
   },
   opts = {
     bigfile = { enabled = false },
