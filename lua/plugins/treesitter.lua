@@ -1,8 +1,8 @@
 local utils = require "core.utils"
 
-if utils.is_win() then
-  require 'nvim-treesitter.install'.prefer_git = false
-end
+-- if utils.is_win() then
+--   require 'nvim-treesitter.install'.prefer_git = false
+-- end
 
 local default = {
   ensure_installed = {
