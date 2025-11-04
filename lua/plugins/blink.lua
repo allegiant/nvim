@@ -27,10 +27,14 @@ local opts = {
     },
   },
   cmdline = {
-    keymap = {
-      ['<CR>'] = { 'accept', 'fallback' },
+    completion = {
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
+      menu = { auto_show = true }
     },
-    completion = { menu = { auto_show = true } }
   },
   appearance = {
     use_nvim_cmp_as_default = false,
