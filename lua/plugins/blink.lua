@@ -106,65 +106,42 @@ local opts = {
       }
     },
   },
-  snippets = {
-    expand = function(snippet)
-      require("luasnip").lsp_expand(snippet)
-    end,
-    active = function(filter)
-      if filter and filter.direction then
-        return require("luasnip").jumpable(filter.direction)
-      end
-      return require("luasnip").in_snippet()
-    end,
-    jump = function(direction)
-      require("luasnip").jump(direction)
-    end,
-  },
   signature = { enabled = true },
 }
 
 return {
   {
     "saghen/blink.cmp",
-    dependencies = {
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-        },
-        build = "make install_jsregexp"
-      },
-      {
-        "fang2hou/blink-copilot",
-      },
-    },
+    dependencies = { "fang2hou/blink-copilot" },
     version = "*",
     opts = opts,
     opts_extend = { "sources.default" },
   },
   {
     "saghen/blink.pairs",
-    version = "*", -- (recommended) only required with prebuilt binaries
-    -- download prebuilt binaries from github releases
+    version = "*",
     dependencies = "saghen/blink.download",
     opts = {
       mappings = {
-        -- you can call require("blink.pairs.mappings").enable() and require("blink.pairs.mappings").disable() to enable/disable mappings at runtime
         enabled = true,
-        -- see the defaults: https://github.com/Saghen/blink.pairs/blob/main/lua/blink/pairs/config/mappings.lua#L10
+        cmdline = true,
         pairs = {},
       },
       highlights = {
         enabled = true,
+        cmdline = true,
         groups = {
           "BlinkPairsOrange",
           "BlinkPairsPurple",
           "BlinkPairsBlue",
         },
+        unmatched_group = 'BlinkPairsUnmatched',
         matchparen = {
           enabled = true,
-          group = "MatchParen",
+          cmdline = false,
+          include_surrounding = false,
+          group = 'BlinkPairsMatchParen',
+          priority = 250,
         },
       },
       debug = false,
