@@ -1,6 +1,6 @@
 return {
   'nvim-flutter/flutter-tools.nvim',
-  lazy = false,
+  ft = { 'dart', 'flutter' },
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
