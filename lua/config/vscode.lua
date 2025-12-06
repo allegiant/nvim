@@ -1,3 +1,4 @@
+vim.opt.timeoutlen = 300
 local vscode = require("vscode")
 local whichkey = {
   show = function()
@@ -74,7 +75,7 @@ vim.keymap.set({ "n" }, "gj", "<cmd>lua require('vscode').action('editor.action.
 vim.keymap.set({ "n" }, "gk", "<cmd>lua require('vscode').action('editor.action.marker.prev')<CR>")
 vim.keymap.set({ "n" }, "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set({ "n" }, "<leader>fm", "<cmd>lua vim.lsp.buf.format()<CR>")
-vim.keymap.set({ "n" }, "<leader>e", "<cmd>lua require('vscode').action('workbench.action.toggleSidebarVisibility')<CR>")
+vim.keymap.set({ "n" }, "<leader>e", function() vim.fn.VSCodeNotify('workbench.view.explorer') end)
 
 --folding
 vim.keymap.set({ "n" }, "zr", fold.openAll)
