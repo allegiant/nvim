@@ -4,7 +4,7 @@ local opts = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         -- "Lua 5.1","Lua 5.2","Lua 5.3","Lua 5.4","LuaJIT"
-        version = "Lua 5.1",
+        version = "LuaJIT",
       },
       diagnostics = {
         enable = true,
