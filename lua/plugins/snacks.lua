@@ -14,7 +14,7 @@ return {
     { "gd",         "<cmd>lua Snacks.picker.lsp_definitions()<CR>",       desc = "definition" },
     { "gD",         "<cmd>lua Snacks.picker.lsp_declarations()<CR>",      desc = "Declaration" },
     { "gt",         "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>",  desc = "Type Definitions" },
-    { "go",         "<cmd>lua Snacks.picker.diagnostics()<cr>",           desc = "diagnostic" },
+    -- { "go",         "<cmd>lua Snacks.picker.diagnostics()<cr>",           desc = "diagnostic" },
     { "gO",         "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>",    desc = "Buffer diagnostic" },
     { "gs",         "<cmd>lua Snacks.picker.lsp_symbols()<CR>",           desc = "Symbols" },
     { "gS",         "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>", desc = "Workspace Symbols" },

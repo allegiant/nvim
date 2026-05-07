@@ -7,6 +7,7 @@ return {
     { "gr", "<cmd>lua vim.lsp.buf.rename()<cr>",                    desc = "rename" },
     { "gh", "<cmd>lua vim.lsp.buf.hover({border = 'rounded'})<CR>", desc = "Doc Hover" },
     { "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>",               desc = "Code Action" },
+    { "go", function() vim.diagnostic.open_float() end,             desc = "diagnostics" },
 
   },
   config = function()

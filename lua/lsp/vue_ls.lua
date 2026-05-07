@@ -1,16 +1,3 @@
-local present, mason_registry = pcall(require, "mason-registry")
-if not present then
-  return
-end
-
-local installed = mason_registry.is_installed("vue-language-server")
-if not installed then
-  return
-end
-
-
-local tsserver_filetypes       = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
-
 local vue_language_server_path = vim.fn.expand "$MASON/packages/vue-language-server" ..
     "/node_modules/@vue/language-server"
 
@@ -30,19 +17,23 @@ local vtsls_config             = {
       },
     },
   },
-  filetypes = tsserver_filetypes,
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 }
 
-local vuels_config             = {
+local M                        = {}
 
-}
+M.setup                        = function()
+  local present, mason_registry = pcall(require, "mason-registry")
+  if not present then
+    return
+  end
 
-
-local M = {}
-
-M.setup = function()
+  local installed = mason_registry.is_installed("vue-language-server")
+  if not installed then
+    return
+  end
   vim.lsp.config('vtsls', vtsls_config)
-  vim.lsp.config('vue_ls', vuels_config)
+  vim.lsp.config('vue_ls', {})
   vim.lsp.enable({ 'vtsls', 'vue_ls' })
 end
 

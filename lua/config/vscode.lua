@@ -1,10 +1,5 @@
 vim.opt.timeoutlen = 300
-local vscode = require("vscode")
-local whichkey = {
-  show = function()
-    vim.fn.VSCodeNotify("whichkey.show")
-  end,
-}
+
 
 local fold = {
   toggle = function()

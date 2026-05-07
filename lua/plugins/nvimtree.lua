@@ -22,11 +22,15 @@ return {
     },
     filesystem_watchers = {
       enable = true,
+      debounce_delay = 50, -- 增加一点防抖延迟
       ignore_dirs = {
-        "/.ccls-cache",
-        "/build",
-        "/node_modules",
-        "/target",
+        ".ccls-cache",
+        "build",
+        "node_modules",
+        "target",
+        ".git",
+        ".idea",
+        ".gradle"
       },
     },
     diagnostics = {
