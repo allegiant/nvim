@@ -89,14 +89,8 @@ local opts = {
     },
   },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer", "copilot" },
+    default = { "lsp", "path", "snippets", "buffer" },
     providers = {
-      copilot = {
-        name = "copilot",
-        module = "blink-copilot",
-        score_offset = 100,
-        async = true,
-      },
       cmdline = {
         min_keyword_length = function(ctx)
           -- when typing a command, only show when the keyword is 3 characters or longer
@@ -112,8 +106,7 @@ local opts = {
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { "fang2hou/blink-copilot" },
-    version = "*",
+    version = "1.*",
     opts = opts,
     opts_extend = { "sources.default" },
   },
