@@ -28,6 +28,7 @@ There is no browser accessibility suite, frontend linter, or TypeScript check. R
 - Keep plugin-owned keymaps with the plugin spec. For example, NvimTree owns `<leader>e` in `lua/plugins/nvimtree.lua`, ToggleTerm owns `<leader>t...` in `lua/plugins/toggleterm.lua`, and Conform owns `<leader>fm` in `lua/plugins/conform.lua`.
 - Keep related UI option tables local to the plugin file and pass them through `opts` or `setup(...)` consistently.
 - Preserve mode-specific keymaps. Terminal-mode mappings use `vim.keymap.set('t', ...)` in `lua/plugins/toggleterm.lua`; visual clipboard mappings use `map("v", ...)` in `lua/core/mappings.lua` and `vim.keymap.set({ "v" }, ...)` in `lua/config/vscode.lua`.
+- Keep plugin-owned terminal keymaps scoped to the owning plugin's buffers. ToggleTerm-only mappings belong on `TermOpen term://*toggleterm#*`; avoid `term://*` unless the intent is to affect every Neovim terminal, including Claude Code terminals.
 
 ---
 

@@ -66,7 +66,8 @@ Keep filesystem reads guarded and scoped to the event that needs them.
 
 - Use descriptive local variables for Neovim APIs at file top when repeated (`local autocmd = vim.api.nvim_create_autocmd`).
 - Use `opts` for keymap option tables and callback option tables when that matches surrounding code.
-- Use named global functions only when a Neovim command string needs to call them. Current example: `_G.set_terminal_keymaps()` in `lua/plugins/toggleterm.lua` is referenced by `autocmd! TermOpen term://* lua set_terminal_keymaps()`.
+- Use named global functions only when a Neovim command string needs to call them. Current example: `_G.set_terminal_keymaps()` in `lua/plugins/toggleterm.lua` is referenced by `autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()`.
+- Scope plugin-owned terminal hooks to the plugin's terminal buffers when documented. ToggleTerm mappings should use `term://*toggleterm#*`, not broad `term://*`, so Claude Code and other terminal buffers do not inherit ToggleTerm-only `<Esc>` behavior.
 - Prefer `desc` on autocommands where the hook has non-obvious behavior.
 
 ---

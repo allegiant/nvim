@@ -72,6 +72,6 @@ return {
     vim.cmd([[ hi ToggleTermFloatBorder guibg=#f2e5bc guifg=#f2e5bc ]])
     vim.cmd([[ hi ToogleTermNormalFloat guibg=#f2e5bc ]])
 
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+    vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
   end,
 }
