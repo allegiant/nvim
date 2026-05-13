@@ -22,6 +22,7 @@ Existing formatting reality:
 - Do not add new LSP setup that errors when Mason or the server package is missing. Follow the `pcall(require, "mason-registry")` and `is_installed(...)` pattern.
 - Do not duplicate generic helpers across plugin files. Reuse or extend `lua/core/utils.lua` when the same logic has multiple call sites.
 - Do not commit local Neovim data/cache directories or generated runtime state.
+- Do not commit Trellis session journals/indexes from `.trellis/workspace/`; this personal config keeps them local-only via `.trellis/.gitignore`.
 - Do not add secrets, tokens, credentials, or machine-specific absolute paths to config files.
 
 ---
