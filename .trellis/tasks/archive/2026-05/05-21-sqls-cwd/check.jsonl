@@ -1,0 +1,4 @@
+{"file":".trellis/spec/backend/directory-structure.md","reason":"Verify sqls config remains in the proper lua/lsp owner module."}
+{"file":".trellis/spec/backend/error-handling.md","reason":"Verify existing Mason guard behavior is preserved."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify required runtime config checks are run."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Verify no unnecessary helper abstraction was introduced."}
