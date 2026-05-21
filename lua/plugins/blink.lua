@@ -37,17 +37,9 @@ local opts = {
     },
   },
   appearance = {
-    use_nvim_cmp_as_default = false,
     nerd_font_variant = "mono",
   },
   completion = {
-    trigger = {
-      show_on_keyword = true,
-      prefetch_on_insert = false, --防止在行最前面按<tab>触发补全
-      show_on_blocked_trigger_characters = { " ", "\n", "\t" },
-    },
-    keyword = { range = "prefix" },
-    accept = { auto_brackets = { enabled = true } },
     list = {
       selection = {
         preselect = false,
@@ -80,13 +72,6 @@ local opts = {
     },
     use_proximity = true,
     sorts = { "score", "sort_text" },
-    prebuilt_binaries = {
-      download = true,
-      ignore_version_mismatch = false,
-      force_version = nil,
-      force_system_triple = nil,
-      extra_curl_args = {},
-    },
   },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
