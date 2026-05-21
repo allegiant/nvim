@@ -1,0 +1,4 @@
+{"file":".trellis/spec/backend/directory-structure.md","reason":"Verify change remains scoped to lua/lsp/lua_ls.lua."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify headless startup check and no formatter policy drift."}
+{"file":".trellis/spec/backend/error-handling.md","reason":"Verify Mason guard remains in place."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Verify no unrelated refactor was introduced."}
