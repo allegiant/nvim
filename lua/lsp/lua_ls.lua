@@ -1,3 +1,5 @@
+local lsp_utils = require("lsp.utils")
+
 local opts = {
   settings = {
     Lua = {
@@ -51,16 +53,9 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  local present, mason_registry = pcall(require, "mason-registry")
-  if not present then
+  if not lsp_utils.is_mason_package_installed("lua-language-server") then
     return
   end
-
-  local installed = mason_registry.is_installed("lua-language-server")
-  if not installed then
-    return
-  end
-
 
   vim.lsp.config('lua_ls', opts)
   vim.lsp.enable('lua_ls')

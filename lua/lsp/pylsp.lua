@@ -1,3 +1,5 @@
+local lsp_utils = require("lsp.utils")
+
 local opts = {
   cmd = { 'pylsp' },
   filetypes = { 'python' },
@@ -24,16 +26,9 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  local present, mason_registry = pcall(require, "mason-registry")
-  if not present then
+  if not lsp_utils.is_mason_package_installed("python-lsp-server") then
     return
   end
-
-  local installed = mason_registry.is_installed("python-lsp-server")
-  if not installed then
-    return
-  end
-
 
   vim.lsp.config('pylsp', opts)
   vim.lsp.enable('pylsp')

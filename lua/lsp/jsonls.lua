@@ -1,3 +1,5 @@
+local lsp_utils = require("lsp.utils")
+
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -15,17 +17,9 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  local present, mason_registry = pcall(require, "mason-registry")
-  if not present then
+  if not lsp_utils.is_mason_package_installed("json-lsp") then
     return
   end
-
-  local installed = mason_registry.is_installed("json-lsp")
-  if not installed then
-    return
-  end
-
-
 
   vim.lsp.config('jsonls', opts)
   vim.lsp.enable('jsonls')

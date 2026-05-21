@@ -1,3 +1,5 @@
+local lsp_utils = require("lsp.utils")
+
 local opts = {
   cmd = { "sqls" },
   filetypes = { "sql", "mysql" },
@@ -7,13 +9,7 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  local present, mason_registry = pcall(require, "mason-registry")
-  if not present then
-    return
-  end
-
-  local installed = mason_registry.is_installed("sqls")
-  if not installed then
+  if not lsp_utils.is_mason_package_installed("sqls") then
     return
   end
 

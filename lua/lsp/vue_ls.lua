@@ -1,3 +1,5 @@
+local lsp_utils = require("lsp.utils")
+
 local vue_language_server_path = vim.fn.expand "$MASON/packages/vue-language-server" ..
     "/node_modules/@vue/language-server"
 
@@ -23,15 +25,14 @@ local vtsls_config             = {
 local M                        = {}
 
 M.setup                        = function()
-  local present, mason_registry = pcall(require, "mason-registry")
-  if not present then
+  if not lsp_utils.is_mason_package_installed("vue-language-server") then
     return
   end
 
-  local installed = mason_registry.is_installed("vue-language-server")
-  if not installed then
+  if not lsp_utils.is_mason_package_installed("vtsls") then
     return
   end
+
   vim.lsp.config('vtsls', vtsls_config)
   vim.lsp.config('vue_ls', {})
   vim.lsp.enable({ 'vtsls', 'vue_ls' })
