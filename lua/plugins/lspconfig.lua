@@ -2,8 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   keys = {
-    { "gj", "<cmd>lua vim.diagnostic.goto_next()<cr>",              desc = "diagnostic next" },
-    { "gk", "<cmd>lua vim.diagnostic.goto_prev()<cr>",              desc = "diagnostic prev" },
+    { "gj", "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<cr>",  desc = "diagnostic next" },
+    { "gk", "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>", desc = "diagnostic prev" },
     { "gr", "<cmd>lua vim.lsp.buf.rename()<cr>",                    desc = "rename" },
     { "gh", "<cmd>lua vim.lsp.buf.hover({border = 'rounded'})<CR>", desc = "Doc Hover" },
     { "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>",               desc = "Code Action" },

@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Verify changed keymaps remain in the proper plugin owner file."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Verify required headless startup check and UI config review expectations."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Verify lazy.nvim plugin spec shape remains consistent."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Verify deprecated APIs are replaced without suppressing diagnostics."}
