@@ -1,4 +1,0 @@
-{"file":".trellis/spec/backend/directory-structure.md","reason":"Defines ownership and organization for lua/lsp runtime modules."}
-{"file":".trellis/spec/backend/error-handling.md","reason":"Defines optional dependency and external tool integration error handling patterns."}
-{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines validation and review expectations for Lua runtime config changes."}
-{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Confirms this task should avoid unnecessary abstraction while modifying config."}

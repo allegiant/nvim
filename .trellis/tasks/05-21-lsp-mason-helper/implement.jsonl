@@ -1,4 +1,0 @@
-{"file":".trellis/spec/backend/directory-structure.md","reason":"Defines lua/lsp module ownership and setup organization."}
-{"file":".trellis/spec/backend/error-handling.md","reason":"Defines Mason optional dependency guard behavior for LSP modules."}
-{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines runtime config verification requirements."}
-{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Justifies extracting repeated Mason guard logic after 5 occurrences."}

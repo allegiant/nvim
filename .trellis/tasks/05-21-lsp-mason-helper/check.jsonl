@@ -1,4 +1,0 @@
-{"file":".trellis/spec/backend/directory-structure.md","reason":"Verify new lsp.utils belongs in lua/lsp and lspconfig setup list is unchanged."}
-{"file":".trellis/spec/backend/error-handling.md","reason":"Verify missing Mason/package still returns without startup failure."}
-{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify headless startup and runtime config review expectations."}
-{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Verify abstraction is thin and removes repeated logic without overengineering."}

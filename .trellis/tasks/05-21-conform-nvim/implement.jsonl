@@ -1,4 +1,0 @@
-{"file":".trellis/spec/frontend/directory-structure.md","reason":"Defines plugin-owned formatter/keymap configuration in lua/plugins/conform.lua."}
-{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Defines validation expectations for editor-facing plugin config changes."}
-{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Defines lazy.nvim plugin spec and keymap option patterns."}
-{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines runtime config verification expectations and external tool config review."}

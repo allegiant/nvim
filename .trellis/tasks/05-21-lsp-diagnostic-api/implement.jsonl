@@ -1,4 +1,0 @@
-{"file":".trellis/spec/frontend/directory-structure.md","reason":"Defines plugin-owned LSP navigation/action mappings in lua/plugins/lspconfig.lua."}
-{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Defines validation expectations for editor-facing config changes."}
-{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Defines lazy.nvim plugin spec and plugin UI/keymap configuration patterns."}
-{"file":".trellis/spec/frontend/type-safety.md","reason":"Defines Lua plugin option/runtime validation conventions and avoiding warning suppression."}
