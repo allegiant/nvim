@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Verify conform formatter/keymap config remains in the plugin owner file."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Verify headless startup check and editor-facing config review expectations."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Verify lazy.nvim spec shape and keymap desc remain consistent."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify runtime config checks are run and no local machine paths are introduced."}

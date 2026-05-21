@@ -30,15 +30,7 @@ return {
     },
     format_on_save = {
       timeout_ms = 500,
-      lsp_fallback = true,
-    },
-    formatters = {
-      prettierd = {
-        condition = function()
-          return vim.loop.fs_realpath(".prettierrc.js") ~= nil
-              or vim.loop.fs_realpath(".prettierrc.mjs") ~= nil
-        end,
-      },
+      lsp_format = "fallback",
     },
   },
 }
