@@ -1,5 +1,5 @@
 local opts = {
-  cmd = { "sqls", "-config", vim.loop.cwd() .. "/.sqlsrc.yml" },
+  cmd = { "sqls" },
   filetypes = { "sql", "mysql" },
   root_markers = { "config.yml", ".sqlsrc.yml" }
 }
@@ -16,8 +16,6 @@ M.setup = function()
   if not installed then
     return
   end
-
-
 
   vim.lsp.config('sqls', opts)
   vim.lsp.enable('sqls')
