@@ -111,3 +111,34 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 4: 修复 Neovide 字体配置
+
+**Date**: 2026-05-25
+**Task**: 修复 Neovide 字体配置
+**Branch**: `master`
+
+### Summary
+
+更新用户级 Neovide config.toml，显式使用已安装的 JetBrainsMono NFM 字体，并通过 tomllib 校验 TOML 语法。
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+(No commits - planning session)
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

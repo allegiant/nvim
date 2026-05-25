@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 3
-- **Last Active**: 2026-05-21
+- **Total Sessions**: 4
+- **Last Active**: 2026-05-25
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~113 | Active |
+| `journal-1.md` | ~144 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 4 | 2026-05-25 | 修复 Neovide 字体配置 | - | `master` |
 | 3 | 2026-05-21 | Neovim LSP 与格式化配置优化 | `7b62684`, `462ccff`, `1b73f42`, `d3eea19`, `5b445fe`, `84e2444` | `master` |
 | 2 | 2026-05-13 | 修复 Claude Code 终端 Esc 行为 | `0374f6a` | `master` |
 | 1 | 2026-05-13 | 初始化 Trellis 规范并整理忽略规则 | `06ffc9d`, `7eaa3b5`, `8a3108c` | `master` |
