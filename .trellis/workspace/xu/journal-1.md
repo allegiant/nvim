@@ -142,3 +142,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 5: 修复 Neovide 字体启动报错
+
+**Date**: 2026-05-25
+**Task**: 修复 Neovide 字体启动报错
+**Branch**: `master`
+
+### Summary
+
+修正 Neovide 专用 guifont 为 Windows 实际注册的 JetBrainsMono NFM，并记录 Neovide 默认 guifont 早期触发 monospace 报错的排查结论。
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `0b3b5af` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
