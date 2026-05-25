@@ -57,7 +57,7 @@ Styling is plugin-specific and uses Neovim options/highlights:
 - Borders use simple strings such as `"single"` in `lua/plugins/blink.lua` and `lua/plugins/toggleterm.lua`; LSP float borders use `"rounded"` in `lua/plugins/lspconfig.lua`.
 - Statusline theme is `gruvbox-material` in `lua/plugins/lualine.lua`, matching lazy.nvim install colorscheme in `lua/config/lazy.lua`.
 - Terminal highlights are set explicitly with `vim.cmd([[ hi ... ]])` in `lua/plugins/toggleterm.lua`.
-- Neovide GUI styling is isolated in `lua/config/neovide.lua` (`JetBrainsMono Nerd Font Mono:h12`, animations disabled).
+- Neovide GUI styling is isolated in `lua/config/neovide.lua` (`JetBrainsMono NFM:h12`, animations disabled). On Windows, use the actual registered font family name, not the display/download name.
 
 ---
 
@@ -72,6 +72,26 @@ This is an editor configuration, so accessibility means discoverable, non-surpri
 ---
 
 ## Common Mistakes
+
+### Debugging Neovide default font errors as TOML syntax
+
+**Symptom**: Neovide startup reports `Cascadia Code,Cascadia Mono,Consolas,Courier New,monospace` and `size: 18.666668`.
+
+**Cause**: This is Neovim's Windows default `guifont` path, not proof that Neovide TOML parsing failed. The `18.666668` value is Neovide's 14pt default converted to pixels, and Windows may not resolve the generic `monospace` family.
+
+**Fix**: Keep Neovide-only `guifont` in `lua/config/neovide.lua` using the registered Windows family name:
+
+```lua
+vim.o.guifont = "JetBrainsMono NFM:h12"
+```
+
+For Neovide TOML, the Windows default config file is `%APPDATA%\neovide\config.toml`; `%USERPROFILE%\.config\neovide\config.toml` only applies if the launch environment points Neovide there, such as through `NEOVIDE_CONFIG`.
+
+**Check**:
+
+```powershell
+nvim --headless --cmd "let g:neovide=1" +"set guifont?" +qa
+```
 
 - Do not create web component folders (`components/`, `pages/`, `hooks/`) for this repo.
 - Do not put plugin UI options in `lua/core/mappings.lua`; plugin-owned UI belongs in `lua/plugins/<plugin>.lua`.
