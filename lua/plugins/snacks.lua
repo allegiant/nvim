@@ -87,12 +87,49 @@ local terminal_opts = {
   },
 }
 
-local function terminal_options()
-  return vim.tbl_deep_extend("force", {}, terminal_opts)
+local function terminal_options(opts)
+  return vim.tbl_deep_extend("force", {}, terminal_opts, opts or {})
 end
 
 toggle_terminal = function()
   Snacks.terminal.toggle(nil, terminal_options())
+end
+
+local function terminal_id_number(meta)
+  if type(meta) ~= "table" then
+    return nil
+  end
+
+  local id = meta.id
+  if type(id) == "number" then
+    return id
+  end
+
+  if type(id) ~= "string" then
+    return nil
+  end
+
+  return tonumber(id) or tonumber(id:match("count%s*=%s*(%d+)"))
+end
+
+local function max_terminal_id()
+  local max_id = 0
+
+  for _, term in ipairs(Snacks.terminal.list()) do
+    local buf = term.buf
+    if buf and vim.api.nvim_buf_is_valid(buf) then
+      local id = terminal_id_number(vim.b[buf].snacks_terminal)
+      if id and id > max_id then
+        max_id = id
+      end
+    end
+  end
+
+  return max_id
+end
+
+local function toggle_next_terminal()
+  Snacks.terminal.toggle(nil, terminal_options({ count = max_terminal_id() + 1 }))
 end
 
 local function terminal_label(term)
@@ -133,6 +170,7 @@ return {
     -- terminal
     { "<leader>t",  group = "Terminal" },
     { [[<C-\>]],    toggle_terminal,                                      desc = "Toggle Terminal" },
+    { "<leader>tn", toggle_next_terminal,                                 desc = "New Terminal" },
     { "<leader>ts", select_terminal,                                      desc = "select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
