@@ -1,0 +1,5 @@
+{"file":".trellis/tasks/05-27-dap/research/dap-cross-platform.md","reason":"Defines the chosen cross-platform DAP approach for Python debugpy, CodeLLDB Mason paths, dynamic ports, and C/C++/Rust configurations."}
+{"file":".trellis/spec/backend/error-handling.md","reason":"Defines guarded optional integration behavior for Mason registry and missing packages so startup does not fail."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines platform-safe runtime config expectations and avoids machine-specific absolute paths."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Documents pcall(require, 'mason-registry'), is_installed, executable, and platform check patterns used by Neovim Lua config."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Keeps helper logic small and reusable without overengineering or copy-paste."}

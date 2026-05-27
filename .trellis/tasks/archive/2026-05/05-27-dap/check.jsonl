@@ -1,0 +1,5 @@
+{"file":".trellis/tasks/05-27-dap/research/dap-cross-platform.md","reason":"Verify implementation matches the selected Python debugpy, CodeLLDB path, dynamic port, and launch configuration decisions."}
+{"file":".trellis/spec/backend/error-handling.md","reason":"Verify missing Mason registry/packages or debugpy fallbacks do not produce startup errors."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify cross-platform guards, no machine-specific absolute paths, and runtime config checks."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Verify guarded Mason registry and platform/executable checks are applied consistently."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Verify helper extraction remains minimal and avoids duplicated path/probe logic."}
