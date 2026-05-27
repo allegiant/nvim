@@ -9,8 +9,7 @@ return {
   },
   opts = {
     strategy = {
-      "toggleterm",
-      direction = 'vertical',
+      "jobstart",
     },
     templates = { "builtin", "user.lua_run" }
   },

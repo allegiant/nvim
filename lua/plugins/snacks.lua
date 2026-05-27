@@ -1,3 +1,75 @@
+local toggle_terminal
+
+local function set_snacks_terminal_keymaps(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) or not vim.b[bufnr].snacks_terminal then
+    return
+  end
+
+  local opts = { buffer = bufnr, silent = true }
+  vim.keymap.set("t", [[<C-\>]], function()
+    toggle_terminal()
+  end, opts)
+  vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+end
+
+local terminal_opts = {
+  win = {
+    position = "bottom",
+    height = 10,
+    on_buf = function(term)
+      set_snacks_terminal_keymaps(term.buf)
+    end,
+  },
+}
+
+local next_terminal_count = 1
+
+local function terminal_options(extra)
+  return vim.tbl_deep_extend("force", {}, terminal_opts, extra or {})
+end
+
+toggle_terminal = function()
+  Snacks.terminal.toggle(nil, terminal_options())
+end
+
+local function new_terminal()
+  next_terminal_count = next_terminal_count + 1
+  Snacks.terminal.open(nil, terminal_options({ count = next_terminal_count }))
+end
+
+local function terminal_label(term)
+  local buf = term.buf
+  local title = vim.b[buf].term_title or vim.api.nvim_buf_get_name(buf)
+  if title == "" then
+    title = "Terminal"
+  end
+
+  return ("buf %d: %s"):format(buf, title)
+end
+
+local function select_terminal()
+  local terminals = Snacks.terminal.list()
+  if vim.tbl_isempty(terminals) then
+    vim.notify("No Snacks terminals", vim.log.levels.INFO, { title = "Terminal" })
+    return
+  end
+
+  vim.ui.select(terminals, {
+    prompt = "Select terminal",
+    format_item = terminal_label,
+  }, function(term)
+    if term then
+      term:show()
+      term:focus()
+    end
+  end)
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -5,6 +77,11 @@ return {
   keys = {
     -- buffer
     { "<leader>bd", function() Snacks.bufdelete() end,                    desc = "Close" },
+    -- terminal
+    { "<leader>t",  group = "Terminal" },
+    { [[<C-\>]],    toggle_terminal,                                      desc = "Toggle Terminal" },
+    { "<leader>tn", new_terminal,                                         desc = "Create new Terminal" },
+    { "<leader>ts", select_terminal,                                      desc = "select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
@@ -51,6 +128,7 @@ return {
       enabled = true,
       top_down = false, -- place notifications from top to bottom
     },
+    terminal = terminal_options(),
     quickfile = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
