@@ -1,45 +1,98 @@
 local toggle_terminal
+local toggle_current_terminal
 
-local function set_snacks_terminal_keymaps(bufnr)
-  if not vim.api.nvim_buf_is_valid(bufnr) or not vim.b[bufnr].snacks_terminal then
+local function terminal_normal_keycodes()
+  return [[<C-\><C-n>]]
+end
+
+local function terminal_wincmd(direction)
+  return function()
+    vim.cmd.wincmd(direction)
+  end
+end
+
+toggle_current_terminal = function(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
     return
   end
 
-  local opts = { buffer = bufnr, silent = true }
-  vim.keymap.set("t", [[<C-\>]], function()
-    toggle_terminal()
-  end, opts)
-  vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+  local meta = vim.b[bufnr].snacks_terminal
+  if type(meta) ~= "table" or not meta.id then
+    return
+  end
+
+  for _, term in ipairs(Snacks.terminal.list()) do
+    if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
+      local term_meta = vim.b[term.buf].snacks_terminal
+      if type(term_meta) == "table" and term_meta.id == meta.id then
+        term:toggle()
+        return
+      end
+    end
+  end
 end
 
 local terminal_opts = {
   win = {
     position = "bottom",
     height = 10,
-    on_buf = function(term)
-      set_snacks_terminal_keymaps(term.buf)
-    end,
+    keys = {
+      term_toggle = {
+        [[<C-\>]],
+        function(term)
+          toggle_current_terminal(term.buf)
+        end,
+        mode = "t",
+        desc = "Toggle current terminal",
+      },
+      term_normal = {
+        "<Esc>",
+        terminal_normal_keycodes,
+        mode = "t",
+        expr = true,
+        desc = "Exit terminal mode",
+      },
+      term_normal_jk = {
+        "jk",
+        terminal_normal_keycodes,
+        mode = "t",
+        expr = true,
+        desc = "Exit terminal mode",
+      },
+      term_nav_left = {
+        "<C-h>",
+        terminal_wincmd("h"),
+        mode = "t",
+        desc = "Go to left window",
+      },
+      term_nav_down = {
+        "<C-j>",
+        terminal_wincmd("j"),
+        mode = "t",
+        desc = "Go to lower window",
+      },
+      term_nav_up = {
+        "<C-k>",
+        terminal_wincmd("k"),
+        mode = "t",
+        desc = "Go to upper window",
+      },
+      term_nav_right = {
+        "<C-l>",
+        terminal_wincmd("l"),
+        mode = "t",
+        desc = "Go to right window",
+      },
+    },
   },
 }
 
-local next_terminal_count = 1
-
-local function terminal_options(extra)
-  return vim.tbl_deep_extend("force", {}, terminal_opts, extra or {})
+local function terminal_options()
+  return vim.tbl_deep_extend("force", {}, terminal_opts)
 end
 
 toggle_terminal = function()
   Snacks.terminal.toggle(nil, terminal_options())
-end
-
-local function new_terminal()
-  next_terminal_count = next_terminal_count + 1
-  Snacks.terminal.open(nil, terminal_options({ count = next_terminal_count }))
 end
 
 local function terminal_label(term)
@@ -80,7 +133,6 @@ return {
     -- terminal
     { "<leader>t",  group = "Terminal" },
     { [[<C-\>]],    toggle_terminal,                                      desc = "Toggle Terminal" },
-    { "<leader>tn", new_terminal,                                         desc = "Create new Terminal" },
     { "<leader>ts", select_terminal,                                      desc = "select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
