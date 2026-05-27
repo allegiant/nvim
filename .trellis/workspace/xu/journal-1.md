@@ -211,3 +211,41 @@ Updated nvim-dap configuration to resolve Python debugpy and CodeLLDB adapters s
 ### Next Steps
 
 - None - task complete
+
+
+## Session 7: Replace Bufferline bufdelete dependency
+
+**Date**: 2026-05-27
+**Task**: Replace Bufferline bufdelete dependency
+**Branch**: `master`
+
+### Summary
+
+Replaced the unused famiu/bufdelete.nvim dependency with Snacks.bufdelete for Bufferline close actions, moved the buffer delete keymap under Snacks, and verified startup and forced Bufferline/Snacks loading.
+
+### Main Changes
+
+- Removed the unused `famiu/bufdelete.nvim` dependency from Bufferline.
+- Replaced Bufferline close/right-click close commands with `Snacks.bufdelete({ buf = bufnr, force = true })`.
+- Moved the `<leader>bd` current-buffer delete keymap to `snacks.nvim`, keeping the same user-facing behavior.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `8d6e34a` | fix: use Snacks for buffer deletion |
+| `52d9a8e` | fix: move buffer delete keymap to Snacks |
+
+### Testing
+
+- [OK] `nvim --headless "+luafile init.lua" "+qa"`
+- [OK] Forced Snacks and Bufferline load checks.
+- [OK] `git diff --check`
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
