@@ -1,0 +1,8 @@
+{"file":".trellis/tasks/05-27-snacks-terminal-toggleterm/research/snacks-terminal-toggleterm.md","reason":"Defines Snacks terminal API, required keymap semantics, terminal selector implementation, Windows shell migration, scoped keymaps, and Overseer strategy caveat."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines lazy.nvim plugin spec conventions, platform guard expectations, and Neovim headless verification requirements."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Defines plugin-owned keymap/UI organization and current terminal UI ownership."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Defines plugin UI option/keymap patterns, leader group conventions, and desc requirements."}
+{"file":".trellis/spec/frontend/hook-guidelines.md","reason":"Defines terminal-mode mapping scope requirements and avoiding broad TermOpen mappings that affect Claude Code terminals."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Defines UI/config checks for keymap conflicts, plugin specs, Windows/WSL/Claude terminal safety."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Defines runtime validation and optional plugin API access expectations."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Ensures new terminal helpers are minimal and do not duplicate existing logic unnecessarily."}

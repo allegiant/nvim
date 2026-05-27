@@ -1,0 +1,8 @@
+{"file":".trellis/tasks/05-27-snacks-terminal-toggleterm/research/snacks-terminal-toggleterm.md","reason":"Verify implementation matches researched Snacks terminal replacement, selector, shell migration, scoped mappings, and Overseer strategy handling."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Verify plugin specs remain valid and headless checks are run."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Verify terminal keymaps/options live in appropriate plugin files."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Verify keymap desc/group conventions and lazy.nvim spec shape."}
+{"file":".trellis/spec/frontend/hook-guidelines.md","reason":"Verify terminal keymaps are scoped to Snacks terminal and do not affect Claude Code terminal."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Verify no unintended keymap conflicts or platform-specific regressions."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Verify runtime access to Snacks terminal and selection metadata is guarded enough."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Verify helper functions remain small and justified."}
