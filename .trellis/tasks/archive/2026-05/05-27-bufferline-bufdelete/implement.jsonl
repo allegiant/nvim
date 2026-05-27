@@ -1,0 +1,6 @@
+{"file":".trellis/tasks/05-27-bufferline-bufdelete/research/snacks-bufdelete.md","reason":"Defines Snacks.bufdelete API, Bufferline command function signature, force behavior, and dependency ordering constraints."}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Defines lazy.nvim plugin spec conventions and required Neovim headless startup checks."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Confirms plugin-owned keymaps and UI options belong in lua/plugins/bufferline.lua."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Defines plugin UI option/keymap patterns and leader group expectations."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Defines keymap desc, plugin spec validity, and UI/config verification expectations."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Defines optional plugin API and startup-order validation considerations for Snacks access."}
