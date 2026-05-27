@@ -1,11 +1,15 @@
+local function close_buffer(bufnr)
+  Snacks.bufdelete({ buf = bufnr, force = true })
+end
+
 local default = {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
     numbers = function(opts)
       return string.format("%s.", opts.ordinal)
     end,
-    close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+    close_command = close_buffer,       -- can be a string | function, see "Mouse actions"
+    right_mouse_command = close_buffer, -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
     --- name_formatter can be used to change the buffer's label in the bufferline.
@@ -42,14 +46,13 @@ return {
   "akinsho/bufferline.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    'famiu/bufdelete.nvim'
   },
   event = 'VimEnter',
   keys = {
     { "<leader>b",  group = "Buffer" },
     { "<TAB>",      "<cmd>BufferLineCycleNext<CR>",    desc = "buf next" },
     { "<S-Tab>",    "<cmd>BufferLineCyclePrev<CR>",    desc = "buf prev" },
-    { "<leader>bd", "<cmd>bdelete<CR>",                desc = "Close" },
+    { "<leader>bd", function() Snacks.bufdelete() end,   desc = "Close" },
     { "<leader>bc", "<cmd>BufferLinePickClose<CR>",    desc = "Pick Close" },
     { "<leader>bs", "<cmd>BufferLinePick<CR>",         desc = "Pick" },
     { "<leader>bl", "<cmd>BufferLineMoveNext<CR>",     desc = "Move right" },
