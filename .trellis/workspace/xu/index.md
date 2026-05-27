@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 5
-- **Last Active**: 2026-05-25
+- **Total Sessions**: 6
+- **Last Active**: 2026-05-27
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~177 | Active |
+| `journal-1.md` | ~210 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 6 | 2026-05-27 | Fix cross-platform DAP config | `62708c0` | `master` |
 | 5 | 2026-05-25 | 修复 Neovide 字体启动报错 | `0b3b5af` | `master` |
 | 4 | 2026-05-25 | 修复 Neovide 字体配置 | - | `master` |
 | 3 | 2026-05-21 | Neovim LSP 与格式化配置优化 | `7b62684`, `462ccff`, `1b73f42`, `d3eea19`, `5b445fe`, `84e2444` | `master` |

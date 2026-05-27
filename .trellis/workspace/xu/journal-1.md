@@ -175,3 +175,39 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 6: Fix cross-platform DAP config
+
+**Date**: 2026-05-27
+**Task**: Fix cross-platform DAP config
+**Branch**: `master`
+
+### Summary
+
+Updated nvim-dap configuration to resolve Python debugpy and CodeLLDB adapters safely across Windows and Linux, added dynamic CodeLLDB ports and baseline C/C++/Rust launch configs, and verified headless Neovim loading.
+
+### Main Changes
+
+- Resolved Python DAP setup through Mason `debugpy-adapter` when available, with guarded fallback to `python3`/`python` only when `debugpy` imports successfully.
+- Resolved CodeLLDB through guarded Mason package lookup with Windows/Linux adapter names and `${port}` dynamic port allocation.
+- Added baseline C/C++/Rust CodeLLDB launch configurations while preserving the existing `<leader>d` group mapping.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `62708c0` | fix: make DAP adapters cross-platform |
+
+### Testing
+
+- [OK] `nvim --headless "+luafile init.lua" "+qa"`
+- [OK] Forced `nvim-dap` lazy load and inspected DAP adapters/configurations.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
