@@ -3,6 +3,9 @@ return {
   priority = 1000,
   lazy = false,
   keys = {
+    -- buffer
+    { "<leader>bd", function() Snacks.bufdelete() end,                    desc = "Close" },
+    -- file
     { "<leader>f",  group = "File" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
     { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>",               desc = "Find Buffers" },

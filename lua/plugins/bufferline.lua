@@ -10,8 +10,8 @@ local default = {
     end,
     close_command = close_buffer,       -- can be a string | function, see "Mouse actions"
     right_mouse_command = close_buffer, -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+    left_mouse_command = "buffer %d",   -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = nil,         -- can be a string | function, see "Mouse actions"
     --- name_formatter can be used to change the buffer's label in the bufferline.
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
@@ -52,7 +52,6 @@ return {
     { "<leader>b",  group = "Buffer" },
     { "<TAB>",      "<cmd>BufferLineCycleNext<CR>",    desc = "buf next" },
     { "<S-Tab>",    "<cmd>BufferLineCyclePrev<CR>",    desc = "buf prev" },
-    { "<leader>bd", function() Snacks.bufdelete() end,   desc = "Close" },
     { "<leader>bc", "<cmd>BufferLinePickClose<CR>",    desc = "Pick Close" },
     { "<leader>bs", "<cmd>BufferLinePick<CR>",         desc = "Pick" },
     { "<leader>bl", "<cmd>BufferLineMoveNext<CR>",     desc = "Move right" },
