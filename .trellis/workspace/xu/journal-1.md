@@ -249,3 +249,45 @@ Replaced the unused famiu/bufdelete.nvim dependency with Snacks.bufdelete for Bu
 ### Next Steps
 
 - None - task complete
+
+
+## Session 8: Replace ToggleTerm with Snacks terminal
+
+**Date**: 2026-05-27
+**Task**: Replace ToggleTerm with Snacks terminal
+**Branch**: `master`
+
+### Summary
+
+Migrated terminal management from ToggleTerm to Snacks terminal, moved Windows shell options to core options, switched Overseer to jobstart, preserved scoped terminal keymaps, and refined terminal selection/new-terminal behavior around Snacks count semantics.
+
+### Main Changes
+
+- Replaced `akinsho/toggleterm.nvim` with Snacks terminal keymaps and terminal options.
+- Moved Windows PowerShell shell options into core options so they survive ToggleTerm removal.
+- Switched Overseer from the ToggleTerm strategy to `jobstart`.
+- Scoped terminal-mode mappings to Snacks terminal buffers only, preserving Claude Code terminal behavior.
+- Restored `<leader>tn` as a next-numbered terminal shortcut based on the current Snacks terminal list.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `bde8aee` | fix: replace ToggleTerm with Snacks terminal |
+| `9e6ebb3` | fix: use Snacks terminal count model |
+| `c1095b1` | fix: restore next terminal shortcut |
+
+### Testing
+
+- [OK] `nvim --headless "+luafile init.lua" "+qa"`
+- [OK] Verified `Snacks.terminal.toggle/open/list/focus` availability.
+- [OK] Verified `toggleterm.nvim` is no longer registered and no runtime ToggleTerm references remain.
+- [OK] `git diff --check`
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
