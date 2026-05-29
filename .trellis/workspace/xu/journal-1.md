@@ -370,3 +370,36 @@ Moved LSP server helper modules under lua/plugins/lsp, updated require paths, an
 ### Next Steps
 
 - None - task complete
+
+
+## Session 11: Remove mini.comment plugin
+
+**Date**: 2026-05-29
+**Task**: Remove mini.comment plugin
+**Branch**: `master`
+
+### Summary
+
+Removed the redundant mini.comment plugin spec because Neovim built-in commenting covers the use case; verified no Lua config references remain and headless startup passes.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `ac15144` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
