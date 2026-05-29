@@ -11,7 +11,7 @@ This repository favors small Lua modules, lazy-loaded plugin specs, and defensiv
 Existing formatting reality:
 
 - Lua indentation is generally 2 spaces in most files (`lua/core/options.lua`, `lua/plugins/snacks.lua`, `lua/plugins/blink.lua`).
-- Some LSP formatter settings specify 4 spaces for Lua in `lua/lsp/lua_ls.lua`; document the current mixed state rather than enforcing a new formatter.
+- Some LSP formatter settings specify 4 spaces for Lua in `lua/plugins/lsp/lua_ls.lua`; document the current mixed state rather than enforcing a new formatter.
 - Strings are mixed single/double quotes; follow the surrounding file.
 
 ---
@@ -53,7 +53,8 @@ If Neovim is unavailable in the environment, at minimum run Lua syntax checks on
 
 - Startup order still matches `init.lua` and does not load normal plugins inside VS Code mode.
 - New plugin specs are discoverable through the `{ import = "plugins" }` setup in `lua/config/lazy.lua`.
-- New LSP modules are called from `lua/plugins/lspconfig.lua` and guard Mason/server availability.
+- Helper-only plugin subdirectories under `lua/plugins/` do not include `init.lua`; otherwise lazy.nvim may import them as plugin specs.
+- New LSP helper modules live under `lua/plugins/lsp/`, are called from `lua/plugins/lspconfig.lua`, and guard Mason/server availability.
 - Keymaps use existing leader groups and include `desc` when defined through lazy.nvim `keys`.
 - Platform-specific code is guarded and does not break Windows, WSL, Neovide, or vscode-neovim paths.
 - No local generated state, secrets, or machine-only paths are introduced.

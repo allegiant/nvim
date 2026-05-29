@@ -11,7 +11,7 @@ This project uses Lua, not TypeScript. Type safety is provided by lua-language-s
 Relevant files:
 
 - `.luarc.json` declares workspace globals such as `vim` and `Snacks`.
-- `lua/lsp/lua_ls.lua` configures lua-language-server diagnostics, runtime version, telemetry, formatting, and workspace library.
+- `lua/plugins/lsp/lua_ls.lua` configures lua-language-server diagnostics, runtime version, telemetry, formatting, and workspace library.
 - Plugin option tables in `lua/plugins/*.lua` rely on plugin-documented shapes rather than local type definitions.
 
 ---
@@ -50,7 +50,7 @@ end
 return M
 ```
 
-Used by LSP modules such as `lua/lsp/lua_ls.lua`, `lua/lsp/jsonls.lua`, and `lua/lsp/pylsp.lua`.
+Used by LSP modules such as `lua/plugins/lsp/lua_ls.lua`, `lua/plugins/lsp/jsonls.lua`, and `lua/plugins/lsp/pylsp.lua`.
 
 ### Defensive payload check
 
@@ -73,6 +73,6 @@ Used in `lua/plugins/snacks.lua` before formatting LSP progress notifications.
 ## Forbidden Patterns
 
 - Do not add TypeScript conventions, `any`, React prop types, or Zod/Yup validation to this repo; they do not match the Lua Neovim config.
-- Do not silence lua-language-server warnings globally unless the warning is already intentionally disabled in `lua/lsp/lua_ls.lua` or `.luarc.json`.
+- Do not silence lua-language-server warnings globally unless the warning is already intentionally disabled in `lua/plugins/lsp/lua_ls.lua` or `.luarc.json`.
 - Do not access optional plugin APIs without guarding availability when startup can run before that plugin/tool exists.
 - Do not rely on undeclared globals. If a global is intentionally provided by the runtime or plugin and lua-language-server needs it, update `.luarc.json` or the lua_ls diagnostics globals consistently.

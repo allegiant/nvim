@@ -26,10 +26,10 @@ return {
         },
       },
     })
-    require("lsp.lua_ls").setup()
-    require("lsp.jsonls").setup()
-    require("lsp.pylsp").setup()
-    require("lsp.vue_ls").setup()
-    require("lsp.sqls").setup()
+    require("plugins.lsp.lua_ls").setup()
+    require("plugins.lsp.jsonls").setup()
+    require("plugins.lsp.pylsp").setup()
+    require("plugins.lsp.vue_ls").setup()
+    require("plugins.lsp.sqls").setup()
   end,
 }

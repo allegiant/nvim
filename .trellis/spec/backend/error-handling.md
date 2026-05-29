@@ -11,7 +11,7 @@ Errors are handled defensively at integration boundaries: plugin bootstrap, opti
 Observed patterns:
 
 - Fail loudly only when Neovim cannot continue, as in `lua/config/lazy.lua` when cloning lazy.nvim fails.
-- Gracefully return when an optional dependency or Mason package is unavailable, as in `lua/lsp/lua_ls.lua`, `lua/lsp/jsonls.lua`, `lua/lsp/pylsp.lua`, and `lua/lsp/vue_ls.lua`.
+- Gracefully return when an optional dependency or Mason package is unavailable, as in `lua/plugins/lsp/lua_ls.lua`, `lua/plugins/lsp/jsonls.lua`, `lua/plugins/lsp/pylsp.lua`, and `lua/plugins/lsp/vue_ls.lua`.
 - Notify the user through Neovim UI for runtime cleanup failures, as in `lua/core/autocmds.lua`.
 
 ---

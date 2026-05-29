@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repository is a Neovim configuration, not a backend service. In Trellis terms, the backend layer maps to startup/runtime concerns: `init.lua`, `lua/core/`, `lua/config/`, `lua/lsp/`, plugin bootstrap, lockfiles, and defensive integration with external tools such as git, Mason, language servers, and formatters.
+This repository is a Neovim configuration, not a backend service. In Trellis terms, the backend layer maps to startup/runtime concerns: `init.lua`, `lua/core/`, `lua/config/`, `lua/plugins/lsp/`, plugin bootstrap, lockfiles, and defensive integration with external tools such as git, Mason, language servers, and formatters.
 
 ---
 
@@ -29,7 +29,7 @@ Use these backend guidelines when changing:
 - `init.lua`
 - `lua/core/*.lua`
 - `lua/config/lazy.lua`
-- `lua/lsp/*.lua`
+- `lua/plugins/lsp/*.lua`
 - runtime helpers, lockfiles, snippets, or task templates
 
 For editor-facing keymaps and plugin UI behavior, also read the frontend guidelines.

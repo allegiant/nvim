@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repository is a Neovim configuration, not a backend service. Treat the Trellis "backend" layer as the core runtime configuration: startup flow, shared helpers, editor options, autocommands, plugin bootstrap, LSP setup, and task templates.
+This repository is a Neovim configuration, not a backend service. Treat the Trellis "backend" layer as the core runtime configuration: startup flow, shared helpers, editor options, autocommands, plugin bootstrap, LSP setup helpers, and task templates.
 
 Startup is intentionally small and ordered in `init.lua`: VS Code mode short-circuits to `lua/config/vscode.lua`; normal Neovim loads `lua/core/options.lua`, `lua/core/autocmds.lua`, `lua/core/mappings.lua`, `lua/config/lazy.lua`, then `lspconfig`.
 
@@ -23,7 +23,7 @@ lua/core/utils.lua               # small reusable Lua helpers and notify wrapper
 lua/config/lazy.lua              # lazy.nvim bootstrap and plugin import
 lua/config/neovide.lua           # Neovide-only GUI settings
 lua/config/vscode.lua            # vscode-neovim integration path
-lua/lsp/*.lua                    # one LSP server module per language/server family
+lua/plugins/lsp/*.lua            # one LSP server helper module per language/server family
 lua/plugins/*.lua                # one lazy.nvim plugin spec per plugin or tightly-coupled plugin group
 lua/overseer/template/user/*.lua # user task templates consumed by overseer.nvim
 .vsnip/*.json                    # snippet files
@@ -43,13 +43,14 @@ lazy-lock.json                   # lazy.nvim plugin lockfile
   - reusable helper functions in `lua/core/utils.lua`
 - Put environment-specific configuration in `lua/config/`, as shown by `lua/config/vscode.lua` and `lua/config/neovide.lua`.
 - Add plugins under `lua/plugins/` as lazy.nvim specs. `lua/config/lazy.lua` imports the whole folder with `{ import = "plugins" }`; avoid manually requiring individual plugin spec files from startup.
-- Add or modify LSP server setup in `lua/lsp/<server>.lua`, then call `<module>.setup()` from `lua/plugins/lspconfig.lua`. Existing modules use this pattern in `lua/lsp/lua_ls.lua`, `lua/lsp/jsonls.lua`, `lua/lsp/pylsp.lua`, and `lua/lsp/vue_ls.lua`.
+- Put plugin-owned helper modules in plugin-specific subdirectories under `lua/plugins/<plugin>/` when they are only consumed by that plugin spec. Do not add `init.lua` to helper-only subdirectories such as `lua/plugins/lsp/`; lazy.nvim imports direct files and directories with `init.lua` from the `plugins` import.
+- Add or modify LSP server setup helpers in `lua/plugins/lsp/<server>.lua`, then call `<module>.setup()` from `lua/plugins/lspconfig.lua`. Existing modules use this pattern in `lua/plugins/lsp/lua_ls.lua`, `lua/plugins/lsp/jsonls.lua`, `lua/plugins/lsp/pylsp.lua`, and `lua/plugins/lsp/vue_ls.lua`.
 
 ---
 
 ## Naming Conventions
 
-- Lua modules use lowercase or plugin/server names that match their purpose: `lua/plugins/bufferline.lua`, `lua/plugins/toggleterm.lua`, `lua/lsp/jsonls.lua`.
+- Lua modules use lowercase or plugin/server names that match their purpose: `lua/plugins/bufferline.lua`, `lua/plugins/toggleterm.lua`, `lua/plugins/lsp/jsonls.lua`.
 - LSP modules return a table `M` with `M.setup = function() ... end`.
 - Lazy plugin files return a plugin spec table directly. A file may return an array when configuring related plugins together, as in `lua/plugins/treesitter.lua` and `lua/plugins/blink.lua`.
 - Prefer local aliases for frequently used Neovim globals inside core files (`local opt = vim.opt`, `local autocmd = vim.api.nvim_create_autocmd`) when the file already follows that style.
@@ -75,7 +76,7 @@ else
 end
 ```
 
-### LSP module shape from `lua/lsp/jsonls.lua`
+### LSP module shape from `lua/plugins/lsp/jsonls.lua`
 
 ```lua
 local M = {}
