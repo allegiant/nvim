@@ -436,3 +436,36 @@ Removed the disabled fzf-lua plugin spec because Snacks already provides the act
 ### Next Steps
 
 - None - task complete
+
+
+## Session 13: Remove Overseer plugin
+
+**Date**: 2026-05-29
+**Task**: Remove Overseer plugin
+**Branch**: `master`
+
+### Summary
+
+Removed the unused Overseer task runner plugin and its orphaned Lua run template; verified no active Lua references remain and headless startup passes.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `38350ec` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

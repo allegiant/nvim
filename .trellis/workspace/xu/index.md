@@ -8,7 +8,7 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 12
+- **Total Sessions**: 13
 - **Last Active**: 2026-05-29
 <!-- @@@/auto:current-status -->
 
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~438 | Active |
+| `journal-1.md` | ~471 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 13 | 2026-05-29 | Remove Overseer plugin | `38350ec` | `master` |
 | 12 | 2026-05-29 | Remove disabled fzf plugin | `93a48e1` | `master` |
 | 11 | 2026-05-29 | Remove mini.comment plugin | `ac15144` | `master` |
 | 10 | 2026-05-29 | Move LSP helpers under plugins | `943bd0e` | `master` |
