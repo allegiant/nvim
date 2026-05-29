@@ -1,164 +1,5 @@
-local toggle_terminal
-local toggle_current_terminal
-
-local function terminal_normal_keycodes()
-  return [[<C-\><C-n>]]
-end
-
-local function terminal_wincmd(direction)
-  return function()
-    vim.cmd.wincmd(direction)
-  end
-end
-
-toggle_current_terminal = function(bufnr)
-  if not vim.api.nvim_buf_is_valid(bufnr) then
-    return
-  end
-
-  local meta = vim.b[bufnr].snacks_terminal
-  if type(meta) ~= "table" or not meta.id then
-    return
-  end
-
-  for _, term in ipairs(Snacks.terminal.list()) do
-    if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
-      local term_meta = vim.b[term.buf].snacks_terminal
-      if type(term_meta) == "table" and term_meta.id == meta.id then
-        term:toggle()
-        return
-      end
-    end
-  end
-end
-
-local terminal_opts = {
-  win = {
-    position = "bottom",
-    height = 10,
-    keys = {
-      term_toggle = {
-        [[<C-\>]],
-        function(term)
-          toggle_current_terminal(term.buf)
-        end,
-        mode = "t",
-        desc = "Toggle current terminal",
-      },
-      term_normal = {
-        "<Esc>",
-        terminal_normal_keycodes,
-        mode = "t",
-        expr = true,
-        desc = "Exit terminal mode",
-      },
-      term_normal_jk = {
-        "jk",
-        terminal_normal_keycodes,
-        mode = "t",
-        expr = true,
-        desc = "Exit terminal mode",
-      },
-      term_nav_left = {
-        "<C-h>",
-        terminal_wincmd("h"),
-        mode = "t",
-        desc = "Go to left window",
-      },
-      term_nav_down = {
-        "<C-j>",
-        terminal_wincmd("j"),
-        mode = "t",
-        desc = "Go to lower window",
-      },
-      term_nav_up = {
-        "<C-k>",
-        terminal_wincmd("k"),
-        mode = "t",
-        desc = "Go to upper window",
-      },
-      term_nav_right = {
-        "<C-l>",
-        terminal_wincmd("l"),
-        mode = "t",
-        desc = "Go to right window",
-      },
-    },
-  },
-}
-
-local function terminal_options(opts)
-  return vim.tbl_deep_extend("force", {}, terminal_opts, opts or {})
-end
-
-toggle_terminal = function()
-  Snacks.terminal.toggle(nil, terminal_options())
-end
-
-local function terminal_id_number(meta)
-  if type(meta) ~= "table" then
-    return nil
-  end
-
-  local id = meta.id
-  if type(id) == "number" then
-    return id
-  end
-
-  if type(id) ~= "string" then
-    return nil
-  end
-
-  return tonumber(id) or tonumber(id:match("count%s*=%s*(%d+)"))
-end
-
-local function max_terminal_id()
-  local max_id = 0
-
-  for _, term in ipairs(Snacks.terminal.list()) do
-    local buf = term.buf
-    if buf and vim.api.nvim_buf_is_valid(buf) then
-      local id = terminal_id_number(vim.b[buf].snacks_terminal)
-      if id and id > max_id then
-        max_id = id
-      end
-    end
-  end
-
-  return max_id
-end
-
-local function toggle_next_terminal()
-  Snacks.terminal.toggle(nil, terminal_options({ count = max_terminal_id() + 1 }))
-end
-
-local function terminal_label(term)
-  local buf = term.buf
-  local title = vim.b[buf].term_title or vim.api.nvim_buf_get_name(buf)
-  if title == "" then
-    title = "Terminal"
-  end
-
-  return ("buf %d: %s"):format(buf, title)
-end
-
-local function select_terminal()
-  local terminals = Snacks.terminal.list()
-  if vim.tbl_isempty(terminals) then
-    vim.notify("No Snacks terminals", vim.log.levels.INFO, { title = "Terminal" })
-    return
-  end
-
-  vim.ui.select(terminals, {
-    prompt = "Select terminal",
-    format_item = terminal_label,
-  }, function(term)
-    if term then
-      term:show()
-      term:focus()
-    end
-  end)
-end
+local terminal = require("plugins.snacks.terminal")
+local lsp_progress = require("plugins.snacks.lsp_progress")
 
 return {
   "folke/snacks.nvim",
@@ -169,9 +10,9 @@ return {
     { "<leader>bd", function() Snacks.bufdelete() end,                    desc = "Close" },
     -- terminal
     { "<leader>t",  group = "Terminal" },
-    { [[<C-\>]],    toggle_terminal,                                      desc = "Toggle Terminal" },
-    { "<leader>tn", toggle_next_terminal,                                 desc = "New Terminal" },
-    { "<leader>ts", select_terminal,                                      desc = "select Terminal" },
+    { [[<C-\>]],    terminal.toggle,                                      desc = "Toggle Terminal" },
+    { "<leader>tn", terminal.toggle_next,                                 desc = "New Terminal" },
+    { "<leader>ts", terminal.select,                                      desc = "select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
@@ -218,7 +59,7 @@ return {
       enabled = true,
       top_down = false, -- place notifications from top to bottom
     },
-    terminal = terminal_options(),
+    terminal = terminal.options(),
     quickfile = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
@@ -226,46 +67,6 @@ return {
     words = { enabled = false },
   },
   init = function()
-    local progress = vim.defaulttable()
-    vim.api.nvim_create_autocmd("LspProgress", {
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params.value
-        if not client or type(value) ~= "table" then
-          return
-        end
-        local p = progress[client.id]
-
-        for i = 1, #p + 1 do
-          if i == #p + 1 or p[i].token == ev.data.params.token then
-            p[i] = {
-              token = ev.data.params.token,
-              msg = ("[%3d%%] %s%s"):format(
-                value.kind == "end" and 100 or value.percentage or 100,
-                value.title or "",
-                value.message and (" **%s**"):format(value.message) or ""
-              ),
-              done = value.kind == "end",
-            }
-            break
-          end
-        end
-
-        local msg = {} ---@type string[]
-        progress[client.id] = vim.tbl_filter(function(v)
-          return table.insert(msg, v.msg) or not v.done
-        end, p)
-
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(table.concat(msg, "\n"), "info", {
-          id = "lsp_progress",
-          title = client.name,
-          opts = function(notif)
-            notif.icon = #progress[client.id] == 0 and " "
-                or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-          end,
-        })
-      end,
-    })
+    lsp_progress.setup()
   end
 }
