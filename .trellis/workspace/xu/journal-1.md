@@ -403,3 +403,36 @@ Removed the redundant mini.comment plugin spec because Neovim built-in commentin
 ### Next Steps
 
 - None - task complete
+
+
+## Session 12: Remove disabled fzf plugin
+
+**Date**: 2026-05-29
+**Task**: Remove disabled fzf plugin
+**Branch**: `master`
+
+### Summary
+
+Removed the disabled fzf-lua plugin spec because Snacks already provides the active picker and LSP picker mappings; verified no active Lua references remain and headless startup passes.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `93a48e1` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
