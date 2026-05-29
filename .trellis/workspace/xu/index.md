@@ -8,7 +8,7 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 9
+- **Total Sessions**: 10
 - **Last Active**: 2026-05-29
 <!-- @@@/auto:current-status -->
 
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~326 | Active |
+| `journal-1.md` | ~365 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 10 | 2026-05-29 | Move LSP helpers under plugins | `943bd0e` | `master` |
 | 9 | 2026-05-29 | Simplify Snacks configuration | `e6048fa` | `master` |
 | 8 | 2026-05-27 | Replace ToggleTerm with Snacks terminal | `bde8aee`, `9e6ebb3`, `c1095b1` | `master` |
 | 7 | 2026-05-27 | Replace Bufferline bufdelete dependency | `8d6e34a`, `52d9a8e` | `master` |

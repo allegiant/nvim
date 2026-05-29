@@ -330,3 +330,43 @@ Split Snacks terminal helpers and LSP progress notification setup into focused h
 ### Next Steps
 
 - None - task complete
+
+
+## Session 10: Move LSP helpers under plugins
+
+**Date**: 2026-05-29
+**Task**: Move LSP helpers under plugins
+**Branch**: `master`
+
+### Summary
+
+Moved LSP server helper modules under lua/plugins/lsp, updated require paths, and refreshed Trellis specs to document the plugin-owned helper module pattern.
+
+### Main Changes
+
+- Moved LSP server helper modules from `lua/lsp/` to `lua/plugins/lsp/`.
+- Updated `lua/plugins/lspconfig.lua` to require `plugins.lsp.*` helpers explicitly.
+- Updated moved LSP server modules to require `plugins.lsp.utils`.
+- Refreshed Trellis specs to document the new plugin-owned LSP helper location and the no-`init.lua` helper directory constraint.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `943bd0e` | refactor: move LSP helpers under plugins |
+
+### Testing
+
+- [OK] `nvim --headless "+luafile init.lua" "+qa"`
+- [OK] Forced `nvim-lspconfig` load and required all moved `plugins.lsp.*` helper modules.
+- [OK] Verified no runtime `require("lsp.*")` references remain.
+- [OK] Verified `lua/plugins/lsp/init.lua` was not created.
+- [OK] `git diff --check`
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
