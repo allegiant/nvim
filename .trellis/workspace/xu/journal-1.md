@@ -469,3 +469,36 @@ Removed the unused Overseer task runner plugin and its orphaned Lua run template
 ### Next Steps
 
 - None - task complete
+
+
+## Session 14: Remove surround plugin
+
+**Date**: 2026-05-29
+**Task**: Remove surround plugin
+**Branch**: `master`
+
+### Summary
+
+Removed the unused nvim-surround plugin spec without adding replacement mappings; verified no active Lua references remain and headless startup passes.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `46525ab` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
