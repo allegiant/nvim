@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/index.md","reason":"Defines this Neovim UI/plugin configuration as the frontend layer and identifies lua/plugins/*.lua as in scope."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Requires plugin-specific UI/keymaps to stay with the owning plugin and documents the Snacks/TogglerTerm terminal ownership conventions."}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Covers keymap grouping, plugin-owned keymap descriptions, terminal scoping, and required Neovim verification for UI/config changes."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Guides the refactor to extract cohesive existing logic without introducing duplicate helper code or premature abstraction."}
