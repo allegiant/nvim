@@ -1,0 +1,2 @@
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Plugin-owned helper modules should live with plugin specs; LSP helpers are moving under lua/plugins/lsp."}
+{"file":".trellis/spec/frontend/hook-guidelines.md","reason":"LSP config is plugin-owned Neovim callback/setup code and must avoid broad or misplaced plugin-dependent hooks."}

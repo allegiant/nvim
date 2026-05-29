@@ -1,0 +1,2 @@
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Check that plugin-specific helper organization remains consistent with the frontend/editor-facing module layout."}
+{"file":".trellis/spec/frontend/hook-guidelines.md","reason":"Check that no plugin-dependent behavior is moved into inappropriate global hooks and no import ambiguity is introduced."}
