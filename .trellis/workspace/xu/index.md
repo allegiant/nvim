@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 8
-- **Last Active**: 2026-05-27
+- **Total Sessions**: 9
+- **Last Active**: 2026-05-29
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~286 | Active |
+| `journal-1.md` | ~326 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 9 | 2026-05-29 | Simplify Snacks configuration | `e6048fa` | `master` |
 | 8 | 2026-05-27 | Replace ToggleTerm with Snacks terminal | `bde8aee`, `9e6ebb3`, `c1095b1` | `master` |
 | 7 | 2026-05-27 | Replace Bufferline bufdelete dependency | `8d6e34a`, `52d9a8e` | `master` |
 | 6 | 2026-05-27 | Fix cross-platform DAP config | `62708c0` | `master` |

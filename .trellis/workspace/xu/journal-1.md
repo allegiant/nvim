@@ -291,3 +291,42 @@ Migrated terminal management from ToggleTerm to Snacks terminal, moved Windows s
 ### Next Steps
 
 - None - task complete
+
+
+## Session 9: Simplify Snacks configuration
+
+**Date**: 2026-05-29
+**Task**: Simplify Snacks configuration
+**Branch**: `master`
+
+### Summary
+
+Split Snacks terminal helpers and LSP progress notification setup into focused helper modules while preserving existing Snacks keymaps and terminal behavior.
+
+### Main Changes
+
+- Moved Snacks terminal helpers into `lua/plugins/snacks/terminal.lua`.
+- Moved the Snacks-backed LSP progress notification autocmd into `lua/plugins/snacks/lsp_progress.lua`.
+- Kept `lua/plugins/snacks.lua` focused on the plugin spec, explicit keymaps, top-level options, and module wiring.
+- Preserved existing terminal keymaps, Snacks terminal scoping, and LSP progress notification behavior.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `e6048fa` | refactor: split Snacks configuration helpers |
+
+### Testing
+
+- [OK] `nvim --headless "+luafile init.lua" "+qa"`
+- [OK] Forced Snacks helper module require/API check.
+- [OK] Verified no broad `TermOpen` / `term://*` terminal mappings were introduced.
+- [OK] `git diff --check`
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
