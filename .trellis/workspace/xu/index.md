@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 14
-- **Last Active**: 2026-05-29
+- **Total Sessions**: 15
+- **Last Active**: 2026-06-04
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~504 | Active |
+| `journal-1.md` | ~537 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 15 | 2026-06-04 | Remove Claude terminal Esc mapping | `28fae35` | `master` |
 | 14 | 2026-05-29 | Remove surround plugin | `46525ab` | `master` |
 | 13 | 2026-05-29 | Remove Overseer plugin | `38350ec` | `master` |
 | 12 | 2026-05-29 | Remove disabled fzf plugin | `93a48e1` | `master` |

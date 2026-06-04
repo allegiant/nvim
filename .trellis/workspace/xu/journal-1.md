@@ -502,3 +502,36 @@ Removed the unused nvim-surround plugin spec without adding replacement mappings
 ### Next Steps
 
 - None - task complete
+
+
+## Session 15: Remove Claude terminal Esc mapping
+
+**Date**: 2026-06-04
+**Task**: Remove Claude terminal Esc mapping
+**Branch**: `master`
+
+### Summary
+
+Removed the custom Claude Code terminal <Esc> mapping so Esc can reach Claude Code interactions; verified the Lua config with headless Neovim and left unrelated Snacks changes untouched.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `28fae35` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
