@@ -1,0 +1,2 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Verification guardrails for syntax/load checks and minimal diff review."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Review checklist for ensuring existing Snacks patterns are preserved rather than duplicated."}

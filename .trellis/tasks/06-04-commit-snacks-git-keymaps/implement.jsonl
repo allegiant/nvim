@@ -1,0 +1,2 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"General quality guardrails for small config changes: keep scope minimal and avoid unrelated edits."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Checklist for avoiding unnecessary duplication/rework when touching existing configuration patterns."}
