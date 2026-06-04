@@ -535,3 +535,36 @@ Removed the custom Claude Code terminal <Esc> mapping so Esc can reach Claude Co
 ### Next Steps
 
 - None - task complete
+
+
+## Session 16: Organize Snacks git keymaps
+
+**Date**: 2026-06-04
+**Task**: Organize Snacks git keymaps
+**Branch**: `master`
+
+### Summary
+
+Committed Snacks Git keymap reorganization under <leader>g, added blame/git-files entries, configured lazygit as a large rounded float, and verified via headless Neovim/Snacks API checks.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `27a3ed2` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
