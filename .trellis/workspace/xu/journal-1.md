@@ -568,3 +568,36 @@ Committed Snacks Git keymap reorganization under <leader>g, added blame/git-file
 ### Next Steps
 
 - None - task complete
+
+
+## Session 17: Migrate nvim-treesitter for Neovim 0.12
+
+**Date**: 2026-06-05
+**Task**: Migrate nvim-treesitter for Neovim 0.12
+**Branch**: `master`
+
+### Summary
+
+Migrated nvim-treesitter main-branch config for Neovim 0.12, added standalone nvim-ts-autotag, fixed parser/query mismatch and lua.so2 parser health issue, and captured the convention in Trellis spec.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `2b6c6c5` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
