@@ -21,9 +21,9 @@ The UI surface is split by ownership:
 
 ```text
 lua/core/mappings.lua       # global non-plugin keymaps
-lua/plugins/snacks.lua      # picker/dashboard/notifier UI and LSP navigation mappings
-lua/plugins/nvimtree.lua    # file explorer UI and <leader>e mapping
-lua/plugins/bufferline.lua  # buffer tabline UI and buffer navigation mappings
+lua/plugins/snacks.lua          # picker/dashboard/notifier UI, LSP navigation, and <leader>e explorer entry
+lua/plugins/snacks/explorer.lua # Snacks explorer helper/config consumed by lua/plugins/snacks.lua
+lua/plugins/bufferline.lua      # buffer tabline UI and buffer navigation mappings
 lua/plugins/lualine.lua     # statusline theme/options
 lua/plugins/toggleterm.lua  # terminal UI, terminal-mode mappings, Windows shell options
 lua/plugins/blink.lua       # completion, command-line completion, signature UI
@@ -38,7 +38,7 @@ lua/config/neovide.lua      # Neovide font and animation settings
 ## Module Organization
 
 - Put generic keymaps that do not depend on a plugin in `lua/core/mappings.lua`. Current examples: clipboard mappings, window navigation, window resize, split creation, and `:nohlsearch`.
-- Put plugin-specific UI and keymaps in that plugin's spec file under `lua/plugins/`. Examples: file picker keys in `lua/plugins/snacks.lua`, file tree key in `lua/plugins/nvimtree.lua`, terminal keys in `lua/plugins/toggleterm.lua`.
+- Put plugin-specific UI and keymaps in that plugin's spec file under `lua/plugins/`. Examples: file picker and file explorer keys in `lua/plugins/snacks.lua`, Snacks explorer helper logic in `lua/plugins/snacks/explorer.lua`, and terminal keys in `lua/plugins/toggleterm.lua`.
 - Keep VS Code integration separate in `lua/config/vscode.lua`; it uses `vim.fn.VSCodeNotify(...)` and `require('vscode').action(...)`, which are not valid assumptions for normal Neovim.
 - Keep GUI-only Neovide settings in `lua/config/neovide.lua` and load them only through the `vim.g.neovide` branch in `init.lua`.
 
@@ -47,8 +47,9 @@ lua/config/neovide.lua      # Neovide font and animation settings
 ## Naming Conventions
 
 - Leader groups are capitalized and defined through lazy.nvim `keys` entries: `File`, `Buffer`, `Terminal`, `Run Tasks`.
-- Key descriptions are short user-facing labels, usually imperative or noun phrases: `Find Files`, `Format buffer`, `NvimTree Toggle`, `Git Status`.
+- Key descriptions are short user-facing labels, usually imperative or noun phrases: `Find Files`, `Format buffer`, `File Explorer`, `Git Status`.
 - Existing navigation prefixes:
+  - `<leader>e` for Snacks explorer in `lua/plugins/snacks.lua`.
   - `<leader>f...` for picker/file actions in `lua/plugins/snacks.lua`.
   - `<leader>b...` for buffers in `lua/plugins/bufferline.lua`.
   - `<leader>t...` for terminals in `lua/plugins/toggleterm.lua`.

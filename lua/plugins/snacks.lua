@@ -1,5 +1,6 @@
 local terminal = require("plugins.snacks.terminal")
 local lsp_progress = require("plugins.snacks.lsp_progress")
+local explorer = require("plugins.snacks.explorer")
 
 return {
   "folke/snacks.nvim",
@@ -15,6 +16,7 @@ return {
     { "<leader>ts", terminal.select,                                      desc = "select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
+    { "<leader>e",  explorer.open,                                       desc = "File Explorer" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
     { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>",               desc = "Find Buffers" },
     { "<leader>fh", "<cmd>lua Snacks.picker.help()<cr>",                  desc = "Find help_tags" },
@@ -54,7 +56,7 @@ return {
         { section = "startup" },
       },
     },
-    explorer = { enabled = false },
+    explorer = explorer.options(),
     indent = { enabled = false },
     input = { enabled = true },
     lazygit = {

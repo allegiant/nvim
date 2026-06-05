@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Keymap, lazy.nvim plugin spec, and UI config quality rules for implementing the explorer migration."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Project conventions for placing plugin-owned mappings and Snacks helper modules under lua/plugins/snacks/."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Lua runtime safety conventions for optional plugin APIs and local helper module shapes."}
+{"file":".trellis/tasks/06-05-replace-nvimtree-with-snacks-explorer/research/snacks-explorer.md","reason":"Research findings for Snacks explorer defaults, keymap API, bufferline offsets, and ClaudeCode integration caveats."}

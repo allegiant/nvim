@@ -25,10 +25,116 @@ There is no browser accessibility suite, frontend linter, or TypeScript check. R
 ## Required Patterns
 
 - Group leader mappings before child mappings, following examples such as `{ "<leader>f", group = "File" }` in `lua/plugins/snacks.lua` and `{ "<leader>b", group = "Buffer" }` in `lua/plugins/bufferline.lua`.
-- Keep plugin-owned keymaps with the plugin spec. For example, NvimTree owns `<leader>e` in `lua/plugins/nvimtree.lua`, ToggleTerm owns `<leader>t...` in `lua/plugins/toggleterm.lua`, and Conform owns `<leader>fm` in `lua/plugins/conform.lua`.
+- Keep plugin-owned keymaps with the plugin spec. For example, Snacks owns `<leader>e` in `lua/plugins/snacks.lua` via `lua/plugins/snacks/explorer.lua`, ToggleTerm owns `<leader>t...` in `lua/plugins/toggleterm.lua`, and Conform owns `<leader>fm` in `lua/plugins/conform.lua`.
 - Keep related UI option tables local to the plugin file and pass them through `opts` or `setup(...)` consistently.
 - Preserve mode-specific keymaps. Terminal-mode mappings use `vim.keymap.set('t', ...)` in `lua/plugins/toggleterm.lua`; visual clipboard mappings use `map("v", ...)` in `lua/core/mappings.lua` and `vim.keymap.set({ "v" }, ...)` in `lua/config/vscode.lua`.
 - Keep plugin-owned terminal keymaps scoped to the owning plugin's buffers. ToggleTerm-only mappings belong on `TermOpen term://*toggleterm#*`; avoid `term://*` unless the intent is to affect every Neovim terminal, including Claude Code terminals.
+
+---
+
+## Scenario: Snacks Explorer Integration
+
+### 1. Scope / Trigger
+
+- Trigger: Any change to Snacks explorer, file explorer keymaps, bufferline explorer offsets, or tree-buffer integrations such as ClaudeCode tree-add behavior.
+- Applies when `folke/snacks.nvim` provides the file explorer through `lua/plugins/snacks.lua` and helper modules under `lua/plugins/snacks/`.
+
+### 2. Signatures
+
+- Explorer entry keymap:
+
+```lua
+{ "<leader>e", explorer.open, desc = "File Explorer" }
+```
+
+- Helper module shape:
+
+```lua
+local explorer = require("plugins.snacks.explorer")
+explorer.open()
+explorer.options(opts?)
+```
+
+- Bufferline explorer offset uses the Snacks layout wrapper filetype:
+
+```lua
+offsets = {
+  {
+    filetype = "snacks_layout_box",
+    text = "File Explorer",
+    separator = true,
+  },
+}
+```
+
+### 3. Contracts
+
+- `lua/plugins/snacks.lua` owns the normal-Neovim `<leader>e` explorer entry.
+- `lua/plugins/snacks/explorer.lua` owns Snacks explorer helper/config code and must not add an `init.lua` under `lua/plugins/snacks/`.
+- Snacks explorer internal picker/list keymaps should stay at upstream defaults unless a task explicitly asks to override them.
+- Snacks explorer is picker-backed, so filetypes such as `snacks_picker_list` and `snacks_layout_box` are not unique explorer-only identities.
+- Do not expose `ClaudeCodeTreeAdd` for Snacks picker filetypes unless claudecode upstream or local integration code actually supports resolving the selected Snacks explorer item.
+
+### 4. Validation & Error Matrix
+
+- Duplicate `<leader>e` in normal-Neovim plugin/core files -> remove or consolidate the duplicate before shipping.
+- `NvimTree`, `NvimTreeToggle`, or `nvim-tree/nvim-tree.lua` remains in `lua/**/*.lua` -> stale explorer migration; remove or replace it.
+- `ClaudeCodeTreeAdd` is bound to `snacks_picker_list` without supported integration -> visible keymap fails at runtime with unsupported filetype; do not bind it.
+- `lua/plugins/snacks/` contains helper-only modules with `init.lua` -> lazy.nvim may treat the directory as an importable plugin spec; avoid helper-directory `init.lua`.
+
+### 5. Good/Base/Bad Cases
+
+- Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, bufferline offset targets `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
+- Base: A task changes only `<leader>e`; it still checks normal-Neovim duplicate keymaps and leaves VS Code-only `<leader>e` isolated in `lua/config/vscode.lua`.
+- Bad: Adding `snacks_picker_list` to `ClaudeCodeTreeAdd` filetypes just because Snacks explorer uses picker buffers.
+
+### 6. Tests Required
+
+- Run headless startup:
+
+```powershell
+nvim --headless "+luafile init.lua" "+qa"
+```
+
+- Validate helper module shape when it changes:
+
+```powershell
+nvim --headless "+lua local explorer = require('plugins.snacks.explorer'); assert(type(explorer.open) == 'function'); assert(explorer.options().enabled == true)" "+qa"
+```
+
+- Validate plugin graph excludes old nvim-tree when replacing the explorer:
+
+```powershell
+nvim --headless "+lua local plugins=require('lazy.core.config').plugins; assert(plugins['nvim-tree.lua'] == nil); assert(plugins['snacks.nvim'] ~= nil)" "+qa"
+```
+
+- Search runtime Lua for stale explorer references:
+
+```powershell
+rg "NvimTree|nvim-tree/nvim-tree.lua|NvimTreeToggle|nvimtree" lua
+```
+
+### 7. Wrong vs Correct
+
+#### Wrong
+
+```lua
+{
+  "<leader>as",
+  "<cmd>ClaudeCodeTreeAdd<cr>",
+  ft = { "snacks_picker_list" },
+}
+```
+
+#### Correct
+
+```lua
+{
+  "<leader>as",
+  "<cmd>ClaudeCodeTreeAdd<cr>",
+  ft = { "neo-tree", "oil", "minifiles", "netrw" },
+}
+```
 
 ---
 

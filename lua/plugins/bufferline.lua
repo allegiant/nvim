@@ -27,7 +27,13 @@ local default = {
     tab_size = 18,
     diagnostics = false,
     diagnostics_update_in_insert = false,
-    offsets = { { filetype = "NvimTree" } },
+    offsets = {
+      {
+        filetype = "snacks_layout_box",
+        text = "File Explorer",
+        separator = true,
+      },
+    },
     color_icons = true,       -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = false,

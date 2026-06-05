@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Checklist for validating UI/keymap config changes and required headless startup check."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Verify changed files follow plugin ownership and Snacks module organization conventions."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Verify helper module uses simple guarded Lua patterns without unsafe plugin API assumptions."}
+{"file":".trellis/tasks/06-05-replace-nvimtree-with-snacks-explorer/research/snacks-explorer.md","reason":"Verify Snacks explorer migration handles defaults, keymaps, stale NvimTree references, bufferline, and ClaudeCode caveats."}
