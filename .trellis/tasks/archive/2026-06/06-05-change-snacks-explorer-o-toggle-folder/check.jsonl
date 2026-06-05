@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Required headless startup/helper validation and keymap review checks."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Review plugin option shape consistency."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Verify the change remains in the owning Snacks explorer helper."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Check no duplicated custom toggle logic was introduced."}

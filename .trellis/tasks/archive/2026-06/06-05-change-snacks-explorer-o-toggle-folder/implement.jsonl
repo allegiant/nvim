@@ -1,0 +1,4 @@
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Snacks explorer keymap override contract and validation commands."}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Plugin option shape and keymap discoverability guidance."}
+{"file":".trellis/spec/frontend/directory-structure.md","reason":"Ownership of Snacks explorer helper/config files."}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Reuse existing Snacks confirm action instead of duplicating toggle logic."}
