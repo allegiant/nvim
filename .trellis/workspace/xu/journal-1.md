@@ -634,3 +634,36 @@ Replaced nvim-tree with Snacks explorer, moved explorer helper under lua/plugins
 ### Next Steps
 
 - None - task complete
+
+
+## Session 19: Customize Snacks explorer keys
+
+**Date**: 2026-06-05
+**Task**: Customize Snacks explorer keys
+**Branch**: `master`
+
+### Summary
+
+Customized Snacks explorer key behavior: mapped explorer o to the existing confirm action for folder toggle, disabled inherited q cancel only for explorer windows, updated frontend Snacks explorer key override guidance, and verified Neovim headless/config checks.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `7f8326c` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
