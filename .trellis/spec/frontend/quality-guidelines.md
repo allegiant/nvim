@@ -72,6 +72,9 @@ offsets = {
 - `lua/plugins/snacks.lua` owns the normal-Neovim `<leader>e` explorer entry.
 - `lua/plugins/snacks/explorer.lua` owns Snacks explorer helper/config code and must not add an `init.lua` under `lua/plugins/snacks/`.
 - Snacks explorer internal picker/list keymaps should stay at upstream defaults unless a task explicitly asks to override them.
+- Explorer-only picker key overrides belong under `picker.sources.explorer.win.<window>.keys`; do not change `picker.win.*.keys` unless the task intentionally changes every Snacks picker.
+- Disable an inherited Snacks picker key for explorer by setting the source-scoped key entry to `false`, for example `picker.sources.explorer.win.list.keys.q = false`.
+- If disabling an inherited picker key that exists in multiple picker windows, cover each inherited window used by the explorer (`input`, `list`, and `preview` for the default `q = "cancel"`).
 - Snacks explorer is picker-backed, so filetypes such as `snacks_picker_list` and `snacks_layout_box` are not unique explorer-only identities.
 - Do not expose `ClaudeCodeTreeAdd` for Snacks picker filetypes unless claudecode upstream or local integration code actually supports resolving the selected Snacks explorer item.
 
@@ -85,8 +88,10 @@ offsets = {
 ### 5. Good/Base/Bad Cases
 
 - Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, bufferline offset targets `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
+- Good: Explorer-specific picker key changes use `picker.sources.explorer.win.list.keys`, such as mapping `o` to `confirm`, and disable inherited picker keys source-locally with `false`.
 - Base: A task changes only `<leader>e`; it still checks normal-Neovim duplicate keymaps and leaves VS Code-only `<leader>e` isolated in `lua/config/vscode.lua`.
 - Bad: Adding `snacks_picker_list` to `ClaudeCodeTreeAdd` filetypes just because Snacks explorer uses picker buffers.
+- Bad: Disabling `q` through global `picker.win.*.keys` when only the explorer should stop responding to `q`.
 
 ### 6. Tests Required
 

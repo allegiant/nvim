@@ -67,7 +67,7 @@ return {
         border = "rounded",
       },
     },
-    picker = { enabled = true },
+    picker = explorer.picker_options(),
     notifier = {
       enabled = true,
       top_down = false, -- place notifications from top to bottom
