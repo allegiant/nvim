@@ -37,6 +37,108 @@ Existing formatting reality:
 
 ---
 
+## Scenario: nvim-treesitter Main Branch on Neovim 0.12
+
+### 1. Scope / Trigger
+
+- Trigger: Any change to `lua/plugins/treesitter.lua`, Treesitter parser installation, Treesitter highlighting/indent setup, or tag auto-close behavior.
+- Applies when `nvim-treesitter` is on the `main` branch with Neovim 0.12+.
+
+### 2. Signatures
+
+- Plugin spec must keep `nvim-treesitter` eager-loaded:
+
+```lua
+{
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
+}
+```
+
+- Parser installation uses the main-branch API:
+
+```lua
+require("nvim-treesitter").install(parsers)
+```
+
+- Highlighting is started per buffer with Neovim's built-in API:
+
+```lua
+pcall(vim.treesitter.start, args.buf)
+```
+
+- Tag auto-close/rename is owned by standalone `windwp/nvim-ts-autotag`, not by a Treesitter option table.
+
+### 3. Contracts
+
+- `parsers` is the single source of truth for installed parser names.
+- `filetypes` lists buffer filetypes that should call `vim.treesitter.start()`; parser names and filetypes do not always match (`tsx` parser vs `typescriptreact` filetype).
+- `markdown_inline` is a parser dependency for Markdown and should not be treated as a normal FileType pattern.
+- Parser/query runtime artifacts live under Neovim data paths; do not commit generated parser/query files.
+
+### 4. Validation & Error Matrix
+
+- `Invalid node type ...` or `Invalid field name ...` -> query/parser version mismatch; run `:TSUpdate <lang>` or `:TSInstall! <lang>` and inspect runtimepath precedence.
+- Missing parser for a filetype -> `vim.treesitter.start()` may fail; call it through `pcall` and avoid breaking startup.
+- Missing `nvim-ts-autotag` parser dependency -> tags will not auto-close/rename for that language; add the parser to `parsers` when the filetype is in scope.
+- Old `autotag = { enable = true }` under Treesitter setup -> deprecated integration path; remove it and configure `nvim-ts-autotag` directly.
+
+### 5. Good/Base/Bad Cases
+
+- Good: `nvim-treesitter` has `lazy = false`, `build = ":TSUpdate"`, guarded `install(parsers)`, guarded `vim.treesitter.start()`, and standalone `nvim-ts-autotag` setup.
+- Base: New parser added to `parsers`; matching user-facing filetype added to `filetypes` only when buffers should enable highlighting/indent.
+- Bad: Reintroducing `require("nvim-treesitter").setup({ ensure_installed = ..., highlight = ..., indent = ..., autotag = ... })` on the main branch.
+
+### 6. Tests Required
+
+- Run a headless startup check:
+
+```powershell
+nvim --headless "+luafile init.lua" "+qa"
+```
+
+- For query/parser errors, also open the triggering file headlessly and assert Neovim exits successfully, for example:
+
+```powershell
+nvim --headless "+luafile init.lua" "+edit lua/plugins/themes.lua" "+qa"
+```
+
+- Run `git diff --check` after editing Lua/plugin specs.
+
+### 7. Wrong vs Correct
+
+#### Wrong
+
+```lua
+require("nvim-treesitter").setup({
+  ensure_installed = { "lua", "vim" },
+  highlight = { enable = true },
+  indent = { enable = true },
+  autotag = { enable = true },
+})
+```
+
+#### Correct
+
+```lua
+local ok, treesitter = pcall(require, "nvim-treesitter")
+if ok then
+  pcall(treesitter.install, parsers)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = filetypes,
+  callback = function(args)
+    if pcall(vim.treesitter.start, args.buf) then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
+```
+
+---
+
 ## Testing Requirements
 
 No formal tests are present. For changes to this configuration, run the lightest available verification:
