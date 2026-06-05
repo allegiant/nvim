@@ -1,0 +1,4 @@
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Implementation should follow project lazy.nvim plugin-spec style and defensive startup conventions."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Implementation should keep Lua option tables local and guard plugin APIs that can fail during startup."}
+{"file":".trellis/tasks/06-04-nvim-treesitter-0-12/research/nvim-treesitter-0-12-migration.md","reason":"Contains required Neovim 0.12 nvim-treesitter main migration API and query/parser mismatch guidance."}
+{"file":".trellis/tasks/06-04-nvim-treesitter-0-12/research/autotag-plugin.md","reason":"Contains required standalone nvim-ts-autotag plugin API and parser/filetype considerations."}

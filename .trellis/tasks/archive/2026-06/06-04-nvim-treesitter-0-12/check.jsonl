@@ -1,0 +1,4 @@
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"Checker should verify lazy.nvim plugin specs, startup defensiveness, and no unnecessary churn."}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Checker should verify Lua option-table locality and guarded startup behavior."}
+{"file":".trellis/tasks/06-04-nvim-treesitter-0-12/research/nvim-treesitter-0-12-migration.md","reason":"Checker should validate migration against main-branch nvim-treesitter requirements and parser/query mismatch handling."}
+{"file":".trellis/tasks/06-04-nvim-treesitter-0-12/research/autotag-plugin.md","reason":"Checker should validate autotag plugin configuration against current standalone API and parser dependencies."}
