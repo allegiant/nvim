@@ -601,3 +601,36 @@ Migrated nvim-treesitter main-branch config for Neovim 0.12, added standalone nv
 ### Next Steps
 
 - None - task complete
+
+
+## Session 18: Replace nvim-tree with Snacks explorer
+
+**Date**: 2026-06-05
+**Task**: Replace nvim-tree with Snacks explorer
+**Branch**: `master`
+
+### Summary
+
+Replaced nvim-tree with Snacks explorer, moved explorer helper under lua/plugins/snacks, kept Snacks default explorer keymaps, cleaned bufferline and claudecode NvimTree assumptions, and updated frontend specs.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `739f31e` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

@@ -8,7 +8,7 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 17
+- **Total Sessions**: 18
 - **Last Active**: 2026-06-05
 <!-- @@@/auto:current-status -->
 
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~603 | Active |
+| `journal-1.md` | ~636 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 18 | 2026-06-05 | Replace nvim-tree with Snacks explorer | `739f31e` | `master` |
 | 17 | 2026-06-05 | Migrate nvim-treesitter for Neovim 0.12 | `2b6c6c5` | `master` |
 | 16 | 2026-06-04 | Organize Snacks git keymaps | `27a3ed2` | `master` |
 | 15 | 2026-06-04 | Remove Claude terminal Esc mapping | `28fae35` | `master` |
