@@ -7,13 +7,11 @@ return {
   priority = 1000,
   lazy = false,
   keys = {
-    -- buffer
-    { "<leader>bd", function() Snacks.bufdelete() end,                    desc = "Close" },
     -- terminal
-    { "<leader>t",  group = "Terminal" },
+    { "<leader>T",  group = "Terminal" },
     { [[<C-\>]],    terminal.toggle,                                      desc = "Toggle Terminal" },
-    { "<leader>tn", terminal.toggle_next,                                 desc = "New Terminal" },
-    { "<leader>ts", terminal.select,                                      desc = "select Terminal" },
+    { "<leader>Tn", terminal.toggle_next,                                 desc = "New Terminal" },
+    { "<leader>Ts", terminal.select,                                      desc = "Select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
     { "<leader>e",  explorer.open,                                       desc = "File Explorer" },

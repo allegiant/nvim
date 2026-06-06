@@ -97,6 +97,15 @@ opt.cursorline = true
 opt.cursorcolumn = true
 opt.list = true
 opt.showtabline = 2
+opt.fillchars = {
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  vert = "│",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+}
 opt.winwidth = 30
 opt.winminwidth = 10
 opt.pumheight = 15

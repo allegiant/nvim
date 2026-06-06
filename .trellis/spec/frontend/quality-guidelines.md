@@ -36,7 +36,7 @@ There is no browser accessibility suite, frontend linter, or TypeScript check. R
 
 ### 1. Scope / Trigger
 
-- Trigger: Any change to Snacks explorer, file explorer keymaps, bufferline explorer offsets, or tree-buffer integrations such as ClaudeCode tree-add behavior.
+- Trigger: Any change to Snacks explorer, file explorer keymaps, tabbar explorer offsets, or tree-buffer integrations such as ClaudeCode tree-add behavior.
 - Applies when `folke/snacks.nvim` provides the file explorer through `lua/plugins/snacks.lua` and helper modules under `lua/plugins/snacks/`.
 
 ### 2. Signatures
@@ -55,16 +55,10 @@ explorer.open()
 explorer.options(opts?)
 ```
 
-- Bufferline explorer offset uses the Snacks layout wrapper filetype:
+- Tabbar explorer offset uses the Snacks layout wrapper filetype and must not render `File Explorer` text above the sidebar:
 
 ```lua
-offsets = {
-  {
-    filetype = "snacks_layout_box",
-    text = "File Explorer",
-    separator = true,
-  },
-}
+local explorer_filetype = "snacks_layout_box"
 ```
 
 ### 3. Contracts
@@ -87,7 +81,7 @@ offsets = {
 
 ### 5. Good/Base/Bad Cases
 
-- Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, bufferline offset targets `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
+- Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, tabbar offset detects `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
 - Good: Explorer-specific picker key changes use `picker.sources.explorer.win.list.keys`, such as mapping `o` to `confirm`, and disable inherited picker keys source-locally with `false`.
 - Base: A task changes only `<leader>e`; it still checks normal-Neovim duplicate keymaps and leaves VS Code-only `<leader>e` isolated in `lua/config/vscode.lua`.
 - Bad: Adding `snacks_picker_list` to `ClaudeCodeTreeAdd` filetypes just because Snacks explorer uses picker buffers.
@@ -139,6 +133,115 @@ rg "NvimTree|nvim-tree/nvim-tree.lua|NvimTreeToggle|nvimtree" lua
   "<cmd>ClaudeCodeTreeAdd<cr>",
   ft = { "neo-tree", "oil", "minifiles", "netrw" },
 }
+```
+
+---
+
+## Scenario: Tabby Buffer Tabbar
+
+### 1. Scope / Trigger
+
+- Trigger: Any change to `lua/plugins/bufferline.lua`, buffer tabbar rendering, buffer tabbar keymaps, or file-explorer offset behavior.
+- Applies when `nanozuki/tabby.nvim` renders the file buffer tabbar for this Neovim config.
+
+### 2. Signatures
+
+- Plugin spec:
+
+```lua
+{
+  "nanozuki/tabby.nvim",
+  event = "VimEnter",
+  keys = {
+    { "<Tab>", jump_next_buffer, desc = "Buffer next" },
+    { "<S-Tab>", jump_prev_buffer, desc = "Buffer prev" },
+    { "<leader>b1", function() jump_to_buffer(1) end, desc = "Buffer 1" },
+  },
+  config = function()
+    require("tabby").setup({ line = render_tabline })
+  end,
+}
+```
+
+- Displayed-buffer contract:
+
+```lua
+local function displayed_buffers()
+  return { bufnr1, bufnr2, ... }
+end
+```
+
+### 3. Contracts
+
+- `tabby.nvim` owns the top file-buffer tabbar; do not reintroduce `akinsho/bufferline.nvim` or `BufferLine*` commands.
+- The tabbar renders normal file buffers only. Filter unnamed buffers, unlisted buffers, non-empty `buftype`, Snacks explorer/picker/dashboard buffers, and terminals.
+- Buffer display order and `<leader>bN` jump order must use the same `displayed_buffers()` helper.
+- The visual format is a head segment plus closed slant buffer segments, for example `   1 lazy.lua    2 lspconfig.lua `.
+- When Snacks explorer is open on the left, hide the head segment and render only an offset followed by the first buffer segment, for example `[offset]  1 lazy.lua `.
+- Lowercase `<leader>t...` is not a tab-page workflow in this config. Terminal mappings use uppercase `<leader>T...`.
+
+### 4. Validation & Error Matrix
+
+- `BufferLine` command remains in runtime Lua -> stale migration; remove it.
+- `akinsho/bufferline.nvim` remains in the lazy spec -> duplicate tabbar plugin; replace it with `nanozuki/tabby.nvim`.
+- A buffer appears in the tabbar but `<leader>bN` jumps elsewhere -> display/jump helper mismatch; use one helper for both.
+- `snacks_layout_box`, picker, dashboard, or terminal buffers appear in the tabbar -> filter bug; update the displayed-buffer predicate.
+- Explorer open and `` overlaps the sidebar -> offset bug; hide the head segment while left explorer offset is active.
+
+### 5. Good/Base/Bad Cases
+
+- Good: `TabbyRenderTabline()` returns a string containing numbered normal file buffers and closed ``/`` segments.
+- Good: `<Tab>`, `<S-Tab>`, and `<leader>b1..b9` all navigate within `displayed_buffers()`.
+- Base: With only one normal file buffer, the tabbar still renders the head plus one numbered segment.
+- Bad: `line.bufs().filter(...)` receives a table instead of a function; tabby raises `fn: expected callable, got table`.
+- Bad: Current-buffer highlight leaks into the right-side fill because the segment does not close back to `TabLineFill`.
+
+### 6. Tests Required
+
+- Run headless startup:
+
+```powershell
+nvim --headless "+qa"
+```
+
+- Render multiple file buffers:
+
+```powershell
+nvim --headless "lua/plugins/bufferline.lua" "lua/plugins/lspconfig.lua" "+lua local ok, out = pcall(vim.fn.TabbyRenderTabline); assert(ok, out); assert(out:find('1 ')); assert(out:find('2 '))" "+qa"
+```
+
+- Verify `tabby.nvim` replaced old BufferLine:
+
+```powershell
+nvim --headless "+lua local plugins=require('lazy.core.config').plugins; assert(plugins['tabby.nvim']); assert(not plugins['bufferline.nvim'])" "+qa"
+```
+
+- Check stale command references:
+
+```powershell
+rg "BufferLine|akinsho/bufferline.nvim" lua
+```
+
+### 7. Wrong vs Correct
+
+#### Wrong
+
+```lua
+line.bufs().filter({ function(buf)
+  return vim.bo[buf.id].buflisted
+end })
+```
+
+#### Correct
+
+```lua
+line.bufs()
+  .filter(function(buf)
+    return vim.tbl_contains(displayed_buffers(), buf.id)
+  end)
+  .foreach(function(buf, index)
+    return buffer_segment(buf, index)
+  end)
 ```
 
 ---
