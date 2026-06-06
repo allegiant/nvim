@@ -667,3 +667,36 @@ Customized Snacks explorer key behavior: mapped explorer o to the existing confi
 ### Next Steps
 
 - None - task complete
+
+
+## Session 20: Replace bufferline with tabby buffer tabbar
+
+**Date**: 2026-06-06
+**Task**: Replace bufferline with tabby buffer tabbar
+**Branch**: `chore/update-window-resize-mappings`
+
+### Summary
+
+Replaced bufferline.nvim with a tabby.nvim buffer-only tabbar, added numbered buffer navigation, preserved Snacks explorer offset handling, tuned UI separators, and captured tabbar conventions in the frontend spec.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `3fbf06c` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
