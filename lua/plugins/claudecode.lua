@@ -1,7 +1,15 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-  opts = {},
+  opts = {
+    terminal = {
+      snacks_win_opts = {
+        position = "float",
+        width = 0.9,
+        height = 0.9
+      },
+    },
+  },
   config = function(_, opts)
     require("claudecode").setup(opts)
   end,

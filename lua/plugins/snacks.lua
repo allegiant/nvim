@@ -8,13 +8,13 @@ return {
   lazy = false,
   keys = {
     -- terminal
-    { "<leader>T",  group = "Terminal" },
+    { "<leader>t",  group = "Terminal" },
     { [[<C-\>]],    terminal.toggle,                                      desc = "Toggle Terminal" },
-    { "<leader>Tn", terminal.toggle_next,                                 desc = "New Terminal" },
-    { "<leader>Ts", terminal.select,                                      desc = "Select Terminal" },
+    { "<leader>tn", terminal.toggle_next,                                 desc = "New Terminal" },
+    { "<leader>ts", terminal.select,                                      desc = "Select Terminal" },
     -- file
     { "<leader>f",  group = "File" },
-    { "<leader>e",  explorer.open,                                       desc = "File Explorer" },
+    { "<leader>e",  explorer.open,                                        desc = "File Explorer" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
     { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>",               desc = "Find Buffers" },
     { "<leader>fh", "<cmd>lua Snacks.picker.help()<cr>",                  desc = "Find help_tags" },
