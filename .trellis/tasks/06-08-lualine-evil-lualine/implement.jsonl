@@ -1,6 +1,0 @@
-{"file":".trellis/spec/frontend/directory-structure.md","reason":"Confirms lua/plugins/lualine.lua owns statusline theme/options and plugin UI organization."}
-{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Defines lazy.nvim plugin spec shape and preference for local opts/declarative plugin UI configuration."}
-{"file":".trellis/spec/frontend/state-management.md","reason":"Guides plugin-local state and avoiding unnecessary globals while configuring lualine helpers."}
-{"file":".trellis/spec/frontend/type-safety.md","reason":"Guides defensive Lua checks for optional Neovim/plugin APIs in statusline components."}
-{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Required because this task changes config constants and adds local helpers; reinforces search-first and no premature abstraction."}
-{"file":".trellis/tasks/06-08-lualine-evil-lualine/research/lualine-evil-style.md","reason":"Contains lualine official options, evil_lualine/Eviline pattern, and repo-specific implementation mapping."}

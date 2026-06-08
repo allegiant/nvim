@@ -700,3 +700,36 @@ Replaced bufferline.nvim with a tabby.nvim buffer-only tabbar, added numbered bu
 ### Next Steps
 
 - None - task complete
+
+
+## Session 21: Configure floating cmdline UI
+
+**Date**: 2026-06-08
+**Task**: Configure floating cmdline UI
+**Branch**: `chore/update-window-resize-mappings`
+
+### Summary
+
+Configured lualine separators, added Noice floating cmdline with theme-derived colors, adjusted cmdheight startup behavior, and disabled Esc cancel in Snacks explorer.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `206a9f4` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

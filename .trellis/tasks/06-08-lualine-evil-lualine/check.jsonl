@@ -1,5 +1,0 @@
-{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Defines required Neovim headless startup checks and UI/plugin review checklist."}
-{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Check that the lualine change preserves plugin UI option ownership and lazy.nvim spec style."}
-{"file":".trellis/spec/frontend/type-safety.md","reason":"Check optional LSP/git/plugin APIs are guarded and do not break startup."}
-{"file":".trellis/spec/frontend/directory-structure.md","reason":"Check the change stays scoped to the statusline owner and does not touch unrelated tabline/config files."}
-{"file":".trellis/tasks/06-08-lualine-evil-lualine/research/lualine-evil-style.md","reason":"Check implemented behavior matches the selected gruvbox-material adapted Eviline approach."}
