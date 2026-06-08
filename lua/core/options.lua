@@ -112,6 +112,8 @@ opt.pumheight = 15
 opt.helpheight = 12
 opt.previewheight = 12
 opt.showcmd = false
+-- Keep a safe command area during startup; noice sets this back to 0 after it attaches.
+opt.cmdheight = 1
 -- just for nightly
 opt.cmdwinheight = 5
 opt.equalalways = false
