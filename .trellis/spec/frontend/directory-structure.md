@@ -25,6 +25,7 @@ lua/plugins/snacks.lua          # picker/dashboard/notifier UI, LSP navigation, 
 lua/plugins/snacks/explorer.lua # Snacks explorer helper/config consumed by lua/plugins/snacks.lua
 lua/plugins/bufferline.lua      # buffer tabline UI and buffer navigation mappings
 lua/plugins/lualine.lua     # statusline theme/options
+lua/plugins/noice.lua       # floating cmdline/message UI replacement options
 lua/plugins/toggleterm.lua  # terminal UI, terminal-mode mappings, Windows shell options
 lua/plugins/blink.lua       # completion, command-line completion, signature UI
 lua/plugins/whichkey.lua    # which-key behavior and disabled presets

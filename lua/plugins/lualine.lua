@@ -6,6 +6,7 @@ return {
   opts = {
     options = {
       theme = "gruvbox-material",
+      component_separators = { left = "", right = "" },
     },
     -- sections = {
     --   -- lualine_x = {

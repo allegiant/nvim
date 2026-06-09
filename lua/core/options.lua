@@ -97,12 +97,23 @@ opt.cursorline = true
 opt.cursorcolumn = true
 opt.list = true
 opt.showtabline = 2
+opt.fillchars = {
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  vert = "│",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+}
 opt.winwidth = 30
 opt.winminwidth = 10
 opt.pumheight = 15
 opt.helpheight = 12
 opt.previewheight = 12
 opt.showcmd = false
+-- Keep a safe command area during startup; noice sets this back to 0 after it attaches.
+opt.cmdheight = 1
 -- just for nightly
 opt.cmdwinheight = 5
 opt.equalalways = false

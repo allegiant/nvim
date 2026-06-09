@@ -18,17 +18,20 @@ M.picker_options = function(opts)
         win = {
           input = {
             keys = {
+              ["<Esc>"] = false,
               ["q"] = false,
             },
           },
           list = {
             keys = {
+              ["<Esc>"] = false,
               ["o"] = "confirm",
               ["q"] = false,
             },
           },
           preview = {
             keys = {
+              ["<Esc>"] = false,
               ["q"] = false,
             },
           },

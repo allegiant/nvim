@@ -1,9 +1,9 @@
 local vim = vim
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local map = vim.api.nvim_set_keymap
+
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 map("v", "<leader>y", '"+y', opts)
@@ -22,15 +22,13 @@ map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
 -- resizing window
-map("n", "H", "<C-w>3<", opts)
-map("n", "L", "<C-w>3>", opts)
-map("n", "K", "<C-w>2+<", opts)
-map("n", "J", "<C-w>2-", opts)
+map("n", "<C-Up>", "<C-w>2+", opts)
+map("n", "<C-Down>", "<C-w>2-", opts)
+map("n", "<C-Left>", "<C-w>3<", opts)
+map("n", "<C-Right>", "<C-w>3>", opts)
+
 -- split windows
 map("n", "<leader>sv", ":vsp<CR>", opts)
 map("n", "<leader>sh", ":sp<CR>", opts)
 
 map("n", "<leader>nl", ":nohlsearch<CR>", opts)
-
-local pluginskeys = {}
-return pluginskeys

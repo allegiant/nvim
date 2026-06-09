@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 19
-- **Last Active**: 2026-06-05
+- **Total Sessions**: 21
+- **Last Active**: 2026-06-08
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~669 | Active |
+| `journal-1.md` | ~735 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,8 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 21 | 2026-06-08 | Configure floating cmdline UI | `206a9f4` | `chore/update-window-resize-mappings` |
+| 20 | 2026-06-06 | Replace bufferline with tabby buffer tabbar | `3fbf06c` | `chore/update-window-resize-mappings` |
 | 19 | 2026-06-05 | Customize Snacks explorer keys | `7f8326c` | `master` |
 | 18 | 2026-06-05 | Replace nvim-tree with Snacks explorer | `739f31e` | `master` |
 | 17 | 2026-06-05 | Migrate nvim-treesitter for Neovim 0.12 | `2b6c6c5` | `master` |

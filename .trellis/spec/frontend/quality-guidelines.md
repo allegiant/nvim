@@ -36,7 +36,7 @@ There is no browser accessibility suite, frontend linter, or TypeScript check. R
 
 ### 1. Scope / Trigger
 
-- Trigger: Any change to Snacks explorer, file explorer keymaps, bufferline explorer offsets, or tree-buffer integrations such as ClaudeCode tree-add behavior.
+- Trigger: Any change to Snacks explorer, file explorer keymaps, tabbar explorer offsets, or tree-buffer integrations such as ClaudeCode tree-add behavior.
 - Applies when `folke/snacks.nvim` provides the file explorer through `lua/plugins/snacks.lua` and helper modules under `lua/plugins/snacks/`.
 
 ### 2. Signatures
@@ -55,16 +55,10 @@ explorer.open()
 explorer.options(opts?)
 ```
 
-- Bufferline explorer offset uses the Snacks layout wrapper filetype:
+- Tabbar explorer offset uses the Snacks layout wrapper filetype and must not render `File Explorer` text above the sidebar:
 
 ```lua
-offsets = {
-  {
-    filetype = "snacks_layout_box",
-    text = "File Explorer",
-    separator = true,
-  },
-}
+local explorer_filetype = "snacks_layout_box"
 ```
 
 ### 3. Contracts
@@ -73,8 +67,8 @@ offsets = {
 - `lua/plugins/snacks/explorer.lua` owns Snacks explorer helper/config code and must not add an `init.lua` under `lua/plugins/snacks/`.
 - Snacks explorer internal picker/list keymaps should stay at upstream defaults unless a task explicitly asks to override them.
 - Explorer-only picker key overrides belong under `picker.sources.explorer.win.<window>.keys`; do not change `picker.win.*.keys` unless the task intentionally changes every Snacks picker.
-- Disable an inherited Snacks picker key for explorer by setting the source-scoped key entry to `false`, for example `picker.sources.explorer.win.list.keys.q = false`.
-- If disabling an inherited picker key that exists in multiple picker windows, cover each inherited window used by the explorer (`input`, `list`, and `preview` for the default `q = "cancel"`).
+- Disable an inherited Snacks picker key for explorer by setting the source-scoped key entry to `false`, for example `picker.sources.explorer.win.list.keys.q = false` or `picker.sources.explorer.win.list.keys["<Esc>"] = false`.
+- If disabling an inherited picker key that exists in multiple picker windows, cover each inherited window used by the explorer (`input`, `list`, and `preview` for defaults such as `q = "cancel"` or `<Esc>` cancel behavior).
 - Snacks explorer is picker-backed, so filetypes such as `snacks_picker_list` and `snacks_layout_box` are not unique explorer-only identities.
 - Do not expose `ClaudeCodeTreeAdd` for Snacks picker filetypes unless claudecode upstream or local integration code actually supports resolving the selected Snacks explorer item.
 
@@ -87,7 +81,7 @@ offsets = {
 
 ### 5. Good/Base/Bad Cases
 
-- Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, bufferline offset targets `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
+- Good: `<leader>e` calls `explorer.open`, `explorer.options()` enables Snacks explorer, tabbar offset detects `snacks_layout_box`, and ClaudeCode tree-add remains scoped only to supported tree filetypes.
 - Good: Explorer-specific picker key changes use `picker.sources.explorer.win.list.keys`, such as mapping `o` to `confirm`, and disable inherited picker keys source-locally with `false`.
 - Base: A task changes only `<leader>e`; it still checks normal-Neovim duplicate keymaps and leaves VS Code-only `<leader>e` isolated in `lua/config/vscode.lua`.
 - Bad: Adding `snacks_picker_list` to `ClaudeCodeTreeAdd` filetypes just because Snacks explorer uses picker buffers.
@@ -139,6 +133,232 @@ rg "NvimTree|nvim-tree/nvim-tree.lua|NvimTreeToggle|nvimtree" lua
   "<cmd>ClaudeCodeTreeAdd<cr>",
   ft = { "neo-tree", "oil", "minifiles", "netrw" },
 }
+```
+
+---
+
+## Scenario: Tabby Buffer Tabbar
+
+### 1. Scope / Trigger
+
+- Trigger: Any change to `lua/plugins/bufferline.lua`, buffer tabbar rendering, buffer tabbar keymaps, or file-explorer offset behavior.
+- Applies when `nanozuki/tabby.nvim` renders the file buffer tabbar for this Neovim config.
+
+### 2. Signatures
+
+- Plugin spec:
+
+```lua
+{
+  "nanozuki/tabby.nvim",
+  event = "VimEnter",
+  keys = {
+    { "<Tab>", jump_next_buffer, desc = "Buffer next" },
+    { "<S-Tab>", jump_prev_buffer, desc = "Buffer prev" },
+    { "<leader>b1", function() jump_to_buffer(1) end, desc = "Buffer 1" },
+  },
+  config = function()
+    require("tabby").setup({ line = render_tabline })
+  end,
+}
+```
+
+- Displayed-buffer contract:
+
+```lua
+local function displayed_buffers()
+  return { bufnr1, bufnr2, ... }
+end
+```
+
+### 3. Contracts
+
+- `tabby.nvim` owns the top file-buffer tabbar; do not reintroduce `akinsho/bufferline.nvim` or `BufferLine*` commands.
+- The tabbar renders normal file buffers only. Filter unnamed buffers, unlisted buffers, non-empty `buftype`, Snacks explorer/picker/dashboard buffers, and terminals.
+- Buffer display order and `<leader>bN` jump order must use the same `displayed_buffers()` helper.
+- The visual format is a head segment plus closed slant buffer segments, for example `   1 lazy.lua    2 lspconfig.lua `.
+- When Snacks explorer is open on the left, hide the head segment and render only an offset followed by the first buffer segment, for example `[offset]  1 lazy.lua `.
+- Lowercase `<leader>t...` is not a tab-page workflow in this config. Terminal mappings use uppercase `<leader>T...`.
+
+### 4. Validation & Error Matrix
+
+- `BufferLine` command remains in runtime Lua -> stale migration; remove it.
+- `akinsho/bufferline.nvim` remains in the lazy spec -> duplicate tabbar plugin; replace it with `nanozuki/tabby.nvim`.
+- A buffer appears in the tabbar but `<leader>bN` jumps elsewhere -> display/jump helper mismatch; use one helper for both.
+- `snacks_layout_box`, picker, dashboard, or terminal buffers appear in the tabbar -> filter bug; update the displayed-buffer predicate.
+- Explorer open and `` overlaps the sidebar -> offset bug; hide the head segment while left explorer offset is active.
+
+### 5. Good/Base/Bad Cases
+
+- Good: `TabbyRenderTabline()` returns a string containing numbered normal file buffers and closed ``/`` segments.
+- Good: `<Tab>`, `<S-Tab>`, and `<leader>b1..b9` all navigate within `displayed_buffers()`.
+- Base: With only one normal file buffer, the tabbar still renders the head plus one numbered segment.
+- Bad: `line.bufs().filter(...)` receives a table instead of a function; tabby raises `fn: expected callable, got table`.
+- Bad: Current-buffer highlight leaks into the right-side fill because the segment does not close back to `TabLineFill`.
+
+### 6. Tests Required
+
+- Run headless startup:
+
+```powershell
+nvim --headless "+qa"
+```
+
+- Render multiple file buffers:
+
+```powershell
+nvim --headless "lua/plugins/bufferline.lua" "lua/plugins/lspconfig.lua" "+lua local ok, out = pcall(vim.fn.TabbyRenderTabline); assert(ok, out); assert(out:find('1 ')); assert(out:find('2 '))" "+qa"
+```
+
+- Verify `tabby.nvim` replaced old BufferLine:
+
+```powershell
+nvim --headless "+lua local plugins=require('lazy.core.config').plugins; assert(plugins['tabby.nvim']); assert(not plugins['bufferline.nvim'])" "+qa"
+```
+
+- Check stale command references:
+
+```powershell
+rg "BufferLine|akinsho/bufferline.nvim" lua
+```
+
+### 7. Wrong vs Correct
+
+#### Wrong
+
+```lua
+line.bufs().filter({ function(buf)
+  return vim.bo[buf.id].buflisted
+end })
+```
+
+#### Correct
+
+```lua
+line.bufs()
+  .filter(function(buf)
+    return vim.tbl_contains(displayed_buffers(), buf.id)
+  end)
+  .foreach(function(buf, index)
+    return buffer_segment(buf, index)
+  end)
+```
+
+---
+
+## Scenario: Noice Floating Cmdline
+
+### 1. Scope / Trigger
+
+- Trigger: Any change to `lua/plugins/noice.lua`, command-line UI, message UI, `cmdheight`, or floating command-line popup behavior.
+- Applies when `folke/noice.nvim` replaces the native bottom cmdline with a floating cmdline while the rest of the UI remains owned by Snacks, blink, lualine, and tabby.
+
+### 2. Signatures
+
+- Plugin spec:
+
+```lua
+{
+  "folke/noice.nvim",
+  lazy = false,
+  dependencies = { "MunifTanjim/nui.nvim" },
+  opts = opts,
+  config = function(_, noice_opts)
+    set_noice_highlights()
+    require("noice").setup(noice_opts)
+  end,
+}
+```
+
+- Command-line view contract:
+
+```lua
+opts.cmdline = {
+  enabled = true,
+  view = "cmdline_popup",
+}
+
+opts.popupmenu = {
+  enabled = true,
+  backend = "nui",
+}
+```
+
+- Startup command-height contract:
+
+```lua
+-- in lua/core/options.lua: keep startup safe before noice attaches
+opt.cmdheight = 1
+
+-- in lua/plugins/noice.lua: after noice is running
+vim.opt.cmdheight = 0
+```
+
+### 3. Contracts
+
+- `lua/core/options.lua` should keep a safe startup command area (`cmdheight = 1`) so native startup messages do not render into an early zero-height message area before noice attaches.
+- `lua/plugins/noice.lua` owns the delayed switch to `cmdheight = 0`; only set it after `require("noice.config").is_running()` is true.
+- Noice colors should derive from the active colorscheme's highlight groups (`Normal`, `NormalFloat`, `FloatBorder`, `Pmenu`, `PmenuSel`, `Search`, `Comment`, `NonText`) rather than hard-coded theme hex values.
+- Reapply noice custom highlights on `ColorScheme` with an augroup so colorscheme changes do not leave stale colors.
+- Keep noice scope narrow unless a task explicitly asks otherwise: avoid taking over notifications, LSP progress, hover, signature, and message routing if Snacks/blink already own those surfaces.
+
+### 4. Validation & Error Matrix
+
+- `cmdheight = 0` in core options before noice attaches -> startup can flash native message/cmdline rows; keep startup at `1` and hide after noice is running.
+- Hard-coded noice hex palette -> noice clashes when changing colorscheme; derive from highlight groups.
+- `ColorScheme` autocmd without an augroup -> config reloads can duplicate highlight restoration hooks; use a clearable augroup.
+- Noice `messages`/`notify`/LSP views enabled without intent -> can conflict with Snacks notifications or existing LSP UI; disable non-MVP surfaces.
+- Expecting rounded background clipping in terminal floats -> impossible in terminal character grids; only border glyphs can appear rounded, backgrounds remain rectangular.
+
+### 5. Good/Base/Bad Cases
+
+- Good: `cmdline_popup`, `popupmenu`, and `cmdline_popupmenu` use project-owned noice highlight groups derived from current theme highlights.
+- Good: noice uses `single` borders when the background is visually rectangular, avoiding a rounded border around a rectangular background.
+- Base: With noice disabled or unavailable, native `cmdheight = 1` remains a safe fallback during startup.
+- Bad: Mapping `NormalFloat` to hard-coded gruvbox colors in noice; this breaks on the next colorscheme.
+- Bad: Setting `cmdheight = 0` globally in core options and assuming noice has already attached.
+
+### 6. Tests Required
+
+- Run headless startup:
+
+```powershell
+nvim --headless "+luafile init.lua" "+qa"
+```
+
+- Verify plugin graph:
+
+```powershell
+nvim --headless "+lua local plugins=require('lazy.core.config').plugins; assert(plugins['noice.nvim']); assert(plugins['nui.nvim'])" "+qa"
+```
+
+- Verify noice views/highlights after `VimEnter`: assert `cmdline_popup`, `popupmenu`, and `cmdline_popupmenu` point `winhighlight` at Noice-owned groups and that `cmdheight` becomes `0` after noice is running.
+- Search `lua/plugins/noice.lua` for hard-coded theme hex values (`#[0-9a-fA-F]{6}`); none should remain unless a task explicitly chooses a fixed palette.
+
+### 7. Wrong vs Correct
+
+#### Wrong
+
+```lua
+opt.cmdheight = 0
+
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopup", { fg = "#3c3836", bg = "#eadfbd" })
+```
+
+#### Correct
+
+```lua
+opt.cmdheight = 1
+
+local function get_hl(name)
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
+  return ok and type(hl) == "table" and hl or {}
+end
+
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopup", {
+  fg = get_hl("Normal").fg,
+  bg = get_hl("NormalFloat").bg or get_hl("Pmenu").bg or get_hl("Normal").bg,
+})
 ```
 
 ---

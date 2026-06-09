@@ -1,15 +1,5 @@
 local M = {}
 
-local function terminal_normal_keycodes()
-  return [[<C-\><C-n>]]
-end
-
-local function terminal_wincmd(direction)
-  return function()
-    vim.cmd.wincmd(direction)
-  end
-end
-
 local function toggle_current_terminal(bufnr)
   if not vim.api.nvim_buf_is_valid(bufnr) then
     return
@@ -43,44 +33,6 @@ local terminal_opts = {
         end,
         mode = "t",
         desc = "Toggle current terminal",
-      },
-      term_normal = {
-        "<Esc>",
-        terminal_normal_keycodes,
-        mode = "t",
-        expr = true,
-        desc = "Exit terminal mode",
-      },
-      term_normal_jk = {
-        "jk",
-        terminal_normal_keycodes,
-        mode = "t",
-        expr = true,
-        desc = "Exit terminal mode",
-      },
-      term_nav_left = {
-        "<C-h>",
-        terminal_wincmd("h"),
-        mode = "t",
-        desc = "Go to left window",
-      },
-      term_nav_down = {
-        "<C-j>",
-        terminal_wincmd("j"),
-        mode = "t",
-        desc = "Go to lower window",
-      },
-      term_nav_up = {
-        "<C-k>",
-        terminal_wincmd("k"),
-        mode = "t",
-        desc = "Go to upper window",
-      },
-      term_nav_right = {
-        "<C-l>",
-        terminal_wincmd("l"),
-        mode = "t",
-        desc = "Go to right window",
       },
     },
   },
