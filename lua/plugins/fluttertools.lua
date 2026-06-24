@@ -23,7 +23,7 @@ return {
       focus_on_open = false,
     },
     debugger = { -- integrate with nvim dap + install dart code debugger
-      enabled = true,
+      enabled = false,
     },
   }
 }

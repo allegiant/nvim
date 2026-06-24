@@ -97,12 +97,15 @@ return {
   },
   {
     "saghen/blink.pairs",
+    enabled = true,
+    dependencies = 'saghen/blink.lib',
     version = "*",
-    dependencies = "saghen/blink.download",
+    build = function() require('blink.pairs').download():pwait(60000) end,
     opts = {
       mappings = {
         enabled = true,
         cmdline = true,
+        disabled_filetypes = {},
         pairs = {},
       },
       highlights = {
