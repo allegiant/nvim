@@ -766,3 +766,37 @@ Migrated blink.cmp from v1.10 (version=1.*) to v2/main: blink.lib dep, cargo bui
 ### Next Steps
 
 - None - task complete
+
+
+## Session 23: LSP progress latest-only + blink frecency cleanup
+
+**Date**: 2026-07-30
+**Task**: LSP progress latest-only + blink frecency cleanup
+**Branch**: `master`
+
+### Summary
+
+LSP progress notify keeps only latest message per client to avoid multi-token lua_ls spam; drop explicit blink frecency path and use default stdpath state.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `e149b6f` | (see git log) |
+| `dac096d` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
