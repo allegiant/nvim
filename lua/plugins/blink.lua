@@ -74,7 +74,6 @@ local opts = {
     max_typos = function(keyword) return math.floor(#keyword / 4) end,
     frecency = {
       enabled = true,
-      path = vim.fn.stdpath('state') .. '/blink/cmp/frecency.dat',
     },
     use_proximity = true,
     -- prioritize exact matches before score
