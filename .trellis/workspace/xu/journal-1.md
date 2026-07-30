@@ -733,3 +733,36 @@ Configured lualine separators, added Noice floating cmdline with theme-derived c
 ### Next Steps
 
 - None - task complete
+
+
+## Session 22: Upgrade blink.cmp to v2
+
+**Date**: 2026-07-30
+**Task**: Upgrade blink.cmp to v2
+**Branch**: `master`
+
+### Summary
+
+Migrated blink.cmp from v1.10 (version=1.*) to v2/main: blink.lib dep, cargo build for rust fuzzy, removed unsafe_no_lock. Fixed rustc 1.87→1.97.1 build failure. Applied P0 opts: exact sort, treesitter LSP labels, doc auto_show 200ms, signature border, cmdline ghost_text, disable :! cmdline source on Windows.
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `f4dd26c` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

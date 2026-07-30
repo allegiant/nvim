@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 21
-- **Last Active**: 2026-06-08
+- **Total Sessions**: 22
+- **Last Active**: 2026-07-30
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~735 | Active |
+| `journal-1.md` | ~768 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 22 | 2026-07-30 | Upgrade blink.cmp to v2 | `f4dd26c` | `master` |
 | 21 | 2026-06-08 | Configure floating cmdline UI | `206a9f4` | `chore/update-window-resize-mappings` |
 | 20 | 2026-06-06 | Replace bufferline with tabby buffer tabbar | `3fbf06c` | `chore/update-window-resize-mappings` |
 | 19 | 2026-06-05 | Customize Snacks explorer keys | `7f8326c` | `master` |
