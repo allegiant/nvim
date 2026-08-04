@@ -962,3 +962,32 @@ Encapsulated missing-server handling in plugins/lsp/utils.lua ensure_executable(
 ### Next Steps
 
 - None
+
+---
+
+**Date**: 2026-08-04
+**Task**: conform stop_after_first fix + claudecode removal
+**Branch**: `master`
+
+### Summary
+
+Fixed conform.nvim prettierd/prettier lists: default pipeline semantics ran both sequentially (prettier not installed); added stop_after_first = true and extracted shared list. Verified lua_ls LSP formatting infers 2-space indent (no 4-space reflow risk from its settings). Removed claudecode.nvim plugin + whichkey <leader>a group + lazy-lock entry; deleted empty untracked lua/overseer template dir. Confirmed plugin set fully consistent (installed == locked == configured, 17 plugins).
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `868f2ce` | (see git log) |
+| `e58663d` | (see git log) |
+
+### Testing
+
+- [OK] conform resolves only prettierd for html; startup clean; no claudecode references
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Run :Lazy clean to remove local claudecode.nvim dir
