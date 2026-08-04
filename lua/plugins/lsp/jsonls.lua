@@ -1,18 +1,8 @@
 local lsp_utils = require("plugins.lsp.utils")
 
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local opts = {
-  capabilities = capabilities,
-  cmd = { 'vscode-json-language-server', '--stdio' },
-  filetypes = { 'json', 'jsonc' },
-  init_options = {
-    provideFormatter = true,
-  },
-  root_markers = { '.git' },
-}
+-- cmd/filetypes/init_options/root_markers 均使用 lspconfig 内置默认值
+-- (lsp/jsonls.lua)；默认 cmd 会优先使用项目 node_modules/.bin 下的 server
+-- snippetSupport 由 blink.cmp 统一注入，无需手动覆盖 capabilities
 
 local M = {}
 
@@ -21,7 +11,6 @@ M.setup = function()
     return
   end
 
-  vim.lsp.config('jsonls', opts)
   vim.lsp.enable('jsonls')
 end
 

@@ -1,8 +1,7 @@
 local lsp_utils = require("plugins.lsp.utils")
 
+-- cmd/filetypes 使用 lspconfig 内置默认值 (lsp/sqls.lua)
 local opts = {
-  cmd = { "sqls" },
-  filetypes = { "sql", "mysql" },
   root_markers = { "config.yml", ".sqlsrc.yml" }
 }
 

@@ -1,16 +1,7 @@
 local lsp_utils = require("plugins.lsp.utils")
 
+-- cmd/filetypes/root_markers 均使用 lspconfig 内置默认值 (lsp/pylsp.lua)
 local opts = {
-  cmd = { 'pylsp' },
-  filetypes = { 'python' },
-  root_markers = {
-    'pyproject.toml',
-    'setup.py',
-    'setup.cfg',
-    'requirements.txt',
-    'Pipfile',
-    '.git',
-  },
   settings = {
     pylsp = {
       plugins = {
