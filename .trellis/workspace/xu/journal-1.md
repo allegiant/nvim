@@ -869,3 +869,40 @@ Reviewed lspconfig setup. Simplified per-server modules to only override lspconf
 ### Next Steps
 
 - Note: python-lsp-server / sqls / json-lsp not installed via mason; guards skip them silently (intended)
+
+---
+
+**Date**: 2026-08-04
+**Task**: Full nvim config review and cleanup
+**Branch**: `master`
+
+### Summary
+
+Reviewed all 32 config files. Fixed: init.lua top-level require 'lspconfig' defeating lazy-load; formatoptions global/local contradiction (global now '1jlq' + FileType guard); dead core/utils.lua; ineffective lazy keys `group` entries moved to which-key v3 spec; vscode.lua vim.lsp.buf.* mappings (no-ops in vscode-neovim) replaced with VSCode actions; installed sqruff via mason for conform SQL formatting; added dart/python/bash/yaml/toml treesitter parsers. Cleaned redundant defaults (hidden/magic/encoding, dup netrw, dup mapleader), redundant lua/dart indent autocmds, dead comments.
+
+### Main Changes
+
+- init.lua, core/options.lua, core/autocmds.lua, config/lazy.lua, config/vscode.lua
+- plugins/whichkey.lua (spec groups), bufferline/snacks/claudecode (drop group entries)
+- plugins/treesitter.lua (parsers), lualine.lua (dead comments)
+- Deleted lua/core/utils.lua
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `b14bded` | (see git log) |
+
+### Testing
+
+- [OK] Headless startup clean; lspconfig no longer eagerly loaded; leader/formatoptions correct
+- [OK] sh/dart buffers get treesitter highlighting; sqruff installed via mason
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Note: lazy.nvim keys spec has no `group` support (that is LazyVim distro integration); register groups in which-key spec
+- Watch: noice nui popupmenu vs blink cmdline menu if double cmdline UI ever appears
