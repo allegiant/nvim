@@ -800,3 +800,37 @@ LSP progress notify keeps only latest message per client to avoid multi-token lu
 ### Next Steps
 
 - None - task complete
+
+---
+
+**Date**: 2026-08-04
+**Task**: Replace flutter-tools with dartls via nvim-lspconfig
+**Branch**: `master`
+
+### Summary
+
+Remove flutter-tools.nvim; enable dartls through lspconfig built-in defaults. New module `plugins/lsp/dartls.lua` only guards on `dart` executable (dartls ships with Dart/Flutter SDK, not available in mason registry) and calls `vim.lsp.enable('dartls')`; cmd/filetypes/root_markers/init_options/settings all come from lspconfig defaults. lazy-lock.json cleaned (gitignored).
+
+### Main Changes
+
+- Add `lua/plugins/lsp/dartls.lua` (executable check + enable)
+- Register `plugins.lsp.dartls` in `lspconfig.lua`
+- Delete `lua/plugins/fluttertools.lua`
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `1756499` | (see git log) |
+
+### Testing
+
+- [OK] Headless nvim loads module; resolved dartls config retains lspconfig default init_options
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Optional: add Windows Defender exclusions for Flutter SDK / pub cache to speed up dartls cold-start analysis (script left on Desktop: add-defender-exclusions.bat)
