@@ -834,3 +834,38 @@ Remove flutter-tools.nvim; enable dartls through lspconfig built-in defaults. Ne
 ### Next Steps
 
 - Optional: add Windows Defender exclusions for Flutter SDK / pub cache to speed up dartls cold-start analysis (script left on Desktop: add-defender-exclusions.bat)
+
+---
+
+**Date**: 2026-08-04
+**Task**: LSP config review and cleanup
+**Branch**: `master`
+
+### Summary
+
+Reviewed lspconfig setup. Simplified per-server modules to only override lspconfig built-in defaults where needed (blink v2 injects capabilities via vim.lsp.config('*') so no manual capabilities). Fixed jsonls static cmd overriding lspconfig's project-local-server cmd function. Added bashls module (mason already had bash-language-server; prettierd already wired via conform.nvim). Normalized vue_ls.lua formatting to repo style.
+
+### Main Changes
+
+- jsonls.lua: drop redundant cmd/filetypes/init_options/root_markers/capabilities
+- pylsp.lua / sqls.lua: keep only settings / root_markers deltas
+- vue_ls.lua: remove no-op config call, unify quotes/indent style, add recipe comment
+- Add lua/plugins/lsp/bashls.lua, register in lspconfig.lua
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `2a08b9f` | (see git log) |
+
+### Testing
+
+- [OK] Headless nvim: all modules load; resolved configs verified (jsonls cmd=function, pylsp settings merged, sqls root_markers, vtsls vue plugin path exists on disk, bashls enabled)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Note: python-lsp-server / sqls / json-lsp not installed via mason; guards skip them silently (intended)
