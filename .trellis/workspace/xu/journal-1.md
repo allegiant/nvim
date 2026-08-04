@@ -934,3 +934,31 @@ rustaceanvim used with bare defaults (no RustLsp keymaps, no DAP); its extras un
 ### Next Steps
 
 - If Rust debugging needed later: add nvim-dap + codelldb manually
+
+---
+
+**Date**: 2026-08-04
+**Task**: Unify LSP server guards with ensure_executable
+**Branch**: `master`
+
+### Summary
+
+Encapsulated missing-server handling in plugins/lsp/utils.lua ensure_executable(): executable() check + FileType once-notify with install hint. All 8 server modules migrated off mason-registry checks; mason kept purely as installer (its bin dir is on PATH). rust_analyzer/dartls now warn when opening rust/dart files without the server.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| (see git log) | refactor(lsp): 统一 executable 守卫并封装缺失提醒 |
+
+### Testing
+
+- [OK] rust/lua clients attach; fake-missing binary triggers notify exactly once across repeated FileType events
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None
