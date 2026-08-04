@@ -8,18 +8,5 @@ return {
       theme = "gruvbox-material",
       component_separators = { left = "", right = "" },
     },
-    -- sections = {
-    --   -- lualine_x = {
-    --   --   {
-    --   --     require("lazy.status").updates,
-    --   --     cond = require("lazy.status").has_updates,
-    --   --     color = { fg = "#ff9e64" },
-    --   --   },
-    --   -- },
-    --   lualine_y = {
-    --     "progress",
-    --     -- "lsp_progress",
-    --   },
-    -- }
   }
 }

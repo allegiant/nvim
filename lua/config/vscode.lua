@@ -61,15 +61,15 @@ vim.keymap.set(
 -- code action
 vim.keymap.set({ "n" }, "ga", "<cmd>lua require('vscode').action('editor.action.codeAction')<CR>")
 vim.keymap.set({ "n" }, "gA", "<cmd>lua require('vscode').action('editor.action.sourceAction')<CR>")
-vim.keymap.set({ "n" }, "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.keymap.set({ "n" }, "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-vim.keymap.set({ "n" }, "gf", "<cmd>lua vim.lsp.buf.references()<CR>")
-vim.keymap.set({ "n" }, "gr", "<cmd>lua vim.lsp.buf.rename()<CR>")
+vim.keymap.set({ "n" }, "gi", "<cmd>lua require('vscode').action('editor.action.goToImplementation')<CR>")
+vim.keymap.set({ "n" }, "gd", "<cmd>lua require('vscode').action('editor.action.revealDefinition')<CR>")
+vim.keymap.set({ "n" }, "gf", "<cmd>lua require('vscode').action('editor.action.goToReferences')<CR>")
+vim.keymap.set({ "n" }, "gr", "<cmd>lua require('vscode').action('editor.action.rename')<CR>")
 vim.keymap.set({ "n" }, "gR", "<cmd>lua require('vscode').action('editor.action.Refactor')<CR>")
 vim.keymap.set({ "n" }, "gj", "<cmd>lua require('vscode').action('editor.action.marker.next')<CR>")
 vim.keymap.set({ "n" }, "gk", "<cmd>lua require('vscode').action('editor.action.marker.prev')<CR>")
-vim.keymap.set({ "n" }, "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
-vim.keymap.set({ "n" }, "<leader>fm", "<cmd>lua vim.lsp.buf.format()<CR>")
+vim.keymap.set({ "n" }, "gh", "<cmd>lua require('vscode').action('editor.action.showHover')<CR>")
+vim.keymap.set({ "n" }, "<leader>fm", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
 vim.keymap.set({ "n" }, "<leader>e", function() vim.fn.VSCodeNotify('workbench.view.explorer') end)
 
 --folding

@@ -292,7 +292,6 @@ local function render_tabline(line)
 end
 
 local keys = {
-  { "<leader>b",  group = "Buffer" },
   { "<Tab>",      cycle_buffer(1),      desc = "Next buffer" },
   { "<S-Tab>",    cycle_buffer(-1),     desc = "Previous buffer" },
   { "<leader>bd", delete_current_buffer, desc = "Delete buffer" },

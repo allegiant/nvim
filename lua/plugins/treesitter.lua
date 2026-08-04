@@ -11,6 +11,11 @@ local parsers = {
   "markdown_inline",
   "vue",
   "rust",
+  "dart",
+  "python",
+  "bash",
+  "yaml",
+  "toml",
 }
 
 local filetypes = {
@@ -26,6 +31,11 @@ local filetypes = {
   "markdown",
   "vue",
   "rust",
+  "dart",
+  "python",
+  "sh",
+  "yaml",
+  "toml",
 }
 
 return {

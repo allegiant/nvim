@@ -8,12 +8,10 @@ return {
   lazy = false,
   keys = {
     -- terminal
-    { "<leader>t",  group = "Terminal" },
     { [[<C-\>]],    terminal.toggle,                                      desc = "Toggle Terminal" },
     { "<leader>tn", terminal.toggle_next,                                 desc = "New Terminal" },
     { "<leader>ts", terminal.select,                                      desc = "Select Terminal" },
     -- file
-    { "<leader>f",  group = "File" },
     { "<leader>e",  explorer.open,                                        desc = "File Explorer" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
     { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>",               desc = "Find Buffers" },
@@ -25,12 +23,10 @@ return {
     { "gd",         "<cmd>lua Snacks.picker.lsp_definitions()<CR>",       desc = "definition" },
     { "gD",         "<cmd>lua Snacks.picker.lsp_declarations()<CR>",      desc = "Declaration" },
     { "gt",         "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>",  desc = "Type Definitions" },
-    -- { "go",         "<cmd>lua Snacks.picker.diagnostics()<cr>",           desc = "diagnostic" },
     { "gO",         "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>",    desc = "Buffer diagnostic" },
     { "gs",         "<cmd>lua Snacks.picker.lsp_symbols()<CR>",           desc = "Symbols" },
     { "gS",         "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>", desc = "Workspace Symbols" },
     -- git
-    { "<leader>g",  group = "Git" },
     { "<leader>gg", function() Snacks.lazygit.open() end,                 desc = "Lazygit" },
     { "<leader>ga", function() Snacks.git.blame_line() end,               desc = "Git Blame Line" },
     { "<leader>gb", function() Snacks.picker.git_branches() end,          desc = "Git Branches" },

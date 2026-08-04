@@ -18,7 +18,6 @@ if vim.fn.has("win32") == 1 then
 end
 
 --disable_distribution_plugins
-vim_g.loaded = 1
 vim_g.loaded_netrwPlugin = 1
 vim_g.loaded_gzip = 1
 vim_g.loaded_tar = 1
@@ -35,7 +34,6 @@ vim_g.loaded_2html_plugin = 1
 vim_g.loaded_logiPat = 1
 vim_g.loaded_rrhelper = 1
 vim_g.loaded_netrw = 1
-vim_g.loaded_netrwPlugin = 1
 vim_g.loaded_netrwSettings = 1
 vim_g.loaded_netrwFileHandlers = 1
 
@@ -44,11 +42,8 @@ opt.termguicolors = true
 opt.mouse = 'nv'
 opt.errorbells = true
 opt.visualbell = true
-opt.hidden = true
 opt.fileformats = 'unix,mac,dos'
-opt.magic = true
 opt.virtualedit = 'block'
-opt.encoding = 'utf-8'
 opt.viewoptions = 'folds,cursor,curdir,slash,unix'
 opt.sessionoptions = 'curdir,help,tabpages,winsize'
 opt.wildignorecase = true
@@ -126,7 +121,8 @@ opt.winblend = 10
 
 opt.undofile = true
 opt.synmaxcol = 2500
-opt.formatoptions = '1jcroql'
+-- 不含 c/r/o：禁止自动续注释（FileType 守卫见 autocmds.lua）
+opt.formatoptions = '1jlq'
 opt.textwidth = 80
 opt.expandtab = true
 opt.autoindent = true

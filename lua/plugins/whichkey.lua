@@ -1,4 +1,13 @@
 local opts = {
+  -- lazy.nvim 的 keys 不支持 group 字段，组名须注册在 which-key spec
+  spec = {
+    { "<leader>a", group = "AI/Claude Code" },
+    { "<leader>b", group = "Buffer" },
+    { "<leader>f", group = "File" },
+    { "<leader>g", group = "Git" },
+    { "<leader>s", group = "Split" },
+    { "<leader>t", group = "Terminal" },
+  },
   plugins = {
     spelling = {
       enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
@@ -17,7 +26,7 @@ local opts = {
 }
 
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts =opts,
-  }
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  opts = opts,
+}
