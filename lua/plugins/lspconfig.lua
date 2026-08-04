@@ -31,5 +31,6 @@ return {
     require("plugins.lsp.pylsp").setup()
     require("plugins.lsp.vue_ls").setup()
     require("plugins.lsp.sqls").setup()
+    require("plugins.lsp.dartls").setup()
   end,
 }
