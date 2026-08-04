@@ -1023,3 +1023,31 @@ User tried akinsho/bufferline.nvim, disliked aesthetics; reverted to tabby (HEAD
 ### Next Steps
 
 - None
+
+---
+
+**Date**: 2026-08-04
+**Task**: whichkey.lua review + optimization
+**Branch**: `master`
+
+### Summary
+
+Reviewed which-key config: all 5 leader groups (b/f/g/s/t) have real mappings, no orphan or missing groups; spelling/presets disables are effective overrides (defaults are all-on in installed stable-8-g3aab214). Simplified 32 -> 25 lines: dropped default-and-unused spelling.suggestions=20, inlined opts variable, replaced doc-copied English comments with concise Chinese. Confirmed group registration in whichkey.lua is the right call (lazy keys spec has no group field; group metadata is which-key's own concern; scattered wk.add() would force eager load). Verified effective config via which-key.config after force-load.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `9e2788d` | refactor(whichkey): 精简配置,删默认值与文档抄录注释 |
+
+### Testing
+
+- [OK] Force-loaded which-key: 5 groups registered, spelling=false, presets.operators=false
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None
