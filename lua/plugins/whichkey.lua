@@ -1,7 +1,6 @@
 local opts = {
   -- lazy.nvim 的 keys 不支持 group 字段，组名须注册在 which-key spec
   spec = {
-    { "<leader>a", group = "AI/Claude Code" },
     { "<leader>b", group = "Buffer" },
     { "<leader>f", group = "File" },
     { "<leader>g", group = "Git" },
