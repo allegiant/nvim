@@ -1,10 +1,12 @@
+-- prettierd 优先,prettier 兜底;stop_after_first 避免流水线式重复格式化
+local prettier = { "prettierd", "prettier", stop_after_first = true }
+
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
     {
-      -- Customize or remove this keymap to your liking
       "<leader>fm",
       function()
         require("conform").format({ async = true })
@@ -17,15 +19,14 @@ return {
     default_format_opts = {
       lsp_format = "fallback",
     },
-    -- Define your formatters
     formatters_by_ft = {
-      vue = { "prettierd", "prettier" },
-      html = { "prettierd", "prettier" },
-      javascript = { "prettierd", "prettier" },
-      javascriptreact = { "prettierd", "prettier" },
-      markdown = { "prettierd", "prettier" },
-      typescript = { "prettierd", "prettier" },
-      typescriptreact = { "prettierd", "prettier" },
+      vue = prettier,
+      html = prettier,
+      javascript = prettier,
+      javascriptreact = prettier,
+      markdown = prettier,
+      typescript = prettier,
+      typescriptreact = prettier,
       sql = { "sqruff" }
     },
     format_on_save = {
