@@ -991,3 +991,35 @@ Fixed conform.nvim prettierd/prettier lists: default pipeline semantics ran both
 ### Next Steps
 
 - Run :Lazy clean to remove local claudecode.nvim dir
+
+---
+
+**Date**: 2026-08-04
+**Task**: tabbar switch (bufferline.nvim -> tabby) + snacks simplification
+**Branch**: `master`
+
+### Summary
+
+User tried akinsho/bufferline.nvim, disliked aesthetics; reverted to tabby (HEAD version = buffers-only custom line, no tabpages/windows). Root-caused "wedge separators not rendering": Write/Edit tool silently drops PUA glyphs (U+E0BA/E0BC became empty strings); fixed by writing codepoints via python (saved as memory: write-tool-drops-pua-glyphs). Simplified tabby config 330 -> 157 lines: dropped custom buffer picker (use Snacks.picker.buffers), special_filetypes whitelist (^snacks_ match covers it), redundant config wrapper, unused buf_name option. Darkened current-buffer fg to #1d2021. Simplified snacks terminal.lua (100 -> 34 lines) and explorer.lua. Fixed lua_ls warnings: vim.notify level string -> vim.log.levels.INFO; _G.Snacks -> rawget(_G, "Snacks") (undefined-field).
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `ced7c05` | refactor(tabbar): 恢复 tabby 并精简为纯 buffer 标签栏 |
+| `0142ad9` | refactor(snacks): 精简 terminal/explorer 并修复 notify level 告警 |
+
+### Testing
+
+- [OK] Headless TabbyRenderTabline: 3 buffers listed with wedge separators (U+E0BA/E0BC/E7C5 bytes verified)
+- [OK] Explorer offset path: 40-col blank replaces head icon when snacks_layout_box docked left
+- [OK] lua_ls diagnostics on bufferline.lua: 0
+- [OK] lazy install/clean: bufferline.nvim removed, tabby.nvim restored
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None
