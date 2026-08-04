@@ -33,5 +33,6 @@ return {
     require("plugins.lsp.sqls").setup()
     require("plugins.lsp.dartls").setup()
     require("plugins.lsp.bashls").setup()
+    require("plugins.lsp.rust_analyzer").setup()
   end,
 }
