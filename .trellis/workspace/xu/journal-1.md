@@ -906,3 +906,31 @@ Reviewed all 32 config files. Fixed: init.lua top-level require 'lspconfig' defe
 
 - Note: lazy.nvim keys spec has no `group` support (that is LazyVim distro integration); register groups in which-key spec
 - Watch: noice nui popupmenu vs blink cmdline menu if double cmdline UI ever appears
+
+---
+
+**Date**: 2026-08-04
+**Task**: Replace rustaceanvim with lspconfig rust_analyzer
+**Branch**: `master`
+
+### Summary
+
+rustaceanvim used with bare defaults (no RustLsp keymaps, no DAP); its extras unused. Replaced with plugins/lsp/rust_analyzer.lua (executable guard, rust-analyzer from rustup) + registered in lspconfig.lua. Deleted rustaceanvim.lua, cleaned lazy-lock.json. Also deleted stale *.so3.* parser leftovers in site/parser (health check noise).
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| (see git log) | refactor(lsp): 用 lspconfig rust_analyzer 替换 rustaceanvim |
+
+### Testing
+
+- [OK] Opening .rs file lazy-loads lspconfig; rust_analyzer client attaches; checkhealth vim.treesitter OK
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- If Rust debugging needed later: add nvim-dap + codelldb manually
