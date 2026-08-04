@@ -18,9 +18,6 @@
 # Task directory runtime files
 .plan-log
 
-# Workspace session journals/indexes (local-only for this personal config)
-workspace/
-
 # Atomic update temp files
 *.tmp
 
