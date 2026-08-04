@@ -26,12 +26,12 @@ M.setup = function()
       progress[client.id] = latest.done and nil or latest
 
       local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-      vim.notify(latest.msg, "info", {
+      vim.notify(latest.msg, vim.log.levels.INFO, {
         id = "lsp_progress",
         title = client.name,
         opts = function(notif)
           notif.icon = progress[client.id] == nil and " "
-            or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
         end,
       })
     end,

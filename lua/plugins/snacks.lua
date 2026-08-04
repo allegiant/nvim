@@ -10,7 +10,6 @@ return {
     -- terminal
     { [[<C-\>]],    terminal.toggle,                                      desc = "Toggle Terminal" },
     { "<leader>tn", terminal.toggle_next,                                 desc = "New Terminal" },
-    { "<leader>ts", terminal.select,                                      desc = "Select Terminal" },
     -- file
     { "<leader>e",  explorer.open,                                        desc = "File Explorer" },
     { "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>",                 desc = "Find Files" },
@@ -50,7 +49,7 @@ return {
         { section = "startup" },
       },
     },
-    explorer = explorer.options(),
+    explorer = { enabled = true },
     indent = { enabled = false },
     input = { enabled = true },
     lazygit = {
@@ -61,12 +60,12 @@ return {
         border = "rounded",
       },
     },
-    picker = explorer.picker_options(),
+    picker = explorer.picker_opts,
     notifier = {
       enabled = true,
       top_down = false, -- place notifications from top to bottom
     },
-    terminal = terminal.options(),
+    terminal = terminal.terminal_opts,
     quickfile = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },

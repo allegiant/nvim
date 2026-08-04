@@ -4,41 +4,35 @@ M.open = function()
   Snacks.explorer()
 end
 
-M.options = function(opts)
-  return vim.tbl_deep_extend("force", {
-    enabled = true,
-  }, opts or {})
-end
-
-M.picker_options = function(opts)
-  return vim.tbl_deep_extend("force", {
-    enabled = true,
-    sources = {
-      explorer = {
-        win = {
-          input = {
-            keys = {
-              ["<Esc>"] = false,
-              ["q"] = false,
-            },
+-- snacks setup 的 picker 配置：explorer 窗口键位
+-- (禁用 q/Esc,统一用 <leader>e 开合)
+M.picker_opts = {
+  enabled = true,
+  sources = {
+    explorer = {
+      win = {
+        input = {
+          keys = {
+            ["<Esc>"] = false,
+            ["q"] = false,
           },
-          list = {
-            keys = {
-              ["<Esc>"] = false,
-              ["o"] = "confirm",
-              ["q"] = false,
-            },
+        },
+        list = {
+          keys = {
+            ["<Esc>"] = false,
+            ["o"] = "confirm",
+            ["q"] = false,
           },
-          preview = {
-            keys = {
-              ["<Esc>"] = false,
-              ["q"] = false,
-            },
+        },
+        preview = {
+          keys = {
+            ["<Esc>"] = false,
+            ["q"] = false,
           },
         },
       },
     },
-  }, opts or {})
-end
+  },
+}
 
 return M
