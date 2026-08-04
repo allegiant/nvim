@@ -7,7 +7,11 @@ local lsp_utils = require("plugins.lsp.utils")
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("json-lsp") then
+  if not lsp_utils.ensure_executable({
+    cmd = "vscode-json-language-server",
+    filetypes = { "json", "jsonc" },
+    install = ":MasonInstall json-lsp",
+  }) then
     return
   end
 

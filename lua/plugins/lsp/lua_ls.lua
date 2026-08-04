@@ -38,7 +38,11 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("lua-language-server") then
+  if not lsp_utils.ensure_executable({
+    cmd = "lua-language-server",
+    filetypes = "lua",
+    install = ":MasonInstall lua-language-server",
+  }) then
     return
   end
 

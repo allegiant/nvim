@@ -5,7 +5,11 @@ local lsp_utils = require("plugins.lsp.utils")
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("bash-language-server") then
+  if not lsp_utils.ensure_executable({
+    cmd = "bash-language-server",
+    filetypes = { "sh", "bash" },
+    install = ":MasonInstall bash-language-server",
+  }) then
     return
   end
 

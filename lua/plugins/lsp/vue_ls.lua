@@ -29,11 +29,19 @@ local vtsls_config = {
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("vue-language-server") then
+  if not lsp_utils.ensure_executable({
+    cmd = "vue-language-server",
+    filetypes = "vue",
+    install = ":MasonInstall vue-language-server",
+  }) then
     return
   end
 
-  if not lsp_utils.is_mason_package_installed("vtsls") then
+  if not lsp_utils.ensure_executable({
+    cmd = "vtsls",
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    install = ":MasonInstall vtsls",
+  }) then
     return
   end
 

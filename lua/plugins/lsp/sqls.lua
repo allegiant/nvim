@@ -8,7 +8,11 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("sqls") then
+  if not lsp_utils.ensure_executable({
+    cmd = "sqls",
+    filetypes = { "sql", "mysql" },
+    install = ":MasonInstall sqls",
+  }) then
     return
   end
 

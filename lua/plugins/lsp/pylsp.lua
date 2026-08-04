@@ -17,7 +17,11 @@ local opts = {
 local M = {}
 
 M.setup = function()
-  if not lsp_utils.is_mason_package_installed("python-lsp-server") then
+  if not lsp_utils.ensure_executable({
+    cmd = "pylsp",
+    filetypes = "python",
+    install = ":MasonInstall python-lsp-server",
+  }) then
     return
   end
 
