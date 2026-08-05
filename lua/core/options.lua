@@ -89,18 +89,10 @@ opt.sidescrolloff = 5
 opt.foldlevelstart = 99
 opt.ruler = false
 opt.cursorline = true
-opt.cursorcolumn = true
+-- 只高亮光标所在行,不高亮行号(CursorLineNr 色块)
+opt.cursorlineopt = 'line'
 opt.list = true
 opt.showtabline = 2
-opt.fillchars = {
-  horiz = "─",
-  horizup = "┴",
-  horizdown = "┬",
-  vert = "│",
-  vertleft = "┤",
-  vertright = "├",
-  verthoriz = "┼",
-}
 opt.winwidth = 30
 opt.winminwidth = 10
 opt.pumheight = 15
@@ -134,9 +126,10 @@ opt.wrap = false
 opt.linebreak = true
 opt.number = true
 opt.relativenumber = true
-opt.colorcolumn = '100'
 opt.foldenable = true
 opt.signcolumn = 'yes'
+-- 隐藏缓冲区末尾的 ~ 标记
+opt.fillchars:append({ eob = ' ' })
 
 if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
