@@ -7,6 +7,7 @@ return {
       { "<leader>b", group = "Buffer" },
       { "<leader>f", group = "File" },
       { "<leader>g", group = "Git" },
+      { "<leader>m", group = "Markdown" },
       { "<leader>s", group = "Split" },
       { "<leader>t", group = "Terminal" },
     },
